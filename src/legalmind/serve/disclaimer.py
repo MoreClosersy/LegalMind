@@ -41,15 +41,28 @@ DISCLAIMER_TEXT = (
     "attorney about your specific situation."
 )
 
-# Recognizes a disclaimer that is *already* present so enforcement is idempotent.
-# Intentionally loose: a false positive costs a missing duplicate, while a false
-# negative costs a duplicated paragraph — both cosmetic, neither a compliance
-# failure. The failure mode this module exists to prevent is *absence*, and
-# absence is unambiguous.
-_DISCLAIMER_PRESENT = re.compile(
+# Idempotence marker. Deliberately an exact substring of DISCLAIMER_TEXT rather
+# than a loose paraphrase match.
+#
+# The loose version of this check was a real hole. A calibrated refusal — the
+# behaviour the fine-tune is specifically trained to produce — naturally says
+# something like "that would require a licensed attorney who can review your
+# facts". A regex matching `consult a licensed attorney` treats that as a
+# disclaimer already being present and skips enforcement, so the response ships
+# without the attorney-client-relationship notice. The model's own prose would
+# have been suppressing the compliance layer, which inverts the entire design.
+#
+# Matching only the text this module itself emits means no model output can ever
+# suppress enforcement, whatever it says.
+_ENFORCED_MARKER = "does not create an attorney-client relationship"
+
+# Separate, intentionally loose. Used only for observability: if the model starts
+# volunteering disclaimer-shaped prose, that is a training-data leak worth
+# investigating. It never gates enforcement.
+_VOLUNTEERED_DISCLAIMER = re.compile(
     r"(not\s+legal\s+advice"
     r"|educational\s+purposes\s+only"
-    r"|consult\s+a\s+licensed\s+attorney)",
+    r"|consult\s+(?:a|an|your)\s+(?:licensed\s+)?(?:attorney|lawyer))",
     re.IGNORECASE,
 )
 
@@ -68,30 +81,53 @@ class EnforcementResult:
     text: str
     disclaimer_added: bool
     already_present: bool
+    model_volunteered_disclaimer: bool = False
     version: str = DISCLAIMER_VERSION
 
 
-def has_disclaimer(text: str) -> bool:
-    return bool(_DISCLAIMER_PRESENT.search(text))
+def has_enforced_disclaimer(text: str) -> bool:
+    """True only when this module's own disclaimer text is present.
+
+    This is the idempotence check. It must not match model-generated prose —
+    see the comment on `_ENFORCED_MARKER`.
+    """
+    return _ENFORCED_MARKER in text
+
+
+def looks_like_volunteered_disclaimer(text: str) -> bool:
+    """Observability only. Never gates enforcement."""
+    return bool(_VOLUNTEERED_DISCLAIMER.search(text))
 
 
 def enforce(response: str) -> EnforcementResult:
     """Guarantee that `response` carries a UPL disclaimer.
 
-    Idempotent: enforcing an already-compliant response is a no-op. Safe on
-    empty input — an empty response still gets the disclaimer rather than being
-    passed through unlabelled.
+    Idempotent with respect to this module's own output. Safe on empty input —
+    an empty response still gets the disclaimer rather than passing through
+    unlabelled.
+
+    A response that merely *sounds* compliant does not skip enforcement: only
+    the exact enforced text does. A calibrated refusal that mentions consulting
+    an attorney still gets the full disclaimer appended, because a referral is
+    not the same as the attorney-client-relationship notice.
     """
     body = response.rstrip()
+    volunteered = looks_like_volunteered_disclaimer(body)
 
-    if has_disclaimer(body):
-        return EnforcementResult(text=body, disclaimer_added=False, already_present=True)
+    if has_enforced_disclaimer(body):
+        return EnforcementResult(
+            text=body,
+            disclaimer_added=False,
+            already_present=True,
+            model_volunteered_disclaimer=volunteered,
+        )
 
     separator = "\n\n" if body else ""
     return EnforcementResult(
         text=f"{body}{separator}{DISCLAIMER_TEXT}",
         disclaimer_added=True,
         already_present=False,
+        model_volunteered_disclaimer=volunteered,
     )
 
 

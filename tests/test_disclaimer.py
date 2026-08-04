@@ -13,7 +13,17 @@ from legalmind.serve.disclaimer import (
     DISCLAIMER_VERSION,
     enforce,
     enforce_stream_tail,
-    has_disclaimer,
+    has_enforced_disclaimer,
+    looks_like_volunteered_disclaimer,
+)
+
+# What a calibrated refusal actually looks like — the behaviour the fine-tune is
+# trained to produce. It mentions consulting an attorney, which an earlier loose
+# idempotence check mistook for a disclaimer already being present.
+REFUSAL = (
+    "I can't advise on your specific situation — that would require a licensed "
+    "attorney who can review your facts and your jurisdiction. What I can do is "
+    "explain how eviction procedure generally works."
 )
 
 ANSWER = (
@@ -66,14 +76,41 @@ def test_adversarial_prompting_cannot_remove_the_disclaimer() -> None:
         assert result.disclaimer_added is True, output
 
 
-def test_model_produced_disclaimer_is_recognized() -> None:
-    """If the model does volunteer acceptable text, don't duplicate it — but do
-    record that it happened, because it signals training-data leakage."""
+def test_a_refusal_still_gets_the_full_disclaimer() -> None:
+    """Regression test for a real hole.
+
+    A calibrated refusal naturally says "that would require a licensed attorney".
+    Under a loose idempotence check that counted as a disclaimer already being
+    present, so enforcement was skipped and the response shipped without the
+    attorney-client-relationship notice — the model's own prose suppressing the
+    compliance layer. Only this module's exact text may skip enforcement.
+    """
+    result = enforce(REFUSAL)
+    assert result.disclaimer_added is True
+    assert DISCLAIMER_TEXT in result.text
+    assert "attorney-client relationship" in result.text
+
+
+def test_volunteered_disclaimer_is_recorded_but_does_not_gate() -> None:
+    """Model-produced disclaimer-ish text is a training-leak signal worth
+    logging. It must not change what gets enforced."""
     volunteered = ANSWER + "\n\nThis is not legal advice."
     result = enforce(volunteered)
-    assert result.already_present is True
-    assert result.disclaimer_added is False
-    assert has_disclaimer(result.text)
+    assert result.model_volunteered_disclaimer is True
+    assert result.disclaimer_added is True  # still enforced
+    assert DISCLAIMER_TEXT in result.text
+
+
+def test_enforced_marker_is_distinct_from_volunteered_prose() -> None:
+    """The two checks answer different questions and must not be conflated."""
+    # Only this module's own text satisfies the idempotence check.
+    assert has_enforced_disclaimer(DISCLAIMER_TEXT) is True
+    assert has_enforced_disclaimer(REFUSAL) is False
+
+    # A referral inside a refusal is trained behaviour, not a training-data
+    # leak, so it should not trip the leak signal either.
+    assert looks_like_volunteered_disclaimer(REFUSAL) is False
+    assert looks_like_volunteered_disclaimer("This is not legal advice.") is True
 
 
 def test_version_is_stamped_for_audit() -> None:
