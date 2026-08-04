@@ -1,0 +1,56 @@
+# Smoke test: Qwen3-0.6B, 10 steps, CPU/MPS. Proves the pipeline runs end to
+# end before any GPU spend. Same config file is what CI executes on every push —
+# a training script that can't complete 10 steps on CPU is broken, and we find
+# that out in GitHub Actions rather than 3 hours into a Spot instance.
+#
+# Not expected to produce a useful model. Do not report metrics from this run.
+
+model:
+  name: Qwen/Qwen3-0.6B
+  enable_thinking: false
+  attn_implementation: eager      # FlashAttention-2 needs Ampere+; CPU/MPS has neither
+  torch_dtype: float32            # bf16 on CPU is slow and on MPS is flaky
+
+quantization:
+  load_in_4bit: false             # bitsandbytes has no working macOS wheel
+
+lora:
+  r: 8
+  alpha: 16
+  dropout: 0.05
+  target_modules:
+    - q_proj
+    - k_proj
+    - v_proj
+    - o_proj
+
+data:
+  # Committed fixtures, not generated data: CI must run this config with no
+  # network access and no API key.
+  train_path: tests/fixtures/smoke_train.jsonl
+  val_path: tests/fixtures/smoke_val.jsonl
+  max_seq_length: 512
+  packing: false
+  completion_only_loss: true
+
+training:
+  output_dir: outputs/qwen3-0.6b-smoke
+  max_steps: 10
+  per_device_train_batch_size: 1
+  gradient_accumulation_steps: 1
+  learning_rate: 2.0e-4
+  lr_scheduler_type: constant
+  warmup_ratio: 0.0
+  weight_decay: 0.0
+  max_grad_norm: 1.0
+  bf16: false
+  gradient_checkpointing: false
+  optim: adamw_torch
+  logging_steps: 1
+  eval_strategy: "no"
+  save_strategy: "no"
+  seed: 42
+
+tracking:
+  report_to: none                 # CI must not need a W&B key
+  run_name: smoke

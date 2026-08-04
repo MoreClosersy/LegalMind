@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# Secrets
+.env
+
+# Generated training data — too large for git. Regenerate with:
+#   uv run python -m legalmind.data.synthesize
+data/*.jsonl
+data/raw/
+
+# Model artifacts — the adapter lives on the HF Hub, not here
+outputs/
+checkpoints/
+*.safetensors
+
+# Experiment tracking (runs are on W&B; the local cache is not)
+wandb/
+
+# macOS
+.DS_Store
+
+# NOTE: eval_results/ is deliberately NOT ignored. Every number in the README
+# must be traceable to a committed raw result file.
