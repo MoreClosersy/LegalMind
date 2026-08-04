@@ -1,0 +1,48 @@
+{
+  "what": "Synthesis prompt A/B, measured on real batches through the same filter",
+  "why": "The first probe showed 31.6% of responses referring back to the source passage the trained model never sees, and statutory_interpretation at 4% of pairs against ~32% for each other type. Both were fixed in the prompt; this measures whether the fix held.",
+  "arms": {
+    "old_prompt": {
+      "batch_id": "msgbatch_0119LjgSH2AvX1kqm4dgAD7Z",
+      "requests": 99,
+      "pairs": 294,
+      "kept_after_filter": 214,
+      "retention": 0.728,
+      "retention_ci95": [
+        0.674,
+        0.776
+      ],
+      "statutory_interpretation_share": 0.044,
+      "output_tokens_per_pair": 604
+    },
+    "new_prompt": {
+      "batch_id": "msgbatch_01TBHVAXhDk9FsbixsDmxu8P",
+      "requests": 24,
+      "pairs": 72,
+      "kept_after_filter": 72,
+      "retention": 1.0,
+      "retention_ci95": [
+        0.949,
+        1.0
+      ],
+      "statutory_interpretation_share": 0.125,
+      "output_tokens_per_pair": 720
+    }
+  },
+  "cost_per_1000_usable_pairs_usd": {
+    "note": "normalised to the 94% cache-read profile seen at 294 requests; small batches over-report because cache writes dominate",
+    "old_prompt": {
+      "standard": 7.49,
+      "intro_through_2026_08_31": 4.99
+    },
+    "new_prompt": {
+      "standard": 6.51,
+      "intro_through_2026_08_31": 4.34
+    }
+  },
+  "caveats": [
+    "Rotation sets a floor on task-type share, not parity: each request requires one pair of the assigned type and the remaining 2 still follow model preference, which is why the share is 12.5% rather than 25%.",
+    "The new-prompt arm is n=72. Its retention interval reaches down to 94.9%."
+  ],
+  "decision": "Target ~8,100 pairs (900 passages per source) rather than 10,000. About $35 at intro pricing, inside the $40 budget, and consistent with the small-high-quality-set rationale the project already relies on."
+}

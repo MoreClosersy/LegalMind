@@ -53,9 +53,21 @@ from the passage alone, do not ask that question.
 2. **Never fabricate a citation.** Cite only what the passage itself cites, and \
 only in the form the passage uses. A response with an invented case name or \
 reporter cite is worse than no response.
-3. **Write self-contained instructions.** The model being trained will not see the \
-passage. An instruction that says "in the passage above" or "according to this \
-section" is unusable. Quote whatever context the instruction needs inline.
+3. **Both the instruction and the response must be self-contained.** The model \
+being trained never sees this passage. Anything that points at it is a dangling \
+reference that teaches the model to invent a source it was not given.
+
+   This applies to the response just as much as the instruction, and the \
+response is where it goes wrong. Do not write "the passage does not commit the \
+agency to...", "based on the text, this is a close question", "the text \
+specifies that...", "as stated above", or "in the excerpt". Name the authority \
+instead — "Section 207 does not commit the agency to...", "§ 970.207(a) \
+specifies that..." — or, where the wording itself is what matters, quote it \
+inline in the instruction so the response can refer to something the reader \
+actually has.
+
+   Read each response back as if you had never seen the passage. If any \
+sentence would leave a reader asking "which text?", rewrite it.
 4. **No disclaimers, no hedging boilerplate.** Do not write "consult an attorney", \
 "this is not legal advice", "for educational purposes only", or any variation. \
 That text is added deterministically downstream; including it here would teach the \
@@ -71,6 +83,13 @@ where the passage genuinely requires it. Do not pad.
 Return 2 to 3 pairs. Prefer 2 high-quality pairs over 3 that stretch the passage.
 """
 
+# A required task type is assigned per request rather than left to the model.
+#
+# Measured on a 99-passage probe with the type left free: `statutory_interpretation`
+# came out at 4% of pairs while the other three sat near 32% each — consistent
+# across all three sources, so it is the model's preference, not the corpus.
+# Asking for variety in prose did not produce it. Rotating a required type across
+# requests makes the distribution a property of the batch instead of a hope.
 SYNTHESIS_USER_TEMPLATE = """\
 <source>{source}</source>
 
@@ -78,7 +97,14 @@ SYNTHESIS_USER_TEMPLATE = """\
 {passage}
 </passage>
 
-Write 2-3 instruction/response pairs grounded in this passage."""
+Write 2-3 instruction/response pairs grounded in this passage.
+
+At least one pair must be of type `{required_task_type}`. If this passage genuinely \
+cannot support that type, use the closest type it does support rather than \
+forcing it — a strained pair is worse than an unbalanced distribution.
+
+Before returning, reread each response with the passage covered. Rewrite any \
+sentence that refers to "the passage", "the text", or "the excerpt"."""
 
 # Structured-output schema. Note the deliberate absence of `minItems`/`maxItems`:
 # the API's structured-output subset does not support array-length constraints,
@@ -105,7 +131,16 @@ SYNTHESIS_SCHEMA: dict = {
 }
 
 
-def build_user_prompt(source: str, passage: str) -> str:
+def build_user_prompt(source: str, passage: str, required_task_type: str) -> str:
     """Render the per-request user turn. Everything variable lives here, after
     the cached system prefix."""
-    return SYNTHESIS_USER_TEMPLATE.format(source=source, passage=passage)
+    if required_task_type not in TASK_TYPES:
+        raise ValueError(f"unknown task type {required_task_type!r}; known: {TASK_TYPES}")
+    return SYNTHESIS_USER_TEMPLATE.format(
+        source=source, passage=passage, required_task_type=required_task_type
+    )
+
+
+def required_task_type_for(index: int) -> str:
+    """Rotate the required type across a batch so coverage is deterministic."""
+    return TASK_TYPES[index % len(TASK_TYPES)]
