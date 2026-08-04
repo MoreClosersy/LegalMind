@@ -70,6 +70,35 @@ def test_personal_advice_instruction_is_rejected() -> None:
         assert check_pair(make_pair(instruction=bad), CFG) == "personal_advice", bad
 
 
+def test_dangling_reference_in_response_is_rejected() -> None:
+    """Found by measuring, not by reading the code: 31.6% of responses in the
+    first probe pointed back at the source passage the trained model never sees.
+    The instruction-only check caught none of them, because the model writes a
+    self-contained question and then reaches back in the answer."""
+    for bad in (
+        "The passage does not commit the agency to preparing such an analysis.",
+        "Based on the text, this is a genuinely close question.",
+        "The text specifies that the opportunity to be heard may be limited.",
+        "As stated above, the burden falls on the agency.",
+        "This excerpt treats occupied and potential acreage as distinct.",
+    ):
+        pair = make_pair(response=make_pair()["response"] + " " + bad)
+        assert check_pair(pair, CFG) == "response_not_self_contained", bad
+
+
+def test_naming_the_authority_is_not_a_dangling_reference() -> None:
+    """The fix the prompt asks for — name the provision instead of pointing at
+    the passage — must survive the filter, or the filter defeats the fix."""
+    for good in (
+        "Section 207 does not commit the agency to preparing such an analysis.",
+        "Section 970.207(a) specifies that the review is conducted by two bodies.",
+        "The statutory text of Title VII controls this question.",
+        "Courts reading this provision have reached differing conclusions.",
+    ):
+        pair = make_pair(response=make_pair()["response"] + " " + good)
+        assert check_pair(pair, CFG) is None, good
+
+
 def test_length_bounds() -> None:
     assert check_pair(make_pair(instruction="Too short?"), CFG) == "instruction_length"
     assert check_pair(make_pair(response="Short."), CFG) == "response_length"

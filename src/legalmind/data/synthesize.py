@@ -42,7 +42,12 @@ from anthropic.types.messages.batch_create_params import Request
 from dotenv import load_dotenv
 
 from legalmind.data.corpus import Passage, sample_passages
-from legalmind.data.prompts import SYNTHESIS_SCHEMA, SYNTHESIS_SYSTEM_PROMPT, build_user_prompt
+from legalmind.data.prompts import (
+    SYNTHESIS_SCHEMA,
+    SYNTHESIS_SYSTEM_PROMPT,
+    build_user_prompt,
+    required_task_type_for,
+)
 
 DEFAULT_MODEL = "claude-sonnet-5"
 DEFAULT_MAX_TOKENS = 4000
@@ -117,7 +122,7 @@ def build_requests(
     breakpoint, where it belongs.
     """
     requests: list[Request] = []
-    for passage in passages:
+    for index, passage in enumerate(passages):
         params: dict[str, Any] = {
             "model": model,
             "max_tokens": max_tokens,
@@ -129,7 +134,12 @@ def build_requests(
                 }
             ],
             "messages": [
-                {"role": "user", "content": build_user_prompt(passage.source, passage.text)}
+                {
+                    "role": "user",
+                    "content": build_user_prompt(
+                        passage.source, passage.text, required_task_type_for(index)
+                    ),
+                }
             ],
             # Guarantees parseable output. Without it, roughly a few percent of
             # responses arrive with prose wrapped around the JSON and have to be
@@ -244,8 +254,12 @@ def _parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser.add_argument(
         "--per-source",
         type=int,
-        default=1200,
-        help="passages sampled per pile-of-law source (3 sources)",
+        default=900,
+        help=(
+            "passages sampled per pile-of-law source (3 sources). "
+            "900 x 3 sources x ~3 pairs = ~8,100 pairs, which at the measured "
+            "post-fix retention and Sonnet 5 intro pricing lands near $35"
+        ),
     )
     parser.add_argument("--model", default=DEFAULT_MODEL)
     parser.add_argument("--max-tokens", type=int, default=DEFAULT_MAX_TOKENS)

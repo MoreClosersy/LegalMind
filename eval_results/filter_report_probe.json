@@ -1,0 +1,20 @@
+{
+  "input_pairs": 294,
+  "kept_pairs": 292,
+  "retention_rate": 0.9932,
+  "rejected_by_reason": {
+    "response_length": 1,
+    "not_self_contained": 1
+  },
+  "by_task_type": {
+    "rule_statement": 98,
+    "clause_explanation": 97,
+    "issue_spotting": 84,
+    "statutory_interpretation": 13
+  },
+  "by_source": {
+    "federal_register": 95,
+    "cfr": 99,
+    "courtlisteneropinions": 98
+  }
+}

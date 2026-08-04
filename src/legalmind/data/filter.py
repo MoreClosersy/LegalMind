@@ -50,6 +50,24 @@ _NON_SELF_CONTAINED = re.compile(
     re.IGNORECASE,
 )
 
+# Dangling references in the *response*. Measured at 31.6% on a 99-passage probe
+# before the generation prompt was tightened — a response saying "the passage
+# does not commit the agency to..." teaches the model to cite a source it was
+# never given, which is hallucination taught directly.
+#
+# Checking only the instruction (the rule above) missed all of it: the model
+# writes self-contained questions and then reaches back to the passage in the
+# answer. The generation prompt now forbids this explicitly; this is the backstop
+# that measures whether the prompt is holding.
+_DANGLING_REFERENCE = re.compile(
+    r"\b(?:the|this)\s+(?:passage|excerpt)\b"
+    r"|\b(?:the|this)\s+text\s+(?:does|specifies|states|expressly|provides|contemplates|requires|says)"
+    r"|based\s+on\s+(?:the|this)\s+(?:text|passage|excerpt)"
+    r"|as\s+(?:stated|described|noted|written)\s+above"
+    r"|in\s+the\s+(?:passage|excerpt)\s+(?:above|provided|given)?",
+    re.IGNORECASE,
+)
+
 # First- or second-person requests for advice about the asker's own situation.
 # This behaviour is deliberately held out of the SFT mixture and handled by the
 # refusal-calibration set instead — letting it leak in here would train the model
@@ -136,6 +154,8 @@ def check_pair(pair: dict[str, Any], cfg: FilterConfig) -> str | None:
         return "disclaimer_leaked"
     if _NON_SELF_CONTAINED.search(instruction):
         return "not_self_contained"
+    if _DANGLING_REFERENCE.search(response):
+        return "response_not_self_contained"
     if _PERSONAL_ADVICE.search(instruction):
         return "personal_advice"
 
