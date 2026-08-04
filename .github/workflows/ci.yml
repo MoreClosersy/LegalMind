@@ -1,0 +1,68 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+env:
+  # Keep the model cache out of the default location so actions/cache can find it.
+  HF_HOME: ${{ github.workspace }}/.hf-cache
+
+jobs:
+  lint-and-test:
+    name: Lint, types, unit tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+
+      - name: Install
+        run: uv sync --extra train --extra serve
+
+      - name: Ruff (lint)
+        run: uv run ruff check .
+
+      - name: Ruff (format)
+        run: uv run ruff format --check .
+
+      - name: mypy
+        run: uv run mypy
+
+      - name: Unit tests
+        # Network-free by construction — no Hub access, no API key.
+        run: uv run pytest -q
+
+  smoke-train:
+    name: CPU training smoke test
+    runs-on: ubuntu-latest
+    # A training script that cannot complete ten steps on CPU is broken. Finding
+    # that out here costs four minutes; finding it out three hours into a Spot
+    # instance costs the run.
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+
+      - name: Install
+        run: uv sync --extra train
+
+      - name: Cache Qwen3-0.6B
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.HF_HOME }}
+          key: hf-qwen3-0.6b-${{ hashFiles('configs/train_smoke_0.6b.yaml') }}
+
+      - name: Train 10 steps on committed fixtures
+        run: uv run python -m legalmind.train.sft --config configs/train_smoke_0.6b.yaml
+
+      - name: Verify completion-only loss masking
+        # The claim this project makes about not training on prompt tokens.
+        # Masking failure is silent — the run still converges — so it is checked
+        # explicitly rather than assumed.
+        run: uv run python scripts/verify_masking.py --config configs/train_smoke_0.6b.yaml

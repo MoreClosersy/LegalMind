@@ -1,0 +1,74 @@
+# Production run: Qwen3-8B QLoRA on a single g5.xlarge (A10G 24GB, Ampere).
+#
+# Why g5 and not g4dn: both draw on the same 4-vCPU "G instances" quota, but the
+# T4 in g4dn is Turing — no bf16, no FlashAttention-2, and vLLM support is poor.
+# The A10G is ~3-4x faster per dollar for this workload.
+
+model:
+  name: Qwen/Qwen3-8B
+  # Qwen3's chat template has an `enable_thinking` switch. Our data is legal
+  # instruction-following, not chain-of-thought, so we render without thinking
+  # blocks — and must serve the same way, or train/inference templates diverge.
+  enable_thinking: false
+  attn_implementation: flash_attention_2
+  torch_dtype: bfloat16
+
+quantization:
+  load_in_4bit: true
+  bnb_4bit_quant_type: nf4
+  bnb_4bit_use_double_quant: true
+  bnb_4bit_compute_dtype: bfloat16
+
+lora:
+  r: 16
+  alpha: 32
+  dropout: 0.05
+  # All linear projections, not just q/v. Attention-only LoRA underfits on
+  # instruction data; the MLP projections are where format/style is learned.
+  target_modules:
+    - q_proj
+    - k_proj
+    - v_proj
+    - o_proj
+    - gate_proj
+    - up_proj
+    - down_proj
+
+data:
+  train_path: data/train.jsonl
+  val_path: data/val.jsonl
+  max_seq_length: 2048
+  packing: true
+  # Loss is computed on the assistant completion only — prompt tokens are
+  # masked out. Training on prompt tokens is the single most common silent
+  # mistake in instruction tuning; it wastes capacity teaching the model to
+  # predict its own input. In TRL 0.18 this knob is `completion_only_loss` and
+  # requires a prompt/completion dataset (see train/sft.py).
+  completion_only_loss: true
+
+training:
+  output_dir: outputs/qwen3-8b-legalmind
+  num_train_epochs: 1
+  per_device_train_batch_size: 4
+  gradient_accumulation_steps: 4     # effective batch 16
+  learning_rate: 2.0e-4
+  lr_scheduler_type: cosine
+  warmup_ratio: 0.03
+  weight_decay: 0.0
+  max_grad_norm: 0.3
+  bf16: true
+  gradient_checkpointing: true
+  optim: paged_adamw_8bit
+  logging_steps: 10
+  eval_strategy: steps
+  eval_steps: 100
+  # Spot instances get reclaimed with 2 minutes' notice. Frequent checkpoints
+  # plus S3 sync (see LEGALMIND_S3_CHECKPOINT_URI) make that survivable.
+  save_strategy: steps
+  save_steps: 100
+  save_total_limit: 3
+  seed: 42
+
+tracking:
+  report_to: wandb
+  run_name: qwen3-8b-qlora-v1
