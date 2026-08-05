@@ -1,0 +1,74 @@
+# Two processes, one GPU.
+#
+#   docker compose up --build
+#
+# The split is the point. vLLM holds the model and the GPU; the gateway holds
+# the compliance layer and holds nothing. They scale, fail, and deploy
+# independently, and only one of them needs a rebuild when the disclaimer text
+# changes.
+#
+# Qwen3-8B is ungated, so no Hugging Face token is required to pull it. If you
+# swap in a gated base model, put HF_TOKEN in .env — never in this file and
+# never in the image, which is why .env is in .dockerignore.
+
+services:
+  vllm:
+    image: vllm/vllm-openai:v0.9.1
+    # Matches the pin in pyproject.toml's `gpu` extra. Server and client
+    # speaking different vLLM versions is a debugging session nobody enjoys.
+    command:
+      - --model=Qwen/Qwen3-8B
+      - --served-model-name=Qwen/Qwen3-8B
+      - --enable-lora
+      # A LoRA adapter is addressed as a model name, which is what makes
+      # swapping arms a routing decision instead of a redeploy. One process
+      # serves the base weights and every adapter at once.
+      - --lora-modules=legalmind=/checkpoints/legalmind-qwen3-8b
+      - --max-lora-rank=32
+      - --max-model-len=8192
+      - --gpu-memory-utilization=0.90
+    volumes:
+      # Persist the HF cache across container restarts. Re-downloading 16GB of
+      # weights on every `up` is a slow way to learn this lesson.
+      - hf-cache:/root/.cache/huggingface
+      - ./checkpoints:/checkpoints:ro
+    environment:
+      - HF_TOKEN=${HF_TOKEN:-}
+      - VLLM_LOGGING_LEVEL=INFO
+    ports:
+      - "8000:8000"
+    ipc: host  # vLLM's workers need more than Docker's default 64MB /dev/shm.
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health', timeout=3)"]
+      interval: 20s
+      timeout: 5s
+      # An 8B model loads from cold in minutes; a short start period would have
+      # the gateway declared unhealthy and restarted while vLLM is still fine.
+      start_period: 600s
+      retries: 5
+
+  gateway:
+    build: .
+    depends_on:
+      vllm:
+        condition: service_healthy
+    environment:
+      - LEGALMIND_UPSTREAM=http://vllm:8000/v1
+      - LEGALMIND_MODEL=Qwen/Qwen3-8B
+      # Anything not listed here is rejected with a 400 before it reaches vLLM,
+      # so a typo in a client is a clear error rather than an opaque upstream one.
+      - LEGALMIND_ADAPTERS=legalmind
+      - LEGALMIND_TIMEOUT_S=120
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
+
+volumes:
+  hf-cache:
