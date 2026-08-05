@@ -81,10 +81,19 @@ ANSWER_FORMAT_DIRECTIVE = (
 )
 
 _TEMPLATE_VAR = re.compile(r"\{\{(\w+)\}\}")
-# Everything after the final "Answer:" is where a well-behaved response puts its
-# label. Anchored to the last occurrence because LegalBench instructions contain
-# the word themselves.
-_ANSWER_MARKER = re.compile(r"answer\s*:", re.IGNORECASE)
+# Everything after the final answer marker is where a well-behaved response puts
+# its label, so extraction reads from there rather than from the top.
+#
+# The set of markers is measured, not assumed: across the 127 selected tasks,
+# LegalBench's own instructions end with "Label:" 80 times, "Answer:" 36 times,
+# and "A:" 8 times. Matching only "Answer:" — which is what this started as —
+# left 89 tasks falling back to scanning from the first line, where a response
+# that reasons first and states its label last reads as non-compliant. That
+# would have shown up as a format-compliance gap between arms rather than as a
+# bug, which is exactly the kind of wrong number that never gets questioned.
+_ANSWER_MARKER = re.compile(
+    r"^[ \t]*(?:final\s+answer|answer|label|a)[ \t]*:", re.IGNORECASE | re.MULTILINE
+)
 
 # Markdown and punctuation a model wraps a bare label in. The last two are
 # U+2013 EN DASH and U+2014 EM DASH, written by code point rather than

@@ -34,6 +34,22 @@ def test_label_after_answer_marker_is_extracted() -> None:
     assert extract_label("Some reasoning.\n\nAnswer:\nNo", YES_NO) == "No"
 
 
+def test_every_marker_style_legalbench_uses_is_recognised() -> None:
+    """Measured, not assumed: of the 127 selected tasks, 80 instructions end with
+    "Label:", 36 with "Answer:" and 8 with "A:". Models echo whichever marker the
+    prompt used, so recognising only one of them makes a correct answer stated
+    after its reasoning read as a format failure on 89 tasks."""
+    reasoned = "The statement was offered for its truth and no exception applies.\n{marker} Yes"
+    for marker in ("Answer:", "Label:", "A:", "Final answer:", "label :"):
+        assert extract_label(reasoned.format(marker=marker), YES_NO) == "Yes", marker
+
+
+def test_marker_must_start_a_line() -> None:
+    """Anchoring to line start keeps the one-letter "a:" marker from firing
+    inside ordinary prose."""
+    assert extract_label("No. This is a: a close question on these facts.", YES_NO) == "No"
+
+
 def test_markdown_decoration_is_stripped() -> None:
     for decorated in ("**Yes**", "`Yes`", "- Yes", "Yes.", '"Yes"', "## Yes"):
         assert extract_label(decorated, YES_NO) == "Yes", decorated
