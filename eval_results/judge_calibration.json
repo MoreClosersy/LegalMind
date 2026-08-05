@@ -1,0 +1,15 @@
+{
+  "judge_accuracy": 1.0,
+  "judge_ci95": [
+    0.7224598312333834,
+    1.0
+  ],
+  "judge_correct": "10/10",
+  "heuristic_accuracy_same_set": 0.6,
+  "heuristic_correct": "6/10",
+  "threshold": 0.9,
+  "passed": true,
+  "caveat": "n=10. The interval reaches down to 72%, so this establishes that the judge is not obviously broken and beats the heuristic on hard cases \u2014 it does not establish an accuracy figure. At this n the gate amounts to 'at most one miss', and the way to tighten it is more hand-labelled gold cases, not a higher threshold.",
+  "means": "The gold set is weighted toward cases the cheap heuristic gets wrong, so the heuristic's score here is expected to be poor and is reported to show what the judge is buying. A judge that only matched the heuristic would not be worth its cost.",
+  "disagreements": []
+}
