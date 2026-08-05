@@ -1,0 +1,1922 @@
+{
+  "frozen_at": "2026-08-05T19:28:20+00:00",
+  "why": "Selected mechanically, before any fine-tuned model existed, so the task list cannot have been chosen to flatter a result. Criteria are properties of the benchmark only \u2014 see scripts/select_legalbench_tasks.py.",
+  "criteria": {
+    "eval_method": "contained_in_output",
+    "answer_space_size": [
+      2,
+      8
+    ],
+    "min_test_rows": 60,
+    "max_majority_share": 0.85,
+    "excluded_by_name": [
+      "canada_tax_court_outcomes",
+      "rule_qa"
+    ]
+  },
+  "max_examples_per_task": 60,
+  "n_considered": 162,
+  "n_selected": 127,
+  "rejected_by_reason": {
+    "too_imbalanced": 17,
+    "test_split_too_small": 8,
+    "eval_method=all_in_output": 3,
+    "non_us_jurisdiction": 2,
+    "answer_space=1": 2,
+    "eval_method=any_in_output": 1,
+    "eval_method=numeric_within_1pct": 1,
+    "answer_space=9": 1
+  },
+  "tasks": [
+    {
+      "task": "abercrombie",
+      "answer_space": [
+        "generic",
+        "descriptive",
+        "suggestive",
+        "arbitrary",
+        "fanciful"
+      ],
+      "test_rows": 95,
+      "majority_label": "generic",
+      "majority_share": 0.2,
+      "label_counts": {
+        "generic": 19,
+        "descriptive": 19,
+        "suggestive": 19,
+        "arbitrary": 19,
+        "fanciful": 19
+      }
+    },
+    {
+      "task": "citation_prediction_classification",
+      "answer_space": [
+        "Yes",
+        "No"
+      ],
+      "test_rows": 108,
+      "majority_label": "Yes",
+      "majority_share": 0.5,
+      "label_counts": {
+        "Yes": 54,
+        "No": 54
+      }
+    },
+    {
+      "task": "consumer_contracts_qa",
+      "answer_space": [
+        "Yes",
+        "No"
+      ],
+      "test_rows": 396,
+      "majority_label": "No",
+      "majority_share": 0.5505,
+      "label_counts": {
+        "Yes": 178,
+        "No": 218
+      }
+    },
+    {
+      "task": "contract_nli_confidentiality_of_agreement",
+      "answer_space": [
+        "Yes",
+        "No"
+      ],
+      "test_rows": 82,
+      "majority_label": "Yes",
+      "majority_share": 0.5,
+      "label_counts": {
+        "Yes": 41,
+        "No": 41
+      }
+    },
+    {
+      "task": "contract_nli_explicit_identification",
+      "answer_space": [
+        "Yes",
+        "No"
+      ],
+      "test_rows": 109,
+      "majority_label": "No",
+      "majority_share": 0.8165,
+      "label_counts": {
+        "Yes": 20,
+        "No": 89
+      }
+    },
+    {
+      "task": "contract_nli_inclusion_of_verbally_conveyed_information",
+      "answer_space": [
+        "Yes",
+        "No"
+      ],
+      "test_rows": 139,
+      "majority_label": "No",
+      "majority_share": 0.5108,
+      "label_counts": {
+        "Yes": 68,
+        "No": 71
+      }
+    },
+    {
+      "task": "contract_nli_limited_use",
+      "answer_space": [
+        "Yes",
+        "No"
+      ],
+      "test_rows": 208,
+      "majority_label": "No",
+      "majority_share": 0.5337,
+      "label_counts": {
+        "Yes": 97,
+        "No": 111
+      }
+    },
+    {
+      "task": "contract_nli_no_licensing",
+      "answer_space": [
+        "Yes",
+        "No"
+      ],
+      "test_rows": 162,
+      "majority_label": "No",
+      "majority_share": 0.5062,
+      "label_counts": {
+        "Yes": 80,
+        "No": 82
+      }
+    },
+    {
+      "task": "contract_nli_notice_on_compelled_disclosure",
+      "answer_space": [
+        "Yes",
+        "No"
+      ],
+      "test_rows": 142,
+      "majority_label": "Yes",
+      "majority_share": 0.5,
+      "label_counts": {
+        "Yes": 71,
+        "No": 71
+      }
+    },
+    {
+      "task": "contract_nli_permissible_acquirement_of_similar_information",
+      "answer_space": [
+        "Yes",
+        "No"
+      ],
+      "test_rows": 178,
+      "majority_label": "Yes",
+      "majority_share": 0.5,
+      "label_counts": {
+        "Yes": 89,
+        "No": 89
+      }
+    },
+    {
+      "task": "contract_nli_permissible_copy",
+      "answer_space": [
+        "Yes",
+        "No"
+      ],
+      "test_rows": 87,
+      "majority_label": "No",
+      "majority_share": 0.7931,
+      "label_counts": {
+        "Yes": 18,
+        "No": 69
+      }
+    },
+    {
+      "task": "contract_nli_permissible_development_of_similar_information",
+      "answer_space": [
+        "Yes",
+        "No"
+      ],
+      "test_rows": 136,
+      "majority_label": "Yes",
+      "majority_share": 0.5,
+      "label_counts": {
+        "Yes": 68,
+        "No": 68
+      }
+    },
+    {
+      "task": "contract_nli_permissible_post-agreement_possession",
+      "answer_space": [
+        "Yes",
+        "No"
+      ],
+      "test_rows": 111,
+      "majority_label": "No",
+      "majority_share": 0.7477,
+      "label_counts": {
+        "Yes": 28,
+        "No": 83
+      }
+    },
+    {
+      "task": "contract_nli_return_of_confidential_information",
+      "answer_space": [
+        "Yes",
+        "No"
+      ],
+      "test_rows": 66,
+      "majority_label": "No",
+      "majority_share": 0.5152,
+      "label_counts": {
+        "Yes": 32,
+        "No": 34
+      }
+    },
+    {
+      "task": "contract_nli_sharing_with_employees",
+      "answer_space": [
+        "Yes",
+        "No"
+      ],
+      "test_rows": 170,
+      "majority_label": "Yes",
+      "majority_share": 0.5176,
+      "label_counts": {
+        "Yes": 88,
+        "No": 82
+      }
+    },
+    {
+      "task": "contract_nli_sharing_with_third-parties",
+      "answer_space": [
+        "Yes",
+        "No"
+      ],
+      "test_rows": 180,
+      "majority_label": "No",
+      "majority_share": 0.6056,
+      "label_counts": {
+        "Yes": 71,
+        "No": 109
+      }
+    },
+    {
+      "task": "contract_nli_survival_of_obligations",
+      "answer_space": [
+        "Yes",
+        "No"
+      ],
+      "test_rows": 157,
+      "majority_label": "No",
+      "majority_share": 0.5287,
+      "label_counts": {
+        "Yes": 74,
+        "No": 83
+      }
+    },
+    {
+      "task": "contract_qa",
+      "answer_space": [
+        "Yes",
+        "No"
+      ],
+      "test_rows": 80,
+      "majority_label": "No",
+      "majority_share": 0.5125,
+      "label_counts": {
+        "Yes": 39,
+        "No": 41
+      }
+    },
+    {
+      "task": "corporate_lobbying",
+      "answer_space": [
+        "No",
+        "Yes"
+      ],
+      "test_rows": 490,
+      "majority_label": "No",
+      "majority_share": 0.7041,
+      "label_counts": {
+        "No": 345,
+        "Yes": 145
+      }
+    },
+    {
+      "task": "cuad_affiliate_license-licensee",
+      "answer_space": [
+        "Yes",
+        "No"
+      ],
+      "test_rows": 198,
+      "majority_label": "Yes",
+      "majority_share": 0.5,
+      "label_counts": {
+        "Yes": 99,
+        "No": 99
+      }
+    },
+    {
+      "task": "cuad_affiliate_license-licensor",
+      "answer_space": [
+        "Yes",
+        "No"
+      ],
+      "test_rows": 88,
+      "majority_label": "Yes",
+      "majority_share": 0.5,
+      "label_counts": {
+        "Yes": 44,
+        "No": 44
+      }
+    },
+    {
+      "task": "cuad_anti-assignment",
+      "answer_space": [
+        "Yes",
+        "No"
+      ],
+      "test_rows": 1172,
+      "majority_label": "Yes",
+      "majority_share": 0.5,
+      "label_counts": {
+        "Yes": 586,
+        "No": 586
+      }
+    },
+    {
+      "task": "cuad_audit_rights",
+      "answer_space": [
+        "Yes",
+        "No"
+      ],
+      "test_rows": 1216,
+      "majority_label": "Yes",
+      "majority_share": 0.5,
+      "label_counts": {
+        "Yes": 608,
+        "No": 608
+      }
+    },
+    {
+      "task": "cuad_cap_on_liability",
+      "answer_space": [
+        "Yes",
+        "No"
+      ],
+      "test_rows": 1246,
+      "majority_label": "Yes",
+      "majority_share": 0.5,
+      "label_counts": {
+        "Yes": 623,
+        "No": 623
+      }
+    },
+    {
+      "task": "cuad_change_of_control",
+      "answer_space": [
+        "Yes",
+        "No"
+      ],
+      "test_rows": 416,
+      "majority_label": "Yes",
+      "majority_share": 0.5,
+      "label_counts": {
+        "Yes": 208,
+        "No": 208
+      }
+    },
+    {
+      "task": "cuad_competitive_restriction_exception",
+      "answer_space": [
+        "Yes",
+        "No"
+      ],
+      "test_rows": 220,
+      "majority_label": "Yes",
+      "majority_share": 0.5,
+      "label_counts": {
+        "Yes": 110,
+        "No": 110
+      }
+    },
+    {
+      "task": "cuad_covenant_not_to_sue",
+      "answer_space": [
+        "Yes",
+        "No"
+      ],
+      "test_rows": 308,
+      "majority_label": "Yes",
+      "majority_share": 0.5,
+      "label_counts": {
+        "Yes": 154,
+        "No": 154
+      }
+    },
+    {
+      "task": "cuad_effective_date",
+      "answer_space": [
+        "Yes",
+        "No"
+      ],
+      "test_rows": 236,
+      "majority_label": "Yes",
+      "majority_share": 0.5,
+      "label_counts": {
+        "Yes": 118,
+        "No": 118
+      }
+    },
+    {
+      "task": "cuad_exclusivity",
+      "answer_space": [
+        "Yes",
+        "No"
+      ],
+      "test_rows": 762,
+      "majority_label": "Yes",
+      "majority_share": 0.5,
+      "label_counts": {
+        "Yes": 381,
+        "No": 381
+      }
+    },
+    {
+      "task": "cuad_expiration_date",
+      "answer_space": [
+        "Yes",
+        "No"
+      ],
+      "test_rows": 876,
+      "majority_label": "Yes",
+      "majority_share": 0.5,
+      "label_counts": {
+        "Yes": 438,
+        "No": 438
+      }
+    },
+    {
+      "task": "cuad_governing_law",
+      "answer_space": [
+        "Yes",
+        "No"
+      ],
+      "test_rows": 876,
+      "majority_label": "Yes",
+      "majority_share": 0.5,
+      "label_counts": {
+        "Yes": 438,
+        "No": 438
+      }
+    },
+    {
+      "task": "cuad_insurance",
+      "answer_space": [
+        "Yes",
+        "No"
+      ],
+      "test_rows": 1030,
+      "majority_label": "Yes",
+      "majority_share": 0.5,
+      "label_counts": {
+        "Yes": 515,
+        "No": 515
+      }
+    },
+    {
+      "task": "cuad_ip_ownership_assignment",
+      "answer_space": [
+        "Yes",
+        "No"
+      ],
+      "test_rows": 576,
+      "majority_label": "Yes",
+      "majority_share": 0.5,
+      "label_counts": {
+        "Yes": 288,
+        "No": 288
+      }
+    },
+    {
+      "task": "cuad_irrevocable_or_perpetual_license",
+      "answer_space": [
+        "Yes",
+        "No"
+      ],
+      "test_rows": 280,
+      "majority_label": "Yes",
+      "majority_share": 0.5,
+      "label_counts": {
+        "Yes": 140,
+        "No": 140
+      }
+    },
+    {
+      "task": "cuad_joint_ip_ownership",
+      "answer_space": [
+        "Yes",
+        "No"
+      ],
+      "test_rows": 192,
+      "majority_label": "Yes",
+      "majority_share": 0.5,
+      "label_counts": {
+        "Yes": 96,
+        "No": 96
+      }
+    },
+    {
+      "task": "cuad_license_grant",
+      "answer_space": [
+        "Yes",
+        "No"
+      ],
+      "test_rows": 1396,
+      "majority_label": "Yes",
+      "majority_share": 0.5,
+      "label_counts": {
+        "Yes": 698,
+        "No": 698
+      }
+    },
+    {
+      "task": "cuad_liquidated_damages",
+      "answer_space": [
+        "Yes",
+        "No"
+      ],
+      "test_rows": 220,
+      "majority_label": "Yes",
+      "majority_share": 0.5,
+      "label_counts": {
+        "Yes": 110,
+        "No": 110
+      }
+    },
+    {
+      "task": "cuad_minimum_commitment",
+      "answer_space": [
+        "Yes",
+        "No"
+      ],
+      "test_rows": 772,
+      "majority_label": "Yes",
+      "majority_share": 0.5,
+      "label_counts": {
+        "Yes": 386,
+        "No": 386
+      }
+    },
+    {
+      "task": "cuad_most_favored_nation",
+      "answer_space": [
+        "Yes",
+        "No"
+      ],
+      "test_rows": 64,
+      "majority_label": "Yes",
+      "majority_share": 0.5,
+      "label_counts": {
+        "Yes": 32,
+        "No": 32
+      }
+    },
+    {
+      "task": "cuad_no-solicit_of_customers",
+      "answer_space": [
+        "Yes",
+        "No"
+      ],
+      "test_rows": 84,
+      "majority_label": "Yes",
+      "majority_share": 0.5,
+      "label_counts": {
+        "Yes": 42,
+        "No": 42
+      }
+    },
+    {
+      "task": "cuad_no-solicit_of_employees",
+      "answer_space": [
+        "Yes",
+        "No"
+      ],
+      "test_rows": 142,
+      "majority_label": "Yes",
+      "majority_share": 0.5,
+      "label_counts": {
+        "Yes": 71,
+        "No": 71
+      }
+    },
+    {
+      "task": "cuad_non-compete",
+      "answer_space": [
+        "Yes",
+        "No"
+      ],
+      "test_rows": 442,
+      "majority_label": "Yes",
+      "majority_share": 0.5,
+      "label_counts": {
+        "Yes": 221,
+        "No": 221
+      }
+    },
+    {
+      "task": "cuad_non-disparagement",
+      "answer_space": [
+        "Yes",
+        "No"
+      ],
+      "test_rows": 100,
+      "majority_label": "Yes",
+      "majority_share": 0.5,
+      "label_counts": {
+        "Yes": 50,
+        "No": 50
+      }
+    },
+    {
+      "task": "cuad_non-transferable_license",
+      "answer_space": [
+        "Yes",
+        "No"
+      ],
+      "test_rows": 542,
+      "majority_label": "Yes",
+      "majority_share": 0.5,
+      "label_counts": {
+        "Yes": 271,
+        "No": 271
+      }
+    },
+    {
+      "task": "cuad_notice_period_to_terminate_renewal",
+      "answer_space": [
+        "Yes",
+        "No"
+      ],
+      "test_rows": 222,
+      "majority_label": "Yes",
+      "majority_share": 0.5,
+      "label_counts": {
+        "Yes": 111,
+        "No": 111
+      }
+    },
+    {
+      "task": "cuad_post-termination_services",
+      "answer_space": [
+        "Yes",
+        "No"
+      ],
+      "test_rows": 808,
+      "majority_label": "Yes",
+      "majority_share": 0.5,
+      "label_counts": {
+        "Yes": 404,
+        "No": 404
+      }
+    },
+    {
+      "task": "cuad_renewal_term",
+      "answer_space": [
+        "Yes",
+        "No"
+      ],
+      "test_rows": 386,
+      "majority_label": "Yes",
+      "majority_share": 0.5,
+      "label_counts": {
+        "Yes": 193,
+        "No": 193
+      }
+    },
+    {
+      "task": "cuad_revenue-profit_sharing",
+      "answer_space": [
+        "Yes",
+        "No"
+      ],
+      "test_rows": 774,
+      "majority_label": "Yes",
+      "majority_share": 0.5,
+      "label_counts": {
+        "Yes": 387,
+        "No": 387
+      }
+    },
+    {
+      "task": "cuad_rofr-rofo-rofn",
+      "answer_space": [
+        "Yes",
+        "No"
+      ],
+      "test_rows": 690,
+      "majority_label": "Yes",
+      "majority_share": 0.5,
+      "label_counts": {
+        "Yes": 345,
+        "No": 345
+      }
+    },
+    {
+      "task": "cuad_source_code_escrow",
+      "answer_space": [
+        "Yes",
+        "No"
+      ],
+      "test_rows": 118,
+      "majority_label": "Yes",
+      "majority_share": 0.5,
+      "label_counts": {
+        "Yes": 59,
+        "No": 59
+      }
+    },
+    {
+      "task": "cuad_termination_for_convenience",
+      "answer_space": [
+        "Yes",
+        "No"
+      ],
+      "test_rows": 430,
+      "majority_label": "Yes",
+      "majority_share": 0.5,
+      "label_counts": {
+        "Yes": 215,
+        "No": 215
+      }
+    },
+    {
+      "task": "cuad_third_party_beneficiary",
+      "answer_space": [
+        "Yes",
+        "No"
+      ],
+      "test_rows": 68,
+      "majority_label": "Yes",
+      "majority_share": 0.5,
+      "label_counts": {
+        "Yes": 34,
+        "No": 34
+      }
+    },
+    {
+      "task": "cuad_uncapped_liability",
+      "answer_space": [
+        "Yes",
+        "No"
+      ],
+      "test_rows": 294,
+      "majority_label": "Yes",
+      "majority_share": 0.5,
+      "label_counts": {
+        "Yes": 147,
+        "No": 147
+      }
+    },
+    {
+      "task": "cuad_volume_restriction",
+      "answer_space": [
+        "Yes",
+        "No"
+      ],
+      "test_rows": 322,
+      "majority_label": "Yes",
+      "majority_share": 0.5,
+      "label_counts": {
+        "Yes": 161,
+        "No": 161
+      }
+    },
+    {
+      "task": "cuad_warranty_duration",
+      "answer_space": [
+        "Yes",
+        "No"
+      ],
+      "test_rows": 320,
+      "majority_label": "Yes",
+      "majority_share": 0.5,
+      "label_counts": {
+        "Yes": 160,
+        "No": 160
+      }
+    },
+    {
+      "task": "definition_classification",
+      "answer_space": [
+        "Yes",
+        "No"
+      ],
+      "test_rows": 1337,
+      "majority_label": "Yes",
+      "majority_share": 0.5168,
+      "label_counts": {
+        "Yes": 691,
+        "No": 646
+      }
+    },
+    {
+      "task": "diversity_1",
+      "answer_space": [
+        "No",
+        "Yes"
+      ],
+      "test_rows": 300,
+      "majority_label": "No",
+      "majority_share": 0.7633,
+      "label_counts": {
+        "No": 229,
+        "Yes": 71
+      }
+    },
+    {
+      "task": "diversity_2",
+      "answer_space": [
+        "No",
+        "Yes"
+      ],
+      "test_rows": 300,
+      "majority_label": "No",
+      "majority_share": 0.7467,
+      "label_counts": {
+        "No": 224,
+        "Yes": 76
+      }
+    },
+    {
+      "task": "diversity_3",
+      "answer_space": [
+        "No",
+        "Yes"
+      ],
+      "test_rows": 300,
+      "majority_label": "Yes",
+      "majority_share": 0.5867,
+      "label_counts": {
+        "No": 124,
+        "Yes": 176
+      }
+    },
+    {
+      "task": "diversity_4",
+      "answer_space": [
+        "Yes",
+        "No"
+      ],
+      "test_rows": 300,
+      "majority_label": "Yes",
+      "majority_share": 0.5333,
+      "label_counts": {
+        "Yes": 160,
+        "No": 140
+      }
+    },
+    {
+      "task": "diversity_5",
+      "answer_space": [
+        "Yes",
+        "No"
+      ],
+      "test_rows": 300,
+      "majority_label": "Yes",
+      "majority_share": 0.5733,
+      "label_counts": {
+        "Yes": 172,
+        "No": 128
+      }
+    },
+    {
+      "task": "diversity_6",
+      "answer_space": [
+        "Yes",
+        "No"
+      ],
+      "test_rows": 300,
+      "majority_label": "Yes",
+      "majority_share": 0.53,
+      "label_counts": {
+        "Yes": 159,
+        "No": 141
+      }
+    },
+    {
+      "task": "function_of_decision_section",
+      "answer_space": [
+        "Facts",
+        "Procedural History",
+        "Issue",
+        "Rule",
+        "Analysis",
+        "Conclusion",
+        "Decree"
+      ],
+      "test_rows": 367,
+      "majority_label": "Procedural History",
+      "majority_share": 0.158,
+      "label_counts": {
+        "Facts": 49,
+        "Procedural History": 58,
+        "Issue": 51,
+        "Rule": 56,
+        "Analysis": 56,
+        "Conclusion": 50,
+        "Decree": 47
+      }
+    },
+    {
+      "task": "hearsay",
+      "answer_space": [
+        "No",
+        "Yes"
+      ],
+      "test_rows": 94,
+      "majority_label": "No",
+      "majority_share": 0.5638,
+      "label_counts": {
+        "No": 53,
+        "Yes": 41
+      }
+    },
+    {
+      "task": "insurance_policy_interpretation",
+      "answer_space": [
+        "A",
+        "C",
+        "B"
+      ],
+      "test_rows": 133,
+      "majority_label": "C",
+      "majority_share": 0.4436,
+      "label_counts": {
+        "A": 47,
+        "C": 59,
+        "B": 27
+      }
+    },
+    {
+      "task": "international_citizenship_questions",
+      "answer_space": [
+        "Yes",
+        "No"
+      ],
+      "test_rows": 9306,
+      "majority_label": "No",
+      "majority_share": 0.5783,
+      "label_counts": {
+        "Yes": 3924,
+        "No": 5382
+      }
+    },
+    {
+      "task": "learned_hands_benefits",
+      "answer_space": [
+        "Yes",
+        "No"
+      ],
+      "test_rows": 66,
+      "majority_label": "Yes",
+      "majority_share": 0.5,
+      "label_counts": {
+        "Yes": 33,
+        "No": 33
+      }
+    },
+    {
+      "task": "learned_hands_business",
+      "answer_space": [
+        "Yes",
+        "No"
+      ],
+      "test_rows": 174,
+      "majority_label": "Yes",
+      "majority_share": 0.5,
+      "label_counts": {
+        "Yes": 87,
+        "No": 87
+      }
+    },
+    {
+      "task": "learned_hands_consumer",
+      "answer_space": [
+        "Yes",
+        "No"
+      ],
+      "test_rows": 614,
+      "majority_label": "Yes",
+      "majority_share": 0.5,
+      "label_counts": {
+        "Yes": 307,
+        "No": 307
+      }
+    },
+    {
+      "task": "learned_hands_courts",
+      "answer_space": [
+        "Yes",
+        "No"
+      ],
+      "test_rows": 192,
+      "majority_label": "Yes",
+      "majority_share": 0.5,
+      "label_counts": {
+        "Yes": 96,
+        "No": 96
+      }
+    },
+    {
+      "task": "learned_hands_crime",
+      "answer_space": [
+        "Yes",
+        "No"
+      ],
+      "test_rows": 688,
+      "majority_label": "Yes",
+      "majority_share": 0.5,
+      "label_counts": {
+        "Yes": 344,
+        "No": 344
+      }
+    },
+    {
+      "task": "learned_hands_divorce",
+      "answer_space": [
+        "Yes",
+        "No"
+      ],
+      "test_rows": 150,
+      "majority_label": "Yes",
+      "majority_share": 0.5,
+      "label_counts": {
+        "Yes": 75,
+        "No": 75
+      }
+    },
+    {
+      "task": "learned_hands_domestic_violence",
+      "answer_space": [
+        "Yes",
+        "No"
+      ],
+      "test_rows": 174,
+      "majority_label": "Yes",
+      "majority_share": 0.5,
+      "label_counts": {
+        "Yes": 87,
+        "No": 87
+      }
+    },
+    {
+      "task": "learned_hands_employment",
+      "answer_space": [
+        "Yes",
+        "No"
+      ],
+      "test_rows": 710,
+      "majority_label": "Yes",
+      "majority_share": 0.5,
+      "label_counts": {
+        "Yes": 355,
+        "No": 355
+      }
+    },
+    {
+      "task": "learned_hands_estates",
+      "answer_space": [
+        "Yes",
+        "No"
+      ],
+      "test_rows": 178,
+      "majority_label": "Yes",
+      "majority_share": 0.5,
+      "label_counts": {
+        "Yes": 89,
+        "No": 89
+      }
+    },
+    {
+      "task": "learned_hands_family",
+      "answer_space": [
+        "Yes",
+        "No"
+      ],
+      "test_rows": 2265,
+      "majority_label": "Yes",
+      "majority_share": 0.5002,
+      "label_counts": {
+        "Yes": 1133,
+        "No": 1132
+      }
+    },
+    {
+      "task": "learned_hands_health",
+      "answer_space": [
+        "Yes",
+        "No"
+      ],
+      "test_rows": 226,
+      "majority_label": "Yes",
+      "majority_share": 0.5,
+      "label_counts": {
+        "Yes": 113,
+        "No": 113
+      }
+    },
+    {
+      "task": "learned_hands_housing",
+      "answer_space": [
+        "Yes",
+        "No"
+      ],
+      "test_rows": 4494,
+      "majority_label": "Yes",
+      "majority_share": 0.5,
+      "label_counts": {
+        "Yes": 2247,
+        "No": 2247
+      }
+    },
+    {
+      "task": "learned_hands_immigration",
+      "answer_space": [
+        "Yes",
+        "No"
+      ],
+      "test_rows": 134,
+      "majority_label": "Yes",
+      "majority_share": 0.5,
+      "label_counts": {
+        "Yes": 67,
+        "No": 67
+      }
+    },
+    {
+      "task": "learned_hands_torts",
+      "answer_space": [
+        "Yes",
+        "No"
+      ],
+      "test_rows": 432,
+      "majority_label": "Yes",
+      "majority_share": 0.5,
+      "label_counts": {
+        "Yes": 216,
+        "No": 216
+      }
+    },
+    {
+      "task": "learned_hands_traffic",
+      "answer_space": [
+        "Yes",
+        "No"
+      ],
+      "test_rows": 556,
+      "majority_label": "Yes",
+      "majority_share": 0.5,
+      "label_counts": {
+        "Yes": 278,
+        "No": 278
+      }
+    },
+    {
+      "task": "maud_ability_to_consummate_concept_is_subject_to_mae_carveouts",
+      "answer_space": [
+        "A",
+        "B"
+      ],
+      "test_rows": 69,
+      "majority_label": "A",
+      "majority_share": 0.7971,
+      "label_counts": {
+        "A": 55,
+        "B": 14
+      }
+    },
+    {
+      "task": "maud_accuracy_of_fundamental_target_rws_bringdown_standard",
+      "answer_space": [
+        "B",
+        "C",
+        "A"
+      ],
+      "test_rows": 175,
+      "majority_label": "B",
+      "majority_share": 0.64,
+      "label_counts": {
+        "B": 112,
+        "C": 32,
+        "A": 31
+      }
+    },
+    {
+      "task": "maud_accuracy_of_target_capitalization_rw_(outstanding_shares)_bringdown_standard_answer",
+      "answer_space": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "test_rows": 148,
+      "majority_label": "D",
+      "majority_share": 0.8378,
+      "label_counts": {
+        "A": 10,
+        "B": 3,
+        "C": 11,
+        "D": 124
+      }
+    },
+    {
+      "task": "maud_accuracy_of_target_general_rw_bringdown_timing_answer",
+      "answer_space": [
+        "B",
+        "A"
+      ],
+      "test_rows": 181,
+      "majority_label": "B",
+      "majority_share": 0.7182,
+      "label_counts": {
+        "B": 130,
+        "A": 51
+      }
+    },
+    {
+      "task": "maud_additional_matching_rights_period_for_modifications_(cor)",
+      "answer_space": [
+        "A",
+        "B",
+        "C",
+        "E",
+        "D"
+      ],
+      "test_rows": 158,
+      "majority_label": "A",
+      "majority_share": 0.5443,
+      "label_counts": {
+        "A": 86,
+        "B": 58,
+        "C": 4,
+        "E": 6,
+        "D": 4
+      }
+    },
+    {
+      "task": "maud_cor_permitted_in_response_to_intervening_event",
+      "answer_space": [
+        "A",
+        "B"
+      ],
+      "test_rows": 100,
+      "majority_label": "B",
+      "majority_share": 0.84,
+      "label_counts": {
+        "A": 16,
+        "B": 84
+      }
+    },
+    {
+      "task": "maud_cor_standard_(intervening_event)",
+      "answer_space": [
+        "C",
+        "B",
+        "D",
+        "H",
+        "E",
+        "I"
+      ],
+      "test_rows": 84,
+      "majority_label": "B",
+      "majority_share": 0.4048,
+      "label_counts": {
+        "C": 4,
+        "B": 34,
+        "D": 31,
+        "H": 8,
+        "E": 2,
+        "I": 5
+      }
+    },
+    {
+      "task": "maud_cor_standard_(superior_offer)",
+      "answer_space": [
+        "D",
+        "B",
+        "H",
+        "J",
+        "C",
+        "G",
+        "I",
+        "E"
+      ],
+      "test_rows": 100,
+      "majority_label": "B",
+      "majority_share": 0.37,
+      "label_counts": {
+        "D": 28,
+        "B": 37,
+        "H": 8,
+        "J": 6,
+        "C": 6,
+        "G": 4,
+        "I": 7,
+        "E": 4
+      }
+    },
+    {
+      "task": "maud_definition_contains_knowledge_requirement_-_answer",
+      "answer_space": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "test_rows": 124,
+      "majority_label": "A",
+      "majority_share": 0.5242,
+      "label_counts": {
+        "A": 65,
+        "B": 6,
+        "C": 48,
+        "D": 5
+      }
+    },
+    {
+      "task": "maud_definition_includes_asset_deals",
+      "answer_space": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "test_rows": 141,
+      "majority_label": "C",
+      "majority_share": 0.4823,
+      "label_counts": {
+        "A": 10,
+        "B": 59,
+        "C": 68,
+        "D": 4
+      }
+    },
+    {
+      "task": "maud_definition_includes_stock_deals",
+      "answer_space": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "test_rows": 142,
+      "majority_label": "C",
+      "majority_share": 0.5282,
+      "label_counts": {
+        "A": 4,
+        "B": 60,
+        "C": 75,
+        "D": 3
+      }
+    },
+    {
+      "task": "maud_fiduciary_exception__board_determination_standard",
+      "answer_space": [
+        "D",
+        "E",
+        "H",
+        "B",
+        "I",
+        "C",
+        "F",
+        "G"
+      ],
+      "test_rows": 179,
+      "majority_label": "H",
+      "majority_share": 0.3631,
+      "label_counts": {
+        "D": 38,
+        "E": 8,
+        "H": 65,
+        "B": 46,
+        "I": 14,
+        "C": 4,
+        "F": 2,
+        "G": 2
+      }
+    },
+    {
+      "task": "maud_fls_(mae)_standard",
+      "answer_space": [
+        "B",
+        "C",
+        "E",
+        "A"
+      ],
+      "test_rows": 77,
+      "majority_label": "C",
+      "majority_share": 0.7792,
+      "label_counts": {
+        "B": 14,
+        "C": 60,
+        "E": 2,
+        "A": 1
+      }
+    },
+    {
+      "task": "maud_includes_consistent_with_past_practice",
+      "answer_space": [
+        "B",
+        "A"
+      ],
+      "test_rows": 181,
+      "majority_label": "B",
+      "majority_share": 0.663,
+      "label_counts": {
+        "B": 120,
+        "A": 61
+      }
+    },
+    {
+      "task": "maud_initial_matching_rights_period_(cor)",
+      "answer_space": [
+        "D",
+        "B",
+        "F",
+        "E",
+        "C"
+      ],
+      "test_rows": 158,
+      "majority_label": "D",
+      "majority_share": 0.5506,
+      "label_counts": {
+        "D": 87,
+        "B": 32,
+        "F": 29,
+        "E": 6,
+        "C": 4
+      }
+    },
+    {
+      "task": "maud_initial_matching_rights_period_(ftr)",
+      "answer_space": [
+        "D",
+        "F",
+        "C",
+        "B",
+        "E"
+      ],
+      "test_rows": 132,
+      "majority_label": "D",
+      "majority_share": 0.5455,
+      "label_counts": {
+        "D": 72,
+        "F": 30,
+        "C": 4,
+        "B": 20,
+        "E": 6
+      }
+    },
+    {
+      "task": "maud_intervening_event_-_required_to_occur_after_signing_-_answer",
+      "answer_space": [
+        "A",
+        "B"
+      ],
+      "test_rows": 124,
+      "majority_label": "A",
+      "majority_share": 0.7177,
+      "label_counts": {
+        "A": 89,
+        "B": 35
+      }
+    },
+    {
+      "task": "maud_knowledge_definition",
+      "answer_space": [
+        "A",
+        "B"
+      ],
+      "test_rows": 148,
+      "majority_label": "B",
+      "majority_share": 0.5541,
+      "label_counts": {
+        "A": 66,
+        "B": 82
+      }
+    },
+    {
+      "task": "maud_liability_standard_for_no-shop_breach_by_target_non-do_representatives",
+      "answer_space": [
+        "A",
+        "B"
+      ],
+      "test_rows": 134,
+      "majority_label": "B",
+      "majority_share": 0.5821,
+      "label_counts": {
+        "A": 56,
+        "B": 78
+      }
+    },
+    {
+      "task": "maud_ordinary_course_efforts_standard",
+      "answer_space": [
+        "B",
+        "A",
+        "C"
+      ],
+      "test_rows": 181,
+      "majority_label": "B",
+      "majority_share": 0.5028,
+      "label_counts": {
+        "B": 91,
+        "A": 62,
+        "C": 28
+      }
+    },
+    {
+      "task": "maud_pandemic_or_other_public_health_event__subject_to_disproportionate_impact_modifier",
+      "answer_space": [
+        "B",
+        "A"
+      ],
+      "test_rows": 98,
+      "majority_label": "B",
+      "majority_share": 0.8061,
+      "label_counts": {
+        "B": 79,
+        "A": 19
+      }
+    },
+    {
+      "task": "maud_pandemic_or_other_public_health_event_specific_reference_to_pandemic-related_governmental_responses_or_measures",
+      "answer_space": [
+        "B",
+        "A"
+      ],
+      "test_rows": 98,
+      "majority_label": "B",
+      "majority_share": 0.7347,
+      "label_counts": {
+        "B": 72,
+        "A": 26
+      }
+    },
+    {
+      "task": "maud_relational_language_(mae)_applies_to",
+      "answer_space": [
+        "A",
+        "C"
+      ],
+      "test_rows": 90,
+      "majority_label": "A",
+      "majority_share": 0.7667,
+      "label_counts": {
+        "A": 69,
+        "C": 21
+      }
+    },
+    {
+      "task": "maud_type_of_consideration",
+      "answer_space": [
+        "D",
+        "A",
+        "B",
+        "C"
+      ],
+      "test_rows": 172,
+      "majority_label": "A",
+      "majority_share": 0.5523,
+      "label_counts": {
+        "D": 4,
+        "A": 95,
+        "B": 45,
+        "C": 28
+      }
+    },
+    {
+      "task": "nys_judicial_ethics",
+      "answer_space": [
+        "Yes",
+        "No"
+      ],
+      "test_rows": 292,
+      "majority_label": "Yes",
+      "majority_share": 0.5205,
+      "label_counts": {
+        "Yes": 152,
+        "No": 140
+      }
+    },
+    {
+      "task": "opp115_data_retention",
+      "answer_space": [
+        "Yes",
+        "No"
+      ],
+      "test_rows": 304,
+      "majority_label": "Yes",
+      "majority_share": 0.5,
+      "label_counts": {
+        "Yes": 152,
+        "No": 152
+      }
+    },
+    {
+      "task": "opp115_data_security",
+      "answer_space": [
+        "Yes",
+        "No"
+      ],
+      "test_rows": 738,
+      "majority_label": "Yes",
+      "majority_share": 0.5,
+      "label_counts": {
+        "Yes": 369,
+        "No": 369
+      }
+    },
+    {
+      "task": "opp115_first_party_collection_use",
+      "answer_space": [
+        "No",
+        "Yes"
+      ],
+      "test_rows": 3034,
+      "majority_label": "No",
+      "majority_share": 0.5,
+      "label_counts": {
+        "No": 1517,
+        "Yes": 1517
+      }
+    },
+    {
+      "task": "opp115_international_and_specific_audiences",
+      "answer_space": [
+        "Yes",
+        "No"
+      ],
+      "test_rows": 694,
+      "majority_label": "Yes",
+      "majority_share": 0.5,
+      "label_counts": {
+        "Yes": 347,
+        "No": 347
+      }
+    },
+    {
+      "task": "opp115_policy_change",
+      "answer_space": [
+        "No",
+        "Yes"
+      ],
+      "test_rows": 362,
+      "majority_label": "No",
+      "majority_share": 0.5,
+      "label_counts": {
+        "No": 181,
+        "Yes": 181
+      }
+    },
+    {
+      "task": "opp115_third_party_sharing_collection",
+      "answer_space": [
+        "Yes",
+        "No"
+      ],
+      "test_rows": 2364,
+      "majority_label": "Yes",
+      "majority_share": 0.5,
+      "label_counts": {
+        "Yes": 1182,
+        "No": 1182
+      }
+    },
+    {
+      "task": "opp115_user_access,_edit_and_deletion",
+      "answer_space": [
+        "No",
+        "Yes"
+      ],
+      "test_rows": 452,
+      "majority_label": "No",
+      "majority_share": 0.5,
+      "label_counts": {
+        "No": 226,
+        "Yes": 226
+      }
+    },
+    {
+      "task": "opp115_user_choice_control",
+      "answer_space": [
+        "Yes",
+        "No"
+      ],
+      "test_rows": 1254,
+      "majority_label": "Yes",
+      "majority_share": 0.5,
+      "label_counts": {
+        "Yes": 627,
+        "No": 627
+      }
+    },
+    {
+      "task": "oral_argument_question_purpose",
+      "answer_space": [
+        "Background",
+        "Clarification",
+        "Communicate",
+        "Criticism",
+        "Humor",
+        "Implications",
+        "Support"
+      ],
+      "test_rows": 312,
+      "majority_label": "Clarification",
+      "majority_share": 0.266,
+      "label_counts": {
+        "Background": 57,
+        "Clarification": 83,
+        "Communicate": 14,
+        "Criticism": 51,
+        "Humor": 28,
+        "Implications": 67,
+        "Support": 12
+      }
+    },
+    {
+      "task": "overruling",
+      "answer_space": [
+        "Yes",
+        "No"
+      ],
+      "test_rows": 2394,
+      "majority_label": "Yes",
+      "majority_share": 0.5079,
+      "label_counts": {
+        "Yes": 1216,
+        "No": 1178
+      }
+    },
+    {
+      "task": "privacy_policy_qa",
+      "answer_space": [
+        "Relevant",
+        "Irrelevant"
+      ],
+      "test_rows": 10923,
+      "majority_label": "Irrelevant",
+      "majority_share": 0.5011,
+      "label_counts": {
+        "Relevant": 5449,
+        "Irrelevant": 5474
+      }
+    },
+    {
+      "task": "proa",
+      "answer_space": [
+        "Yes",
+        "No"
+      ],
+      "test_rows": 95,
+      "majority_label": "No",
+      "majority_share": 0.5053,
+      "label_counts": {
+        "Yes": 47,
+        "No": 48
+      }
+    },
+    {
+      "task": "sara_entailment",
+      "answer_space": [
+        "Entailment",
+        "Contradiction"
+      ],
+      "test_rows": 272,
+      "majority_label": "Entailment",
+      "majority_share": 0.5,
+      "label_counts": {
+        "Entailment": 136,
+        "Contradiction": 136
+      }
+    },
+    {
+      "task": "scalr",
+      "answer_space": [
+        "3",
+        "4",
+        "0",
+        "1",
+        "2"
+      ],
+      "test_rows": 571,
+      "majority_label": "0",
+      "majority_share": 0.2242,
+      "label_counts": {
+        "3": 111,
+        "4": 110,
+        "0": 128,
+        "1": 111,
+        "2": 111
+      }
+    },
+    {
+      "task": "supply_chain_disclosure_best_practice_audits",
+      "answer_space": [
+        "Yes",
+        "No"
+      ],
+      "test_rows": 379,
+      "majority_label": "Yes",
+      "majority_share": 0.686,
+      "label_counts": {
+        "Yes": 260,
+        "No": 119
+      }
+    },
+    {
+      "task": "supply_chain_disclosure_best_practice_certification",
+      "answer_space": [
+        "Yes",
+        "No"
+      ],
+      "test_rows": 378,
+      "majority_label": "Yes",
+      "majority_share": 0.7513,
+      "label_counts": {
+        "Yes": 284,
+        "No": 94
+      }
+    },
+    {
+      "task": "supply_chain_disclosure_best_practice_training",
+      "answer_space": [
+        "Yes",
+        "No"
+      ],
+      "test_rows": 379,
+      "majority_label": "Yes",
+      "majority_share": 0.7177,
+      "label_counts": {
+        "Yes": 272,
+        "No": 107
+      }
+    },
+    {
+      "task": "supply_chain_disclosure_best_practice_verification",
+      "answer_space": [
+        "Yes",
+        "No"
+      ],
+      "test_rows": 379,
+      "majority_label": "Yes",
+      "majority_share": 0.562,
+      "label_counts": {
+        "Yes": 213,
+        "No": 166
+      }
+    },
+    {
+      "task": "supply_chain_disclosure_disclosed_verification",
+      "answer_space": [
+        "Yes",
+        "No"
+      ],
+      "test_rows": 379,
+      "majority_label": "Yes",
+      "majority_share": 0.7414,
+      "label_counts": {
+        "Yes": 281,
+        "No": 98
+      }
+    },
+    {
+      "task": "textualism_tool_plain",
+      "answer_space": [
+        "Yes",
+        "No"
+      ],
+      "test_rows": 165,
+      "majority_label": "No",
+      "majority_share": 0.5939,
+      "label_counts": {
+        "Yes": 67,
+        "No": 98
+      }
+    },
+    {
+      "task": "ucc_v_common_law",
+      "answer_space": [
+        "Common Law",
+        "UCC"
+      ],
+      "test_rows": 94,
+      "majority_label": "Common Law",
+      "majority_share": 0.5745,
+      "label_counts": {
+        "Common Law": 54,
+        "UCC": 40
+      }
+    }
+  ]
+}
