@@ -44,5 +44,5 @@
     "Rotation sets a floor on task-type share, not parity: each request requires one pair of the assigned type and the remaining 2 still follow model preference, which is why the share is 12.5% rather than 25%.",
     "The new-prompt arm is n=72. Its retention interval reaches down to 94.9%."
   ],
-  "decision": "Target ~8,100 pairs (900 passages per source) rather than 10,000. About $35 at intro pricing, inside the $40 budget, and consistent with the small-high-quality-set rationale the project already relies on."
+  "decision": "Target ~6,200 pairs (690 passages per source). About $26 at intro pricing. An earlier revision of this file said 900 per source / ~8,100 pairs / ~$35; the number was cut after the teacher-model A/B (eval_results/teacher_model_ab.json) confirmed Sonnet 5 retention at 100%, which removes the yield headroom the larger target was padding for."
 }
