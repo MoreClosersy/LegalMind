@@ -9,6 +9,8 @@ about what the model said.
 from __future__ import annotations
 
 import json
+import subprocess
+import sys
 from collections.abc import AsyncIterator, Iterator
 from contextlib import contextmanager
 from typing import Any
@@ -253,3 +255,35 @@ def test_metrics_expose_enforcement_counts() -> None:
 def test_invalid_requests_are_rejected(field: str, value: Any) -> None:
     with make_client(FakeBackend(["x"])) as client:
         assert post(client, **{field: value}).status_code == 422
+
+
+HEAVY_PACKAGES = frozenset(
+    {"torch", "vllm", "datasets", "pyarrow", "scipy", "numpy", "anthropic", "transformers"}
+)
+
+
+def test_serving_path_imports_nothing_heavy() -> None:
+    """The gateway image installs six packages, not the project's dependencies.
+
+    That is what keeps it a ~200MB container the disclaimer text can be
+    redeployed through in seconds, rather than one carrying the GPU stack. The
+    Dockerfile asserts this at build time; this asserts it in CI, where it is
+    noticed before a build.
+
+    A subprocess because by the time pytest reaches this line, other test
+    modules have already imported half of these into sys.modules.
+    """
+    probe = (
+        "import sys;"
+        "import legalmind.serve.gateway;"
+        f"heavy = {sorted(HEAVY_PACKAGES)};"
+        "found = sorted(p for p in heavy if p in sys.modules);"
+        "print(','.join(found))"
+    )
+    result = subprocess.run(
+        [sys.executable, "-c", probe], capture_output=True, text=True, check=True
+    )
+    assert result.stdout.strip() == "", (
+        f"the serving path now imports {result.stdout.strip()}, which the gateway "
+        "image does not install — the container would crash-loop on ImportError"
+    )
