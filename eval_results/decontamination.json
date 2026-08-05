@@ -1,0 +1,17 @@
+{
+  "shingle_size": 13,
+  "legalbench_ngrams": 3425573,
+  "input_pairs": 6019,
+  "contaminated_dropped": 10,
+  "contamination_rate": 0.001661,
+  "clean_pairs": 6009,
+  "train_pairs": 5509,
+  "val_pairs": 500,
+  "dropped_examples": [
+    "What rule does 18 U.S.C. \u00a7 3161(h)(1)(F) establish for excluding pretrial motion delay from the Speedy Trial Act clock, and how have courts applied it to motions that are pro se or ultimately unsucces",
+    "A subordinate employee is sexually harassed by her direct supervisor at a small company. The supervisor has authority to set her schedule, discipline her, and assign her tasks, but no ownership stake ",
+    "CPLR 5501(a)(1) is invoked for the proposition that \"the issues raised on appeal from the order are brought up for review and have been considered on the appeal from the judgment.\" If a litigant loses",
+    "What legal test must a habeas petitioner satisfy to prevail on a claim that counsel's erroneous advice about parole eligibility led him to plead nolo contendere rather than go to trial?",
+    "What are the three tiers of police-citizen encounters recognized under the Fourth Amendment, and what level of justification does each require?"
+  ]
+}

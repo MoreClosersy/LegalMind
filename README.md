@@ -64,13 +64,56 @@ fine-tune only narrowly beats a good prompt, that is what gets reported, along
 with the conditions under which the fine-tuning cost is justified anyway
 (latency, per-request token cost, private deployment).
 
-**4. ~10k training samples, not 90k.** Instruction tuning teaches format and
+**4. ~6k training samples, not 90k.** Instruction tuning teaches format and
 behaviour, not knowledge (the LIMA argument). A smaller, filtered, deduplicated
-set trains in one Spot window and avoids paying for noise.
+set trains in one Spot window and avoids paying for noise. The target was cut
+from ~8k after a teacher-model A/B measured retention at 100%, which removed the
+yield headroom the larger number was padding for.
 
 **5. g5.xlarge over g4dn.xlarge.** Both draw on the same 4-vCPU G-instance quota.
 The A10G (Ampere) supports bf16 and FlashAttention-2 and runs vLLM properly; the
 T4 (Turing) does none of these.
+
+## Training data
+
+Synthesized from `pile-of-law` with Claude Sonnet 5 over the Batch API, then
+filtered and decontaminated. Every number below comes from a committed report.
+
+| | | Source |
+|---|---|---|
+| Passages sampled | 2,070 (690 × 3 sources) | |
+| Raw pairs generated | 6,153 | batch `msgbatch_01Ep4W9y8QcQ4DuREuiQqBAv` |
+| Kept after quality filter | 6,019 (**97.8%**) | [`filter_report_full.json`](eval_results/filter_report_full.json) |
+| Dropped as contaminated | 10 (**0.17%**) | [`decontamination.json`](eval_results/decontamination.json) |
+| Train / validation | 5,509 / 500 | |
+
+The filter's largest rejection category is `response_not_self_contained` (96 of
+134). That gate exists because a probe measured 31.6% of responses referring back
+to a source passage the trained model never sees; the prompt fix took it to 1.6%.
+
+**On the 0.17% contamination figure.** It is low because the training data comes
+from a different corpus, not because the check is weak — 3.4M distinct 13-grams
+from all 162 LegalBench tasks were indexed. Reading the ten dropped instructions
+(they are in the report) shows they are innocent collisions on standard phrasing:
+the three-tier framework for Fourth Amendment encounters, the *Strickland*
+prejudice test. That is the expected failure mode of a 13-gram threshold on legal
+boilerplate, and over-dropping ten pairs is the cheap direction to err.
+
+Two synthesis defects were found by measuring real output rather than by reading
+the prompt, and both are written up in
+[`synthesis_prompt_ab.json`](eval_results/synthesis_prompt_ab.json) and
+[`teacher_model_ab.json`](eval_results/teacher_model_ab.json).
+
+## Evaluation subset
+
+The LegalBench task list is frozen in
+[`configs/legalbench_tasks.json`](configs/legalbench_tasks.json), selected
+mechanically by [`scripts/select_legalbench_tasks.py`](scripts/select_legalbench_tasks.py)
+**before any fine-tuned model existed**. Picking which benchmark tasks to report
+after seeing the scores is invalidating, so the selection uses only properties of
+the benchmark: 127 of 162 tasks survive; the rest are dropped for class imbalance
+(17), small test splits (8), incompatible scoring methods (5), unusable answer
+spaces (3), or non-US jurisdiction (2).
 
 ## Results
 
