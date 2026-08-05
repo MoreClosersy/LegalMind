@@ -1,0 +1,20 @@
+{
+  "checked_at": "2026-08-05T20:30:45+00:00",
+  "what": "13-gram overlap between the MMLU forgetting benchmark and data/train.jsonl",
+  "why": "The training set was decontaminated against LegalBench only, because that was the only benchmark in play at the time. Quoting an MMLU forgetting delta without checking MMLU too would repeat, smaller, the mistake this project was restructured to avoid. eval/forgetting.py runs this check on every invocation and refuses to write a result file if it fails.",
+  "method": "same shingle size and same blake2b hashing as data/decontaminate.py",
+  "subjects": [
+    "high_school_mathematics",
+    "college_computer_science",
+    "formal_logic",
+    "high_school_biology",
+    "moral_scenarios",
+    "world_religions"
+  ],
+  "train_pairs_indexed": 5509,
+  "train_ngrams": 1313342,
+  "items_checked": 360,
+  "items_overlapping": 0,
+  "examples": [],
+  "verdict": "clean - 0/360 items share a 13-gram with the training set, so a forgetting delta measured on these items is interpretable"
+}
