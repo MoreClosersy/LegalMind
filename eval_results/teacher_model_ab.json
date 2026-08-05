@@ -1,0 +1,48 @@
+{
+  "sonnet5": {
+    "total": 72,
+    "kept": 72,
+    "retention": 1.0,
+    "retention_ci95": [
+      0.9493470601886036,
+      1.0
+    ],
+    "rejected_by_reason": {},
+    "task_types": {
+      "rule_statement": 24,
+      "clause_explanation": 22,
+      "issue_spotting": 17,
+      "statutory_interpretation": 9
+    },
+    "sources": {
+      "federal_register": 24,
+      "cfr": 24,
+      "courtlisteneropinions": 24
+    },
+    "mean_response_chars": 1322.3
+  },
+  "haiku45": {
+    "total": 80,
+    "kept": 70,
+    "retention": 0.875,
+    "retention_ci95": [
+      0.7849700281693438,
+      0.9306651696322249
+    ],
+    "rejected_by_reason": {
+      "response_not_self_contained": 10
+    },
+    "task_types": {
+      "rule_statement": 23,
+      "issue_spotting": 22,
+      "clause_explanation": 20,
+      "statutory_interpretation": 5
+    },
+    "sources": {
+      "courtlisteneropinions": 27,
+      "federal_register": 20,
+      "cfr": 23
+    },
+    "mean_response_chars": 835.0
+  }
+}

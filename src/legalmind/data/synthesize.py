@@ -254,11 +254,12 @@ def _parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser.add_argument(
         "--per-source",
         type=int,
-        default=900,
+        default=690,
         help=(
             "passages sampled per pile-of-law source (3 sources). "
-            "900 x 3 sources x ~3 pairs = ~8,100 pairs, which at the measured "
-            "post-fix retention and Sonnet 5 intro pricing lands near $35"
+            "690 x 3 sources x ~3.0 pairs/passage (measured) = ~6,200 pairs, "
+            "landing near $26 at Sonnet 5 intro pricing. Output tokens are 83% "
+            "of batch cost, so pair count is the only real lever"
         ),
     )
     parser.add_argument("--model", default=DEFAULT_MODEL)
