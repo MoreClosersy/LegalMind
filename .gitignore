@@ -14,6 +14,9 @@ __pycache__/
 #   uv run python -m legalmind.data.synthesize
 data/*.jsonl
 data/raw/
+# Runtime artifacts: resume cursors written by the batch drivers.
+data/.last_batch_id
+data/.last_refusal_batch_id
 
 # Model artifacts — the adapter lives on the HF Hub, not here
 outputs/
