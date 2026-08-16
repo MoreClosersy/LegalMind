@@ -180,7 +180,43 @@ uv run python -m legalmind.data.decontaminate --in data/filtered_pairs.jsonl
 The last two steps write reports to `eval_results/`. The decontamination report
 is the evidence behind the no-contamination claim above.
 
-<!-- PENDING: evaluation and serving quick-start steps. -->
+### Train and evaluate on a GPU instance
+
+One script, because every step below has a failure mode that costs GPU hours:
+
+```bash
+tmux new -s legalmind && ./scripts/run_on_gpu.sh all 2>&1 | tee run.log
+```
+
+`preflight` runs first and spends no GPU time. It checks compute capability
+(≥ 8.0 — a T4 fails deep inside the first forward pass otherwise), that the
+training data is actually present, disk headroom, S3 credentials if checkpoint
+sync is configured, and then runs the ten-step CPU smoke test. Four minutes
+there beats discovering a missing environment variable three hours in.
+
+Set `LEGALMIND_S3_CHECKPOINT_URI` to mirror checkpoints to object storage. The
+usual justification is Spot reclamation, but the local disk of *any* terminated
+instance goes with it — the sync guards SSH drops, OOMs, and full disks equally.
+
+### Serve locally
+
+```bash
+docker compose up --build
+```
+
+vLLM holds the model and the GPU; the gateway holds the compliance layer and
+holds nothing. The gateway image is 197MB and installs six packages, so the
+disclaimer text can be changed and redeployed without restarting a process that
+has an 8B model resident in VRAM.
+
+```bash
+curl -N localhost:8080/v1/chat -H 'content-type: application/json' \
+  -d '{"messages":[{"role":"user","content":"What is promissory estoppel?"}],"adapter":"legalmind","stream":true}'
+```
+
+The first SSE event carries the disclaimer, before any generated token. That is
+deliberate: post-hoc enforcement cannot run if the client disconnects mid-stream,
+so the guarantee is delivered up front and appended again at the end.
 
 ## What I'd do next
 

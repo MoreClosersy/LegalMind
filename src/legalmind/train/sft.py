@@ -51,6 +51,11 @@ from transformers import AutoModelForCausalLM, AutoTokenizer, PreTrainedTokenize
 from trl import SFTConfig, SFTTrainer
 
 from legalmind.config import TrainConfig, load_train_config
+from legalmind.train.checkpoint_sync import (
+    S3CheckpointCallback,
+    pull_latest_checkpoint,
+    s3_uri_from_env,
+)
 
 _DTYPES = {
     "bfloat16": torch.bfloat16,
@@ -203,7 +208,17 @@ def train(cfg: TrainConfig) -> str:
             },
         )
 
-    trainer.train()
+    # Checkpoint mirroring is opt-in by environment variable, so the CPU smoke
+    # test in CI and a laptop run are unaffected while a GPU run is protected.
+    s3_uri = s3_uri_from_env()
+    resume_from: str | bool = False
+    if s3_uri:
+        trainer.add_callback(S3CheckpointCallback(s3_uri))
+        recovered = pull_latest_checkpoint(s3_uri, Path(cfg.output_dir))
+        if recovered is not None:
+            resume_from = str(recovered)
+
+    trainer.train(resume_from_checkpoint=resume_from or None)
     trainer.save_model(cfg.output_dir)
     tokenizer.save_pretrained(cfg.output_dir)
     print(f"adapter saved to {cfg.output_dir}", file=sys.stderr)
