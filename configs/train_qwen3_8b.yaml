@@ -57,8 +57,15 @@ data:
 training:
   output_dir: outputs/qwen3-8b-legalmind
   num_train_epochs: 1
-  per_device_train_batch_size: 4
-  gradient_accumulation_steps: 4     # effective batch 16
+  # per_device_train_batch_size: 4 OOM'd on the first real training step on a
+  # g5.xlarge (A10G, 24GB): "tried to allocate 4.64 GiB, 2.25 GiB free". With
+  # packing=true each sample is already 2048 tokens, so batch_size multiplies
+  # straight into the logits tensor — batch 4 x 2048 tokens x Qwen3's ~152k
+  # vocab is 2GB+ in bf16 before backward needs a second copy for gradients.
+  # Dropping to 1 and quadrupling accumulation keeps the effective batch at 16
+  # (same optimizer dynamics) while cutting that tensor to a quarter its size.
+  per_device_train_batch_size: 1
+  gradient_accumulation_steps: 16    # effective batch 16
   learning_rate: 2.0e-4
   lr_scheduler_type: cosine
   warmup_ratio: 0.03
