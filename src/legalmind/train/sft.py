@@ -39,6 +39,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import sys
 from pathlib import Path
 from typing import Any, cast
@@ -169,12 +170,28 @@ def train(cfg: TrainConfig) -> str:
         task_type="CAUSAL_LM",
     )
 
+    # A config that asks for W&B but finds no API key does not fail — the wandb
+    # client falls back to an interactive login prompt and blocks on stdin.
+    # run_on_gpu.sh is meant to run unattended in tmux; a hang there burns
+    # billed GPU time silently until someone happens to check on it. Downgrading
+    # to "none" here keeps that promise: preflight already warns that an unset
+    # key means "trains but logs nowhere", so this is what makes that true
+    # rather than "trains but logs nowhere, unless it hangs first".
+    report_to = cfg.tracking.report_to
+    if "wandb" in report_to and not os.environ.get("WANDB_API_KEY"):
+        print(
+            "WANDB_API_KEY not set; falling back to report_to='none' instead of "
+            "letting wandb prompt for interactive login and hang the run.",
+            file=sys.stderr,
+        )
+        report_to = "none"
+
     sft_config = SFTConfig(
         max_length=cfg.data.max_seq_length,
         packing=cfg.data.packing,
         completion_only_loss=cfg.data.completion_only_loss,
         run_name=cfg.tracking.run_name,
-        report_to=cfg.tracking.report_to,
+        report_to=report_to,
         **cfg.training,
     )
 
