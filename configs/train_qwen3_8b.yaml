@@ -1,8 +1,8 @@
 # Production run: Qwen3-8B QLoRA on a single g5.xlarge (A10G 24GB, Ampere).
 #
 # Why g5 and not g4dn: both draw on the same 4-vCPU "G instances" quota, but the
-# T4 in g4dn is Turing — no bf16, no FlashAttention-2, and vLLM support is poor.
-# The A10G is ~3-4x faster per dollar for this workload.
+# T4 in g4dn is Turing — no bf16, no fused attention kernels, and vLLM support
+# is poor. The A10G is ~3-4x faster per dollar for this workload.
 
 model:
   name: Qwen/Qwen3-8B
@@ -10,7 +10,15 @@ model:
   # instruction-following, not chain-of-thought, so we render without thinking
   # blocks — and must serve the same way, or train/inference templates diverge.
   enable_thinking: false
-  attn_implementation: flash_attention_2
+  # "sdpa" (torch.nn.functional.scaled_dot_product_attention), not
+  # "flash_attention_2". Transformers' flash_attention_2 path requires the
+  # separate `flash-attn` PyPI package, which has no prebuilt wheel for this
+  # project's pinned torch==2.7.0 and takes 20-40 minutes to compile from
+  # source — a bad trade against a few hours of billed GPU time. sdpa is
+  # built into PyTorch itself and dispatches to a fused flash-attention CUDA
+  # kernel on Ampere+ under bf16, so this is not the performance cliff the
+  # name difference suggests.
+  attn_implementation: sdpa
   torch_dtype: bfloat16
 
 quantization:
