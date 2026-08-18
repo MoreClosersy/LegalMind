@@ -93,6 +93,9 @@ preflight() {
 
 train() {
   log "Training: QLoRA on $BASE_MODEL"
+  # 24GB on a single A10G leaves little slack; the allocator's own OOM message
+  # recommends this directly, and it costs nothing when there is slack to spare.
+  export PYTORCH_CUDA_ALLOC_CONF="expandable_segments:True"
   uv run python -m legalmind.train.sft --config "$CONFIG"
   [ -f "$ADAPTER_DIR/adapter_model.safetensors" ] \
     || fail "training finished but no adapter at $ADAPTER_DIR"
