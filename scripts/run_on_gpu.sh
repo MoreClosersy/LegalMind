@@ -106,6 +106,16 @@ serve() {
   log "Serving: vLLM + gateway"
   [ -d "$ADAPTER_DIR" ] || fail "no adapter at $ADAPTER_DIR — train first"
 
+  # The `serve` extra (fastapi, uvicorn, sse-starlette, ...) is disjoint from
+  # `train` + `gpu` by design — see pyproject.toml and the Dockerfile, which
+  # deliberately keeps the gateway image free of the GPU stack. First real run
+  # against actual infrastructure hit exactly the gap that split implies: an
+  # instance set up with `uv sync --extra train --extra gpu` (the extras
+  # `train` and `evaluate` actually need) has no `sse_starlette`, and this step
+  # died with ModuleNotFoundError. Syncing it here rather than trusting it was
+  # done earlier makes this step self-contained regardless of setup history.
+  uv sync --extra train --extra gpu --extra serve
+
   # One process, base weights and the adapter both addressable by model name.
   # That is what lets all three evaluation arms run against identical weights
   # in a single session, which matters for fairness as much as for cost:
