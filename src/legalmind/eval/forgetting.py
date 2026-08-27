@@ -49,7 +49,12 @@ from datasets import load_dataset
 from legalmind.data.decontaminate import _shingle_hashes
 from legalmind.data.filter import read_jsonl
 from legalmind.eval.arms import Arm, ArmId, build_arms
-from legalmind.eval.generate import DEFAULT_BASE_URL, DEFAULT_CONCURRENCY, GenerationClient
+from legalmind.eval.generate import (
+    DEFAULT_BASE_URL,
+    DEFAULT_CONCURRENCY,
+    GenerationClient,
+    strip_thinking_block,
+)
 from legalmind.eval.refusal import Rate
 
 MMLU_REPO = "cais/mmlu"
@@ -102,6 +107,7 @@ class Item:
 
 
 def extract_letter(text: str) -> str | None:
+    text = strip_thinking_block(text)
     for line in text.strip().splitlines():
         if not line.strip():
             continue

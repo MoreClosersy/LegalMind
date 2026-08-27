@@ -66,7 +66,12 @@ from typing import Any
 from huggingface_hub import hf_hub_download
 
 from legalmind.eval.arms import Arm, ArmId, build_arms
-from legalmind.eval.generate import DEFAULT_BASE_URL, DEFAULT_CONCURRENCY, GenerationClient
+from legalmind.eval.generate import (
+    DEFAULT_BASE_URL,
+    DEFAULT_CONCURRENCY,
+    GenerationClient,
+    strip_thinking_block,
+)
 from legalmind.eval.refusal import wilson_interval
 
 LEGALBENCH_REPO = "nguha/legalbench"
@@ -201,6 +206,7 @@ def extract_label(text: str, answer_space: tuple[str, ...]) -> str | None:
     if not text.strip():
         return None
 
+    text = strip_thinking_block(text)
     tail = _ANSWER_MARKER.split(text)[-1]
     for line in tail.splitlines():
         candidate = line.strip().strip(_LABEL_DECORATION)
