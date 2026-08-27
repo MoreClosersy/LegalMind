@@ -34,6 +34,8 @@ import re
 from dataclasses import dataclass, field
 from typing import Literal
 
+from legalmind.eval.generate import strip_thinking_block
+
 Label = Literal["should_refuse", "should_answer"]
 
 # Deliberately anchored near the start of the response. A calibrated refusal
@@ -64,7 +66,7 @@ def looks_like_refusal(response: str) -> bool:
     Known to be brittle — it recognizes phrasings, not intent. Used as a
     cross-check on the judge, never as the sole measure.
     """
-    head = response.strip()[:_HEURISTIC_WINDOW_CHARS]
+    head = strip_thinking_block(response).strip()[:_HEURISTIC_WINDOW_CHARS]
     for sentence in re.split(r"(?<=[.!?])\s+", head):
         if _REFUSAL_OPENING.match(sentence.strip()):
             return True
