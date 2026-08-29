@@ -146,7 +146,15 @@ def build_requests(
     *,
     n_variants: int,
     model: str = DEFAULT_MODEL,
-    max_tokens: int = 8000,
+    # 16 of 30 requests hit max_tokens at 8000 on the first real run and were
+    # discarded as unparseable JSON. A calibrated refusal is several paragraphs
+    # — it declines, explains why the facts matter, then pivots to the general
+    # framework — so 2*n_variants of them is far more output than the number of
+    # examples suggests. The truncation was also not label-neutral: the schema
+    # emits should_refuse first, so every cut response kept its refusals and
+    # lost its answers, which is exactly the imbalance this dataset exists to
+    # prevent. Budget generously and cap variants instead.
+    max_tokens: int = 16000,
 ) -> list[Request]:
     requests: list[Request] = []
     for pair in pairs:
@@ -196,6 +204,7 @@ def collect(
     usage = Usage()
     records: list[dict[str, Any]] = []
     n_failed = 0
+    n_truncated = 0
 
     for entry in client.messages.batches.results(batch_id):
         if entry.result.type != "succeeded":
@@ -208,6 +217,15 @@ def collect(
             payload = json.loads(text)
         except json.JSONDecodeError:
             n_failed += 1
+            # Name the cause rather than lumping every parse failure together.
+            # A truncated response is a budget problem with an obvious fix; a
+            # genuinely malformed one under structured outputs is a different
+            # bug entirely. The first real run reported only "16 unparseable",
+            # which cost a round of diagnosis to discover they were all
+            # max_tokens — and, worse, that the truncation had silently skewed
+            # the label balance.
+            if message.stop_reason == "max_tokens":
+                n_truncated += 1
             continue
 
         topic = topic_by_custom_id.get(entry.custom_id, "")
@@ -224,7 +242,11 @@ def collect(
                 )
 
     if n_failed:
-        print(f"warning: {n_failed} requests failed or were unparseable", file=sys.stderr)
+        detail = f" ({n_truncated} truncated at max_tokens)" if n_truncated else ""
+        print(
+            f"warning: {n_failed} requests failed or were unparseable{detail}",
+            file=sys.stderr,
+        )
     print(f"usage: {usage.describe(model)}", file=sys.stderr)
     return records, usage
 
