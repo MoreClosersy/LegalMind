@@ -1,0 +1,3502 @@
+{
+  "manifest": "configs/legalbench_tasks.json",
+  "manifest_frozen_at": "2026-08-05T19:28:20+00:00",
+  "model": "Qwen/Qwen3-8B",
+  "adapter": "legalmind",
+  "max_tokens": 512,
+  "sampling": "greedy (temperature=0)",
+  "answer_format_directive": "\n\nRespond with only one of the following labels, on its own line, with no explanation: {labels}",
+  "not_leaderboard_comparable": "Every arm receives an answer-format directive appended to LegalBench's own instruction, so that the comparison measures reasoning rather than which arm happens to emit bare labels. These numbers are comparable across arms, not to published LegalBench results.",
+  "smoke_test": false,
+  "arms": {
+    "A_base_zero_shot": {
+      "n_tasks": 127,
+      "n_examples": 7620,
+      "strict_accuracy_macro": 0.5975,
+      "strict_accuracy_micro": 0.5975,
+      "strict_accuracy_ci95": [
+        0.5864,
+        0.6085
+      ],
+      "balanced_accuracy_macro": 0.5936,
+      "official_accuracy_macro": 0.6024,
+      "majority_baseline_macro": 0.5393,
+      "compliance_rate_macro": 0.9999,
+      "ambiguity_rate_macro": 0.0,
+      "mean_completion_tokens": 2.1,
+      "mean_prompt_tokens": 297.0,
+      "mean_latency_s": 1.812,
+      "per_task": {
+        "abercrombie": {
+          "n": 60,
+          "strict_accuracy": 0.2667,
+          "balanced_accuracy": 0.2156,
+          "official_accuracy": 0.2667,
+          "majority_share": 0.2,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "citation_prediction_classification": {
+          "n": 60,
+          "strict_accuracy": 0.3333,
+          "balanced_accuracy": 0.4815,
+          "official_accuracy": 0.3333,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "consumer_contracts_qa": {
+          "n": 60,
+          "strict_accuracy": 0.8833,
+          "balanced_accuracy": 0.8833,
+          "official_accuracy": 0.8833,
+          "majority_share": 0.5505,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "contract_nli_confidentiality_of_agreement": {
+          "n": 60,
+          "strict_accuracy": 0.4333,
+          "balanced_accuracy": 0.5854,
+          "official_accuracy": 0.4333,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "contract_nli_explicit_identification": {
+          "n": 60,
+          "strict_accuracy": 0.75,
+          "balanced_accuracy": 0.6375,
+          "official_accuracy": 0.75,
+          "majority_share": 0.8165,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "contract_nli_inclusion_of_verbally_conveyed_information": {
+          "n": 60,
+          "strict_accuracy": 0.7833,
+          "balanced_accuracy": 0.7833,
+          "official_accuracy": 0.7833,
+          "majority_share": 0.5108,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "contract_nli_limited_use": {
+          "n": 60,
+          "strict_accuracy": 0.9,
+          "balanced_accuracy": 0.9,
+          "official_accuracy": 0.9,
+          "majority_share": 0.5337,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "contract_nli_no_licensing": {
+          "n": 60,
+          "strict_accuracy": 0.4,
+          "balanced_accuracy": 0.4,
+          "official_accuracy": 0.4,
+          "majority_share": 0.5062,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "contract_nli_notice_on_compelled_disclosure": {
+          "n": 60,
+          "strict_accuracy": 0.8333,
+          "balanced_accuracy": 0.8333,
+          "official_accuracy": 0.8333,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "contract_nli_permissible_acquirement_of_similar_information": {
+          "n": 60,
+          "strict_accuracy": 0.0333,
+          "balanced_accuracy": 0.0333,
+          "official_accuracy": 0.0333,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "contract_nli_permissible_copy": {
+          "n": 60,
+          "strict_accuracy": 0.7667,
+          "balanced_accuracy": 0.627,
+          "official_accuracy": 0.7667,
+          "majority_share": 0.7931,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "contract_nli_permissible_development_of_similar_information": {
+          "n": 60,
+          "strict_accuracy": 0.15,
+          "balanced_accuracy": 0.15,
+          "official_accuracy": 0.15,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "contract_nli_permissible_post-agreement_possession": {
+          "n": 60,
+          "strict_accuracy": 0.8333,
+          "balanced_accuracy": 0.8214,
+          "official_accuracy": 0.8333,
+          "majority_share": 0.7477,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "contract_nli_return_of_confidential_information": {
+          "n": 60,
+          "strict_accuracy": 0.9333,
+          "balanced_accuracy": 0.933,
+          "official_accuracy": 0.9333,
+          "majority_share": 0.5152,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "contract_nli_sharing_with_employees": {
+          "n": 60,
+          "strict_accuracy": 0.5667,
+          "balanced_accuracy": 0.5667,
+          "official_accuracy": 0.5667,
+          "majority_share": 0.5176,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "contract_nli_sharing_with_third-parties": {
+          "n": 60,
+          "strict_accuracy": 0.3667,
+          "balanced_accuracy": 0.3667,
+          "official_accuracy": 0.3667,
+          "majority_share": 0.6056,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "contract_nli_survival_of_obligations": {
+          "n": 60,
+          "strict_accuracy": 0.7333,
+          "balanced_accuracy": 0.7333,
+          "official_accuracy": 0.7333,
+          "majority_share": 0.5287,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "contract_qa": {
+          "n": 60,
+          "strict_accuracy": 0.95,
+          "balanced_accuracy": 0.9615,
+          "official_accuracy": 0.95,
+          "majority_share": 0.5125,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "corporate_lobbying": {
+          "n": 60,
+          "strict_accuracy": 0.85,
+          "balanced_accuracy": 0.8276,
+          "official_accuracy": 0.85,
+          "majority_share": 0.7041,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "cuad_affiliate_license-licensee": {
+          "n": 60,
+          "strict_accuracy": 0.6333,
+          "balanced_accuracy": 0.6333,
+          "official_accuracy": 0.6333,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "cuad_affiliate_license-licensor": {
+          "n": 60,
+          "strict_accuracy": 0.5833,
+          "balanced_accuracy": 0.7159,
+          "official_accuracy": 0.5833,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "cuad_anti-assignment": {
+          "n": 60,
+          "strict_accuracy": 0.2667,
+          "balanced_accuracy": 0.2667,
+          "official_accuracy": 0.2667,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "cuad_audit_rights": {
+          "n": 60,
+          "strict_accuracy": 0.6667,
+          "balanced_accuracy": 0.6667,
+          "official_accuracy": 0.6667,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "cuad_cap_on_liability": {
+          "n": 60,
+          "strict_accuracy": 0.2833,
+          "balanced_accuracy": 0.2833,
+          "official_accuracy": 0.2833,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "cuad_change_of_control": {
+          "n": 60,
+          "strict_accuracy": 0.4,
+          "balanced_accuracy": 0.4,
+          "official_accuracy": 0.4,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "cuad_competitive_restriction_exception": {
+          "n": 60,
+          "strict_accuracy": 0.15,
+          "balanced_accuracy": 0.15,
+          "official_accuracy": 0.15,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "cuad_covenant_not_to_sue": {
+          "n": 60,
+          "strict_accuracy": 0.05,
+          "balanced_accuracy": 0.05,
+          "official_accuracy": 0.05,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "cuad_effective_date": {
+          "n": 60,
+          "strict_accuracy": 0.75,
+          "balanced_accuracy": 0.75,
+          "official_accuracy": 0.75,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "cuad_exclusivity": {
+          "n": 60,
+          "strict_accuracy": 0.1333,
+          "balanced_accuracy": 0.1333,
+          "official_accuracy": 0.1333,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "cuad_expiration_date": {
+          "n": 60,
+          "strict_accuracy": 0.3667,
+          "balanced_accuracy": 0.3667,
+          "official_accuracy": 0.3667,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "cuad_governing_law": {
+          "n": 60,
+          "strict_accuracy": 0.9667,
+          "balanced_accuracy": 0.9667,
+          "official_accuracy": 0.9667,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "cuad_insurance": {
+          "n": 60,
+          "strict_accuracy": 0.95,
+          "balanced_accuracy": 0.95,
+          "official_accuracy": 0.95,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "cuad_ip_ownership_assignment": {
+          "n": 60,
+          "strict_accuracy": 0.6,
+          "balanced_accuracy": 0.6,
+          "official_accuracy": 0.6,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "cuad_irrevocable_or_perpetual_license": {
+          "n": 60,
+          "strict_accuracy": 0.8833,
+          "balanced_accuracy": 0.8833,
+          "official_accuracy": 0.8833,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "cuad_joint_ip_ownership": {
+          "n": 60,
+          "strict_accuracy": 0.6833,
+          "balanced_accuracy": 0.6833,
+          "official_accuracy": 0.6833,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "cuad_license_grant": {
+          "n": 60,
+          "strict_accuracy": 0.85,
+          "balanced_accuracy": 0.85,
+          "official_accuracy": 0.85,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "cuad_liquidated_damages": {
+          "n": 60,
+          "strict_accuracy": 0.7167,
+          "balanced_accuracy": 0.7167,
+          "official_accuracy": 0.7167,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "cuad_minimum_commitment": {
+          "n": 60,
+          "strict_accuracy": 0.15,
+          "balanced_accuracy": 0.15,
+          "official_accuracy": 0.15,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "cuad_most_favored_nation": {
+          "n": 60,
+          "strict_accuracy": 0.4667,
+          "balanced_accuracy": 0.5,
+          "official_accuracy": 0.4667,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "cuad_no-solicit_of_customers": {
+          "n": 60,
+          "strict_accuracy": 0.6667,
+          "balanced_accuracy": 0.7619,
+          "official_accuracy": 0.6667,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "cuad_no-solicit_of_employees": {
+          "n": 60,
+          "strict_accuracy": 0.4333,
+          "balanced_accuracy": 0.4333,
+          "official_accuracy": 0.4333,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "cuad_non-compete": {
+          "n": 60,
+          "strict_accuracy": 0.5667,
+          "balanced_accuracy": 0.5667,
+          "official_accuracy": 0.5667,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "cuad_non-disparagement": {
+          "n": 60,
+          "strict_accuracy": 0.7167,
+          "balanced_accuracy": 0.83,
+          "official_accuracy": 0.7167,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "cuad_non-transferable_license": {
+          "n": 60,
+          "strict_accuracy": 0.1,
+          "balanced_accuracy": 0.1,
+          "official_accuracy": 0.1,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "cuad_notice_period_to_terminate_renewal": {
+          "n": 60,
+          "strict_accuracy": 0.9,
+          "balanced_accuracy": 0.9,
+          "official_accuracy": 0.9,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "cuad_post-termination_services": {
+          "n": 60,
+          "strict_accuracy": 0.55,
+          "balanced_accuracy": 0.55,
+          "official_accuracy": 0.55,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "cuad_renewal_term": {
+          "n": 60,
+          "strict_accuracy": 0.9167,
+          "balanced_accuracy": 0.9167,
+          "official_accuracy": 0.9167,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "cuad_revenue-profit_sharing": {
+          "n": 60,
+          "strict_accuracy": 0.0833,
+          "balanced_accuracy": 0.0833,
+          "official_accuracy": 0.0833,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "cuad_rofr-rofo-rofn": {
+          "n": 60,
+          "strict_accuracy": 0.2333,
+          "balanced_accuracy": 0.2333,
+          "official_accuracy": 0.2333,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "cuad_source_code_escrow": {
+          "n": 60,
+          "strict_accuracy": 0.2833,
+          "balanced_accuracy": 0.6356,
+          "official_accuracy": 0.2833,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "cuad_termination_for_convenience": {
+          "n": 60,
+          "strict_accuracy": 0.6,
+          "balanced_accuracy": 0.6,
+          "official_accuracy": 0.6,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "cuad_third_party_beneficiary": {
+          "n": 60,
+          "strict_accuracy": 0.8,
+          "balanced_accuracy": 0.8235,
+          "official_accuracy": 0.8,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "cuad_uncapped_liability": {
+          "n": 60,
+          "strict_accuracy": 0.0,
+          "balanced_accuracy": 0.0,
+          "official_accuracy": 0.0,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "cuad_volume_restriction": {
+          "n": 60,
+          "strict_accuracy": 0.0333,
+          "balanced_accuracy": 0.0333,
+          "official_accuracy": 0.0333,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "cuad_warranty_duration": {
+          "n": 60,
+          "strict_accuracy": 0.2667,
+          "balanced_accuracy": 0.2667,
+          "official_accuracy": 0.2667,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "definition_classification": {
+          "n": 60,
+          "strict_accuracy": 0.9167,
+          "balanced_accuracy": 0.9167,
+          "official_accuracy": 0.9167,
+          "majority_share": 0.5168,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "diversity_1": {
+          "n": 60,
+          "strict_accuracy": 1.0,
+          "balanced_accuracy": 1.0,
+          "official_accuracy": 1.0,
+          "majority_share": 0.7633,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "diversity_2": {
+          "n": 60,
+          "strict_accuracy": 0.8833,
+          "balanced_accuracy": 0.9222,
+          "official_accuracy": 0.8833,
+          "majority_share": 0.7467,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "diversity_3": {
+          "n": 60,
+          "strict_accuracy": 0.5,
+          "balanced_accuracy": 0.5714,
+          "official_accuracy": 0.5,
+          "majority_share": 0.5867,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "diversity_4": {
+          "n": 60,
+          "strict_accuracy": 0.9,
+          "balanced_accuracy": 0.9021,
+          "official_accuracy": 0.9,
+          "majority_share": 0.5333,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "diversity_5": {
+          "n": 60,
+          "strict_accuracy": 0.4167,
+          "balanced_accuracy": 0.5395,
+          "official_accuracy": 0.4167,
+          "majority_share": 0.5733,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "diversity_6": {
+          "n": 60,
+          "strict_accuracy": 0.4333,
+          "balanced_accuracy": 0.4781,
+          "official_accuracy": 0.4333,
+          "majority_share": 0.53,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "function_of_decision_section": {
+          "n": 60,
+          "strict_accuracy": 0.6167,
+          "balanced_accuracy": 0.6651,
+          "official_accuracy": 0.6167,
+          "majority_share": 0.158,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "hearsay": {
+          "n": 60,
+          "strict_accuracy": 0.6833,
+          "balanced_accuracy": 0.7286,
+          "official_accuracy": 0.6833,
+          "majority_share": 0.5638,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "insurance_policy_interpretation": {
+          "n": 60,
+          "strict_accuracy": 0.5,
+          "balanced_accuracy": 0.5737,
+          "official_accuracy": 0.5,
+          "majority_share": 0.4436,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "international_citizenship_questions": {
+          "n": 60,
+          "strict_accuracy": 0.4,
+          "balanced_accuracy": 0.4306,
+          "official_accuracy": 0.4,
+          "majority_share": 0.5783,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "learned_hands_benefits": {
+          "n": 60,
+          "strict_accuracy": 0.7167,
+          "balanced_accuracy": 0.7357,
+          "official_accuracy": 0.7167,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "learned_hands_business": {
+          "n": 60,
+          "strict_accuracy": 0.2833,
+          "balanced_accuracy": 0.2833,
+          "official_accuracy": 0.2833,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "learned_hands_consumer": {
+          "n": 60,
+          "strict_accuracy": 0.8333,
+          "balanced_accuracy": 0.8333,
+          "official_accuracy": 0.8333,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "learned_hands_courts": {
+          "n": 60,
+          "strict_accuracy": 0.7167,
+          "balanced_accuracy": 0.7167,
+          "official_accuracy": 0.7167,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "learned_hands_crime": {
+          "n": 60,
+          "strict_accuracy": 0.7833,
+          "balanced_accuracy": 0.7833,
+          "official_accuracy": 0.7833,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "learned_hands_divorce": {
+          "n": 60,
+          "strict_accuracy": 0.9167,
+          "balanced_accuracy": 0.9167,
+          "official_accuracy": 0.9167,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "learned_hands_domestic_violence": {
+          "n": 60,
+          "strict_accuracy": 0.65,
+          "balanced_accuracy": 0.65,
+          "official_accuracy": 0.65,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "learned_hands_employment": {
+          "n": 60,
+          "strict_accuracy": 0.8667,
+          "balanced_accuracy": 0.8667,
+          "official_accuracy": 0.8667,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "learned_hands_estates": {
+          "n": 60,
+          "strict_accuracy": 0.25,
+          "balanced_accuracy": 0.25,
+          "official_accuracy": 0.25,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "learned_hands_family": {
+          "n": 60,
+          "strict_accuracy": 0.8667,
+          "balanced_accuracy": 0.8667,
+          "official_accuracy": 0.8667,
+          "majority_share": 0.5002,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "learned_hands_health": {
+          "n": 60,
+          "strict_accuracy": 0.8833,
+          "balanced_accuracy": 0.8833,
+          "official_accuracy": 0.8833,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "learned_hands_housing": {
+          "n": 60,
+          "strict_accuracy": 0.8667,
+          "balanced_accuracy": 0.8667,
+          "official_accuracy": 0.8667,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "learned_hands_immigration": {
+          "n": 60,
+          "strict_accuracy": 0.7333,
+          "balanced_accuracy": 0.7333,
+          "official_accuracy": 0.7333,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "learned_hands_torts": {
+          "n": 60,
+          "strict_accuracy": 0.7833,
+          "balanced_accuracy": 0.7833,
+          "official_accuracy": 0.7833,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "learned_hands_traffic": {
+          "n": 60,
+          "strict_accuracy": 0.5167,
+          "balanced_accuracy": 0.5167,
+          "official_accuracy": 0.5167,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "maud_ability_to_consummate_concept_is_subject_to_mae_carveouts": {
+          "n": 60,
+          "strict_accuracy": 0.2,
+          "balanced_accuracy": 0.5,
+          "official_accuracy": 0.2,
+          "majority_share": 0.7971,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "maud_accuracy_of_fundamental_target_rws_bringdown_standard": {
+          "n": 60,
+          "strict_accuracy": 0.7167,
+          "balanced_accuracy": 0.3333,
+          "official_accuracy": 0.7167,
+          "majority_share": 0.64,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "maud_accuracy_of_target_capitalization_rw_(outstanding_shares)_bringdown_standard_answer": {
+          "n": 60,
+          "strict_accuracy": 0.15,
+          "balanced_accuracy": 0.266,
+          "official_accuracy": 0.15,
+          "majority_share": 0.8378,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "maud_accuracy_of_target_general_rw_bringdown_timing_answer": {
+          "n": 60,
+          "strict_accuracy": 0.6833,
+          "balanced_accuracy": 0.5,
+          "official_accuracy": 0.6833,
+          "majority_share": 0.7182,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "maud_additional_matching_rights_period_for_modifications_(cor)": {
+          "n": 60,
+          "strict_accuracy": 0.35,
+          "balanced_accuracy": 0.1982,
+          "official_accuracy": 0.35,
+          "majority_share": 0.5443,
+          "compliance_rate": 0.9833,
+          "ambiguity_rate": 0.0
+        },
+        "maud_cor_permitted_in_response_to_intervening_event": {
+          "n": 60,
+          "strict_accuracy": 0.8,
+          "balanced_accuracy": 0.525,
+          "official_accuracy": 0.8,
+          "majority_share": 0.84,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "maud_cor_standard_(intervening_event)": {
+          "n": 60,
+          "strict_accuracy": 0.3333,
+          "balanced_accuracy": 0.2784,
+          "official_accuracy": 0.3333,
+          "majority_share": 0.4048,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "maud_cor_standard_(superior_offer)": {
+          "n": 60,
+          "strict_accuracy": 0.2667,
+          "balanced_accuracy": 0.125,
+          "official_accuracy": 0.2667,
+          "majority_share": 0.37,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "maud_definition_contains_knowledge_requirement_-_answer": {
+          "n": 60,
+          "strict_accuracy": 0.6667,
+          "balanced_accuracy": 0.3175,
+          "official_accuracy": 0.6667,
+          "majority_share": 0.5242,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "maud_definition_includes_asset_deals": {
+          "n": 60,
+          "strict_accuracy": 0.2,
+          "balanced_accuracy": 0.3633,
+          "official_accuracy": 0.2,
+          "majority_share": 0.4823,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "maud_definition_includes_stock_deals": {
+          "n": 60,
+          "strict_accuracy": 0.4167,
+          "balanced_accuracy": 0.6649,
+          "official_accuracy": 0.4167,
+          "majority_share": 0.5282,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "maud_fiduciary_exception__board_determination_standard": {
+          "n": 60,
+          "strict_accuracy": 0.2833,
+          "balanced_accuracy": 0.3347,
+          "official_accuracy": 0.2833,
+          "majority_share": 0.3631,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "maud_fls_(mae)_standard": {
+          "n": 60,
+          "strict_accuracy": 0.1333,
+          "balanced_accuracy": 0.0544,
+          "official_accuracy": 0.1333,
+          "majority_share": 0.7792,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "maud_includes_consistent_with_past_practice": {
+          "n": 60,
+          "strict_accuracy": 0.9,
+          "balanced_accuracy": 0.9019,
+          "official_accuracy": 0.9,
+          "majority_share": 0.663,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "maud_initial_matching_rights_period_(cor)": {
+          "n": 60,
+          "strict_accuracy": 0.5667,
+          "balanced_accuracy": 0.1943,
+          "official_accuracy": 0.5667,
+          "majority_share": 0.5506,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "maud_initial_matching_rights_period_(ftr)": {
+          "n": 60,
+          "strict_accuracy": 0.5,
+          "balanced_accuracy": 0.3758,
+          "official_accuracy": 0.5,
+          "majority_share": 0.5455,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "maud_intervening_event_-_required_to_occur_after_signing_-_answer": {
+          "n": 60,
+          "strict_accuracy": 0.95,
+          "balanced_accuracy": 0.5,
+          "official_accuracy": 0.95,
+          "majority_share": 0.7177,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "maud_knowledge_definition": {
+          "n": 60,
+          "strict_accuracy": 0.7,
+          "balanced_accuracy": 0.5,
+          "official_accuracy": 0.7,
+          "majority_share": 0.5541,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "maud_liability_standard_for_no-shop_breach_by_target_non-do_representatives": {
+          "n": 60,
+          "strict_accuracy": 0.5833,
+          "balanced_accuracy": 0.5,
+          "official_accuracy": 0.5833,
+          "majority_share": 0.5821,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "maud_ordinary_course_efforts_standard": {
+          "n": 60,
+          "strict_accuracy": 0.8667,
+          "balanced_accuracy": 0.8877,
+          "official_accuracy": 0.8667,
+          "majority_share": 0.5028,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "maud_pandemic_or_other_public_health_event__subject_to_disproportionate_impact_modifier": {
+          "n": 60,
+          "strict_accuracy": 0.35,
+          "balanced_accuracy": 0.2974,
+          "official_accuracy": 0.35,
+          "majority_share": 0.8061,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "maud_pandemic_or_other_public_health_event_specific_reference_to_pandemic-related_governmental_responses_or_measures": {
+          "n": 60,
+          "strict_accuracy": 0.7333,
+          "balanced_accuracy": 0.5111,
+          "official_accuracy": 0.7333,
+          "majority_share": 0.7347,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "maud_relational_language_(mae)_applies_to": {
+          "n": 60,
+          "strict_accuracy": 0.2667,
+          "balanced_accuracy": 0.5,
+          "official_accuracy": 0.2667,
+          "majority_share": 0.7667,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "maud_type_of_consideration": {
+          "n": 60,
+          "strict_accuracy": 0.65,
+          "balanced_accuracy": 0.6429,
+          "official_accuracy": 0.65,
+          "majority_share": 0.5523,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "nys_judicial_ethics": {
+          "n": 60,
+          "strict_accuracy": 0.65,
+          "balanced_accuracy": 0.6875,
+          "official_accuracy": 0.65,
+          "majority_share": 0.5205,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "opp115_data_retention": {
+          "n": 60,
+          "strict_accuracy": 0.6333,
+          "balanced_accuracy": 0.5926,
+          "official_accuracy": 0.6333,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "opp115_data_security": {
+          "n": 60,
+          "strict_accuracy": 0.6333,
+          "balanced_accuracy": 0.6263,
+          "official_accuracy": 0.6333,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "opp115_first_party_collection_use": {
+          "n": 60,
+          "strict_accuracy": 0.6333,
+          "balanced_accuracy": 0.5417,
+          "official_accuracy": 0.6333,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "opp115_international_and_specific_audiences": {
+          "n": 60,
+          "strict_accuracy": 0.8,
+          "balanced_accuracy": 0.8125,
+          "official_accuracy": 0.8,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "opp115_policy_change": {
+          "n": 60,
+          "strict_accuracy": 0.8833,
+          "balanced_accuracy": 0.8833,
+          "official_accuracy": 0.8833,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "opp115_third_party_sharing_collection": {
+          "n": 60,
+          "strict_accuracy": 0.7667,
+          "balanced_accuracy": 0.7723,
+          "official_accuracy": 0.7667,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "opp115_user_access,_edit_and_deletion": {
+          "n": 60,
+          "strict_accuracy": 0.8667,
+          "balanced_accuracy": 0.8594,
+          "official_accuracy": 0.8667,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "opp115_user_choice_control": {
+          "n": 60,
+          "strict_accuracy": 0.7667,
+          "balanced_accuracy": 0.7642,
+          "official_accuracy": 0.7667,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "oral_argument_question_purpose": {
+          "n": 60,
+          "strict_accuracy": 0.0667,
+          "balanced_accuracy": 0.3509,
+          "official_accuracy": 0.0667,
+          "majority_share": 0.266,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "overruling": {
+          "n": 60,
+          "strict_accuracy": 0.8,
+          "balanced_accuracy": 0.8,
+          "official_accuracy": 0.8,
+          "majority_share": 0.5079,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "privacy_policy_qa": {
+          "n": 60,
+          "strict_accuracy": 0.3833,
+          "balanced_accuracy": 0.3833,
+          "official_accuracy": 1.0,
+          "majority_share": 0.5011,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "proa": {
+          "n": 60,
+          "strict_accuracy": 0.7667,
+          "balanced_accuracy": 0.8511,
+          "official_accuracy": 0.7667,
+          "majority_share": 0.5053,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "sara_entailment": {
+          "n": 60,
+          "strict_accuracy": 0.9167,
+          "balanced_accuracy": 0.9167,
+          "official_accuracy": 0.9167,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "scalr": {
+          "n": 60,
+          "strict_accuracy": 0.6333,
+          "balanced_accuracy": 0.6484,
+          "official_accuracy": 0.6333,
+          "majority_share": 0.2242,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "supply_chain_disclosure_best_practice_audits": {
+          "n": 60,
+          "strict_accuracy": 0.9667,
+          "balanced_accuracy": 0.9667,
+          "official_accuracy": 0.9667,
+          "majority_share": 0.686,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "supply_chain_disclosure_best_practice_certification": {
+          "n": 60,
+          "strict_accuracy": 0.7,
+          "balanced_accuracy": 0.7,
+          "official_accuracy": 0.7,
+          "majority_share": 0.7513,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "supply_chain_disclosure_best_practice_training": {
+          "n": 60,
+          "strict_accuracy": 0.9333,
+          "balanced_accuracy": 0.9333,
+          "official_accuracy": 0.9333,
+          "majority_share": 0.7177,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "supply_chain_disclosure_best_practice_verification": {
+          "n": 60,
+          "strict_accuracy": 0.8,
+          "balanced_accuracy": 0.8,
+          "official_accuracy": 0.8,
+          "majority_share": 0.562,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "supply_chain_disclosure_disclosed_verification": {
+          "n": 60,
+          "strict_accuracy": 0.85,
+          "balanced_accuracy": 0.85,
+          "official_accuracy": 0.85,
+          "majority_share": 0.7414,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "textualism_tool_plain": {
+          "n": 60,
+          "strict_accuracy": 0.8,
+          "balanced_accuracy": 0.8,
+          "official_accuracy": 0.8,
+          "majority_share": 0.5939,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "ucc_v_common_law": {
+          "n": 60,
+          "strict_accuracy": 0.9833,
+          "balanced_accuracy": 0.975,
+          "official_accuracy": 0.9833,
+          "majority_share": 0.5745,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        }
+      }
+    },
+    "B_base_prompted": {
+      "n_tasks": 127,
+      "n_examples": 7620,
+      "strict_accuracy_macro": 0.5387,
+      "strict_accuracy_micro": 0.5387,
+      "strict_accuracy_ci95": [
+        0.5275,
+        0.5499
+      ],
+      "balanced_accuracy_macro": 0.5331,
+      "official_accuracy_macro": 0.5454,
+      "majority_baseline_macro": 0.5393,
+      "compliance_rate_macro": 0.9993,
+      "ambiguity_rate_macro": 0.0005,
+      "mean_completion_tokens": 2.4,
+      "mean_prompt_tokens": 867.0,
+      "mean_latency_s": 1.891,
+      "per_task": {
+        "abercrombie": {
+          "n": 60,
+          "strict_accuracy": 0.3,
+          "balanced_accuracy": 0.3428,
+          "official_accuracy": 0.3,
+          "majority_share": 0.2,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "citation_prediction_classification": {
+          "n": 60,
+          "strict_accuracy": 0.25,
+          "balanced_accuracy": 0.5093,
+          "official_accuracy": 0.25,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "consumer_contracts_qa": {
+          "n": 60,
+          "strict_accuracy": 0.85,
+          "balanced_accuracy": 0.85,
+          "official_accuracy": 0.85,
+          "majority_share": 0.5505,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "contract_nli_confidentiality_of_agreement": {
+          "n": 60,
+          "strict_accuracy": 0.3333,
+          "balanced_accuracy": 0.5122,
+          "official_accuracy": 0.3333,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "contract_nli_explicit_identification": {
+          "n": 60,
+          "strict_accuracy": 0.7167,
+          "balanced_accuracy": 0.575,
+          "official_accuracy": 0.7167,
+          "majority_share": 0.8165,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "contract_nli_inclusion_of_verbally_conveyed_information": {
+          "n": 60,
+          "strict_accuracy": 0.6667,
+          "balanced_accuracy": 0.6667,
+          "official_accuracy": 0.6667,
+          "majority_share": 0.5108,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "contract_nli_limited_use": {
+          "n": 60,
+          "strict_accuracy": 0.9333,
+          "balanced_accuracy": 0.9333,
+          "official_accuracy": 0.9333,
+          "majority_share": 0.5337,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "contract_nli_no_licensing": {
+          "n": 60,
+          "strict_accuracy": 0.6167,
+          "balanced_accuracy": 0.6167,
+          "official_accuracy": 0.6167,
+          "majority_share": 0.5062,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "contract_nli_notice_on_compelled_disclosure": {
+          "n": 60,
+          "strict_accuracy": 0.8167,
+          "balanced_accuracy": 0.8167,
+          "official_accuracy": 0.8167,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "contract_nli_permissible_acquirement_of_similar_information": {
+          "n": 60,
+          "strict_accuracy": 0.25,
+          "balanced_accuracy": 0.25,
+          "official_accuracy": 0.25,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "contract_nli_permissible_copy": {
+          "n": 60,
+          "strict_accuracy": 0.75,
+          "balanced_accuracy": 0.5833,
+          "official_accuracy": 0.75,
+          "majority_share": 0.7931,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "contract_nli_permissible_development_of_similar_information": {
+          "n": 60,
+          "strict_accuracy": 0.55,
+          "balanced_accuracy": 0.55,
+          "official_accuracy": 0.55,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "contract_nli_permissible_post-agreement_possession": {
+          "n": 60,
+          "strict_accuracy": 0.85,
+          "balanced_accuracy": 0.8393,
+          "official_accuracy": 0.85,
+          "majority_share": 0.7477,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "contract_nli_return_of_confidential_information": {
+          "n": 60,
+          "strict_accuracy": 0.9333,
+          "balanced_accuracy": 0.933,
+          "official_accuracy": 0.9333,
+          "majority_share": 0.5152,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "contract_nli_sharing_with_employees": {
+          "n": 60,
+          "strict_accuracy": 0.3167,
+          "balanced_accuracy": 0.3167,
+          "official_accuracy": 0.3167,
+          "majority_share": 0.5176,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "contract_nli_sharing_with_third-parties": {
+          "n": 60,
+          "strict_accuracy": 0.2833,
+          "balanced_accuracy": 0.2833,
+          "official_accuracy": 0.2833,
+          "majority_share": 0.6056,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "contract_nli_survival_of_obligations": {
+          "n": 60,
+          "strict_accuracy": 0.75,
+          "balanced_accuracy": 0.75,
+          "official_accuracy": 0.75,
+          "majority_share": 0.5287,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0333
+        },
+        "contract_qa": {
+          "n": 60,
+          "strict_accuracy": 0.9833,
+          "balanced_accuracy": 0.9872,
+          "official_accuracy": 0.9833,
+          "majority_share": 0.5125,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "corporate_lobbying": {
+          "n": 60,
+          "strict_accuracy": 0.7167,
+          "balanced_accuracy": 0.7904,
+          "official_accuracy": 0.7167,
+          "majority_share": 0.7041,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "cuad_affiliate_license-licensee": {
+          "n": 60,
+          "strict_accuracy": 0.0667,
+          "balanced_accuracy": 0.0667,
+          "official_accuracy": 0.0667,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "cuad_affiliate_license-licensor": {
+          "n": 60,
+          "strict_accuracy": 0.3333,
+          "balanced_accuracy": 0.5455,
+          "official_accuracy": 0.3333,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "cuad_anti-assignment": {
+          "n": 60,
+          "strict_accuracy": 0.05,
+          "balanced_accuracy": 0.05,
+          "official_accuracy": 0.05,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "cuad_audit_rights": {
+          "n": 60,
+          "strict_accuracy": 0.6667,
+          "balanced_accuracy": 0.6667,
+          "official_accuracy": 0.6667,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "cuad_cap_on_liability": {
+          "n": 60,
+          "strict_accuracy": 0.2667,
+          "balanced_accuracy": 0.2667,
+          "official_accuracy": 0.2667,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "cuad_change_of_control": {
+          "n": 60,
+          "strict_accuracy": 0.3833,
+          "balanced_accuracy": 0.3833,
+          "official_accuracy": 0.3833,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "cuad_competitive_restriction_exception": {
+          "n": 60,
+          "strict_accuracy": 0.1167,
+          "balanced_accuracy": 0.1167,
+          "official_accuracy": 0.1167,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0333
+        },
+        "cuad_covenant_not_to_sue": {
+          "n": 60,
+          "strict_accuracy": 0.3333,
+          "balanced_accuracy": 0.3333,
+          "official_accuracy": 0.3333,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "cuad_effective_date": {
+          "n": 60,
+          "strict_accuracy": 0.85,
+          "balanced_accuracy": 0.85,
+          "official_accuracy": 0.85,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "cuad_exclusivity": {
+          "n": 60,
+          "strict_accuracy": 0.1833,
+          "balanced_accuracy": 0.1833,
+          "official_accuracy": 0.1833,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "cuad_expiration_date": {
+          "n": 60,
+          "strict_accuracy": 0.25,
+          "balanced_accuracy": 0.25,
+          "official_accuracy": 0.25,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "cuad_governing_law": {
+          "n": 60,
+          "strict_accuracy": 0.9833,
+          "balanced_accuracy": 0.9833,
+          "official_accuracy": 0.9833,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "cuad_insurance": {
+          "n": 60,
+          "strict_accuracy": 0.8833,
+          "balanced_accuracy": 0.8833,
+          "official_accuracy": 0.8833,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "cuad_ip_ownership_assignment": {
+          "n": 60,
+          "strict_accuracy": 0.9167,
+          "balanced_accuracy": 0.9167,
+          "official_accuracy": 0.9167,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "cuad_irrevocable_or_perpetual_license": {
+          "n": 60,
+          "strict_accuracy": 0.7333,
+          "balanced_accuracy": 0.7333,
+          "official_accuracy": 0.7333,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "cuad_joint_ip_ownership": {
+          "n": 60,
+          "strict_accuracy": 0.4833,
+          "balanced_accuracy": 0.4833,
+          "official_accuracy": 0.4833,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "cuad_license_grant": {
+          "n": 60,
+          "strict_accuracy": 0.6333,
+          "balanced_accuracy": 0.6333,
+          "official_accuracy": 0.6333,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "cuad_liquidated_damages": {
+          "n": 60,
+          "strict_accuracy": 0.65,
+          "balanced_accuracy": 0.65,
+          "official_accuracy": 0.65,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "cuad_minimum_commitment": {
+          "n": 60,
+          "strict_accuracy": 0.0167,
+          "balanced_accuracy": 0.0167,
+          "official_accuracy": 0.0167,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "cuad_most_favored_nation": {
+          "n": 60,
+          "strict_accuracy": 0.4833,
+          "balanced_accuracy": 0.5156,
+          "official_accuracy": 0.4833,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "cuad_no-solicit_of_customers": {
+          "n": 60,
+          "strict_accuracy": 0.6833,
+          "balanced_accuracy": 0.7738,
+          "official_accuracy": 0.6833,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "cuad_no-solicit_of_employees": {
+          "n": 60,
+          "strict_accuracy": 0.3833,
+          "balanced_accuracy": 0.3833,
+          "official_accuracy": 0.3833,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "cuad_non-compete": {
+          "n": 60,
+          "strict_accuracy": 0.8667,
+          "balanced_accuracy": 0.8667,
+          "official_accuracy": 0.8667,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "cuad_non-disparagement": {
+          "n": 60,
+          "strict_accuracy": 0.5667,
+          "balanced_accuracy": 0.74,
+          "official_accuracy": 0.5667,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "cuad_non-transferable_license": {
+          "n": 60,
+          "strict_accuracy": 0.2333,
+          "balanced_accuracy": 0.2333,
+          "official_accuracy": 0.2333,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "cuad_notice_period_to_terminate_renewal": {
+          "n": 60,
+          "strict_accuracy": 0.6,
+          "balanced_accuracy": 0.6,
+          "official_accuracy": 0.6,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "cuad_post-termination_services": {
+          "n": 60,
+          "strict_accuracy": 0.8,
+          "balanced_accuracy": 0.8,
+          "official_accuracy": 0.8,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "cuad_renewal_term": {
+          "n": 60,
+          "strict_accuracy": 0.8167,
+          "balanced_accuracy": 0.8167,
+          "official_accuracy": 0.8167,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "cuad_revenue-profit_sharing": {
+          "n": 60,
+          "strict_accuracy": 0.0,
+          "balanced_accuracy": 0.0,
+          "official_accuracy": 0.0,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "cuad_rofr-rofo-rofn": {
+          "n": 60,
+          "strict_accuracy": 0.0833,
+          "balanced_accuracy": 0.0833,
+          "official_accuracy": 0.0833,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "cuad_source_code_escrow": {
+          "n": 60,
+          "strict_accuracy": 0.45,
+          "balanced_accuracy": 0.7203,
+          "official_accuracy": 0.45,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "cuad_termination_for_convenience": {
+          "n": 60,
+          "strict_accuracy": 0.65,
+          "balanced_accuracy": 0.65,
+          "official_accuracy": 0.65,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "cuad_third_party_beneficiary": {
+          "n": 60,
+          "strict_accuracy": 0.8,
+          "balanced_accuracy": 0.8235,
+          "official_accuracy": 0.8,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "cuad_uncapped_liability": {
+          "n": 60,
+          "strict_accuracy": 0.05,
+          "balanced_accuracy": 0.05,
+          "official_accuracy": 0.05,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "cuad_volume_restriction": {
+          "n": 60,
+          "strict_accuracy": 0.0,
+          "balanced_accuracy": 0.0,
+          "official_accuracy": 0.0,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "cuad_warranty_duration": {
+          "n": 60,
+          "strict_accuracy": 0.1833,
+          "balanced_accuracy": 0.1833,
+          "official_accuracy": 0.1833,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "definition_classification": {
+          "n": 60,
+          "strict_accuracy": 0.9833,
+          "balanced_accuracy": 0.9833,
+          "official_accuracy": 0.9833,
+          "majority_share": 0.5168,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "diversity_1": {
+          "n": 60,
+          "strict_accuracy": 0.95,
+          "balanced_accuracy": 0.875,
+          "official_accuracy": 0.95,
+          "majority_share": 0.7633,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "diversity_2": {
+          "n": 60,
+          "strict_accuracy": 0.7667,
+          "balanced_accuracy": 0.5556,
+          "official_accuracy": 0.7667,
+          "majority_share": 0.7467,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "diversity_3": {
+          "n": 60,
+          "strict_accuracy": 0.45,
+          "balanced_accuracy": 0.5286,
+          "official_accuracy": 0.45,
+          "majority_share": 0.5867,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "diversity_4": {
+          "n": 60,
+          "strict_accuracy": 0.5167,
+          "balanced_accuracy": 0.5,
+          "official_accuracy": 0.5167,
+          "majority_share": 0.5333,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "diversity_5": {
+          "n": 60,
+          "strict_accuracy": 0.3667,
+          "balanced_accuracy": 0.5,
+          "official_accuracy": 0.3667,
+          "majority_share": 0.5733,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "diversity_6": {
+          "n": 60,
+          "strict_accuracy": 0.45,
+          "balanced_accuracy": 0.5,
+          "official_accuracy": 0.45,
+          "majority_share": 0.53,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "function_of_decision_section": {
+          "n": 60,
+          "strict_accuracy": 0.5667,
+          "balanced_accuracy": 0.6196,
+          "official_accuracy": 0.5667,
+          "majority_share": 0.158,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "hearsay": {
+          "n": 60,
+          "strict_accuracy": 0.5667,
+          "balanced_accuracy": 0.6286,
+          "official_accuracy": 0.5667,
+          "majority_share": 0.5638,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "insurance_policy_interpretation": {
+          "n": 60,
+          "strict_accuracy": 0.5,
+          "balanced_accuracy": 0.5254,
+          "official_accuracy": 0.5,
+          "majority_share": 0.4436,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "international_citizenship_questions": {
+          "n": 60,
+          "strict_accuracy": 0.6,
+          "balanced_accuracy": 0.5208,
+          "official_accuracy": 0.6,
+          "majority_share": 0.5783,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "learned_hands_benefits": {
+          "n": 60,
+          "strict_accuracy": 0.5167,
+          "balanced_accuracy": 0.5606,
+          "official_accuracy": 0.5167,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "learned_hands_business": {
+          "n": 60,
+          "strict_accuracy": 0.0667,
+          "balanced_accuracy": 0.0667,
+          "official_accuracy": 0.0667,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "learned_hands_consumer": {
+          "n": 60,
+          "strict_accuracy": 0.8833,
+          "balanced_accuracy": 0.8833,
+          "official_accuracy": 0.8833,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "learned_hands_courts": {
+          "n": 60,
+          "strict_accuracy": 0.2,
+          "balanced_accuracy": 0.2,
+          "official_accuracy": 0.2,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "learned_hands_crime": {
+          "n": 60,
+          "strict_accuracy": 0.0667,
+          "balanced_accuracy": 0.0667,
+          "official_accuracy": 0.0667,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "learned_hands_divorce": {
+          "n": 60,
+          "strict_accuracy": 0.5333,
+          "balanced_accuracy": 0.5333,
+          "official_accuracy": 0.5333,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "learned_hands_domestic_violence": {
+          "n": 60,
+          "strict_accuracy": 0.1833,
+          "balanced_accuracy": 0.1833,
+          "official_accuracy": 0.1833,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "learned_hands_employment": {
+          "n": 60,
+          "strict_accuracy": 0.4667,
+          "balanced_accuracy": 0.4667,
+          "official_accuracy": 0.4667,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "learned_hands_estates": {
+          "n": 60,
+          "strict_accuracy": 0.1,
+          "balanced_accuracy": 0.1,
+          "official_accuracy": 0.1,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "learned_hands_family": {
+          "n": 60,
+          "strict_accuracy": 0.7667,
+          "balanced_accuracy": 0.7667,
+          "official_accuracy": 0.7667,
+          "majority_share": 0.5002,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "learned_hands_health": {
+          "n": 60,
+          "strict_accuracy": 0.2833,
+          "balanced_accuracy": 0.2833,
+          "official_accuracy": 0.2833,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "learned_hands_housing": {
+          "n": 60,
+          "strict_accuracy": 0.6167,
+          "balanced_accuracy": 0.6167,
+          "official_accuracy": 0.6167,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "learned_hands_immigration": {
+          "n": 60,
+          "strict_accuracy": 0.2833,
+          "balanced_accuracy": 0.2833,
+          "official_accuracy": 0.2833,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "learned_hands_torts": {
+          "n": 60,
+          "strict_accuracy": 0.6333,
+          "balanced_accuracy": 0.6333,
+          "official_accuracy": 0.6333,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "learned_hands_traffic": {
+          "n": 60,
+          "strict_accuracy": 0.0167,
+          "balanced_accuracy": 0.0167,
+          "official_accuracy": 0.0167,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "maud_ability_to_consummate_concept_is_subject_to_mae_carveouts": {
+          "n": 60,
+          "strict_accuracy": 0.2,
+          "balanced_accuracy": 0.5,
+          "official_accuracy": 0.2,
+          "majority_share": 0.7971,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "maud_accuracy_of_fundamental_target_rws_bringdown_standard": {
+          "n": 60,
+          "strict_accuracy": 0.7167,
+          "balanced_accuracy": 0.3333,
+          "official_accuracy": 0.7167,
+          "majority_share": 0.64,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "maud_accuracy_of_target_capitalization_rw_(outstanding_shares)_bringdown_standard_answer": {
+          "n": 60,
+          "strict_accuracy": 0.4333,
+          "balanced_accuracy": 0.3564,
+          "official_accuracy": 0.4333,
+          "majority_share": 0.8378,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "maud_accuracy_of_target_general_rw_bringdown_timing_answer": {
+          "n": 60,
+          "strict_accuracy": 0.7,
+          "balanced_accuracy": 0.5263,
+          "official_accuracy": 0.7,
+          "majority_share": 0.7182,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "maud_additional_matching_rights_period_for_modifications_(cor)": {
+          "n": 60,
+          "strict_accuracy": 0.2,
+          "balanced_accuracy": 0.2718,
+          "official_accuracy": 0.2,
+          "majority_share": 0.5443,
+          "compliance_rate": 0.9167,
+          "ambiguity_rate": 0.0
+        },
+        "maud_cor_permitted_in_response_to_intervening_event": {
+          "n": 60,
+          "strict_accuracy": 0.8167,
+          "balanced_accuracy": 0.5353,
+          "official_accuracy": 0.8167,
+          "majority_share": 0.84,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "maud_cor_standard_(intervening_event)": {
+          "n": 60,
+          "strict_accuracy": 0.4833,
+          "balanced_accuracy": 0.3393,
+          "official_accuracy": 0.4833,
+          "majority_share": 0.4048,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "maud_cor_standard_(superior_offer)": {
+          "n": 60,
+          "strict_accuracy": 0.3,
+          "balanced_accuracy": 0.1667,
+          "official_accuracy": 0.3,
+          "majority_share": 0.37,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "maud_definition_contains_knowledge_requirement_-_answer": {
+          "n": 60,
+          "strict_accuracy": 0.6,
+          "balanced_accuracy": 0.3429,
+          "official_accuracy": 0.6,
+          "majority_share": 0.5242,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "maud_definition_includes_asset_deals": {
+          "n": 60,
+          "strict_accuracy": 0.2833,
+          "balanced_accuracy": 0.4554,
+          "official_accuracy": 0.2833,
+          "majority_share": 0.4823,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "maud_definition_includes_stock_deals": {
+          "n": 60,
+          "strict_accuracy": 0.3667,
+          "balanced_accuracy": 0.6752,
+          "official_accuracy": 0.3667,
+          "majority_share": 0.5282,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "maud_fiduciary_exception__board_determination_standard": {
+          "n": 60,
+          "strict_accuracy": 0.25,
+          "balanced_accuracy": 0.1618,
+          "official_accuracy": 0.25,
+          "majority_share": 0.3631,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "maud_fls_(mae)_standard": {
+          "n": 60,
+          "strict_accuracy": 0.8167,
+          "balanced_accuracy": 0.3333,
+          "official_accuracy": 0.8167,
+          "majority_share": 0.7792,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "maud_includes_consistent_with_past_practice": {
+          "n": 60,
+          "strict_accuracy": 0.8833,
+          "balanced_accuracy": 0.86,
+          "official_accuracy": 0.8833,
+          "majority_share": 0.663,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "maud_initial_matching_rights_period_(cor)": {
+          "n": 60,
+          "strict_accuracy": 0.65,
+          "balanced_accuracy": 0.2952,
+          "official_accuracy": 0.65,
+          "majority_share": 0.5506,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "maud_initial_matching_rights_period_(ftr)": {
+          "n": 60,
+          "strict_accuracy": 0.5,
+          "balanced_accuracy": 0.4131,
+          "official_accuracy": 0.5,
+          "majority_share": 0.5455,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "maud_intervening_event_-_required_to_occur_after_signing_-_answer": {
+          "n": 60,
+          "strict_accuracy": 0.95,
+          "balanced_accuracy": 0.5,
+          "official_accuracy": 0.95,
+          "majority_share": 0.7177,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "maud_knowledge_definition": {
+          "n": 60,
+          "strict_accuracy": 0.75,
+          "balanced_accuracy": 0.5833,
+          "official_accuracy": 0.75,
+          "majority_share": 0.5541,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "maud_liability_standard_for_no-shop_breach_by_target_non-do_representatives": {
+          "n": 60,
+          "strict_accuracy": 0.75,
+          "balanced_accuracy": 0.7114,
+          "official_accuracy": 0.75,
+          "majority_share": 0.5821,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "maud_ordinary_course_efforts_standard": {
+          "n": 60,
+          "strict_accuracy": 0.9,
+          "balanced_accuracy": 0.9033,
+          "official_accuracy": 0.9,
+          "majority_share": 0.5028,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "maud_pandemic_or_other_public_health_event__subject_to_disproportionate_impact_modifier": {
+          "n": 60,
+          "strict_accuracy": 0.4,
+          "balanced_accuracy": 0.4641,
+          "official_accuracy": 0.4,
+          "majority_share": 0.8061,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "maud_pandemic_or_other_public_health_event_specific_reference_to_pandemic-related_governmental_responses_or_measures": {
+          "n": 60,
+          "strict_accuracy": 0.8,
+          "balanced_accuracy": 0.7111,
+          "official_accuracy": 0.8,
+          "majority_share": 0.7347,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "maud_relational_language_(mae)_applies_to": {
+          "n": 60,
+          "strict_accuracy": 0.2667,
+          "balanced_accuracy": 0.5,
+          "official_accuracy": 0.2667,
+          "majority_share": 0.7667,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "maud_type_of_consideration": {
+          "n": 60,
+          "strict_accuracy": 0.5,
+          "balanced_accuracy": 0.6161,
+          "official_accuracy": 0.5,
+          "majority_share": 0.5523,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "nys_judicial_ethics": {
+          "n": 60,
+          "strict_accuracy": 0.5333,
+          "balanced_accuracy": 0.5972,
+          "official_accuracy": 0.5333,
+          "majority_share": 0.5205,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "opp115_data_retention": {
+          "n": 60,
+          "strict_accuracy": 0.6167,
+          "balanced_accuracy": 0.5741,
+          "official_accuracy": 0.6167,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "opp115_data_security": {
+          "n": 60,
+          "strict_accuracy": 0.6167,
+          "balanced_accuracy": 0.6057,
+          "official_accuracy": 0.6167,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "opp115_first_party_collection_use": {
+          "n": 60,
+          "strict_accuracy": 0.5167,
+          "balanced_accuracy": 0.5625,
+          "official_accuracy": 0.5167,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "opp115_international_and_specific_audiences": {
+          "n": 60,
+          "strict_accuracy": 0.7167,
+          "balanced_accuracy": 0.7299,
+          "official_accuracy": 0.7167,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "opp115_policy_change": {
+          "n": 60,
+          "strict_accuracy": 0.7333,
+          "balanced_accuracy": 0.7333,
+          "official_accuracy": 0.7333,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "opp115_third_party_sharing_collection": {
+          "n": 60,
+          "strict_accuracy": 0.75,
+          "balanced_accuracy": 0.7589,
+          "official_accuracy": 0.75,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "opp115_user_access,_edit_and_deletion": {
+          "n": 60,
+          "strict_accuracy": 0.6333,
+          "balanced_accuracy": 0.6094,
+          "official_accuracy": 0.6333,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "opp115_user_choice_control": {
+          "n": 60,
+          "strict_accuracy": 0.5833,
+          "balanced_accuracy": 0.569,
+          "official_accuracy": 0.5833,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "oral_argument_question_purpose": {
+          "n": 60,
+          "strict_accuracy": 0.0167,
+          "balanced_accuracy": 0.0088,
+          "official_accuracy": 0.0167,
+          "majority_share": 0.266,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "overruling": {
+          "n": 60,
+          "strict_accuracy": 0.7,
+          "balanced_accuracy": 0.7,
+          "official_accuracy": 0.7,
+          "majority_share": 0.5079,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "privacy_policy_qa": {
+          "n": 60,
+          "strict_accuracy": 0.15,
+          "balanced_accuracy": 0.15,
+          "official_accuracy": 1.0,
+          "majority_share": 0.5011,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "proa": {
+          "n": 60,
+          "strict_accuracy": 0.7667,
+          "balanced_accuracy": 0.8511,
+          "official_accuracy": 0.7667,
+          "majority_share": 0.5053,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "sara_entailment": {
+          "n": 60,
+          "strict_accuracy": 0.95,
+          "balanced_accuracy": 0.95,
+          "official_accuracy": 0.95,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "scalr": {
+          "n": 60,
+          "strict_accuracy": 0.6667,
+          "balanced_accuracy": 0.6719,
+          "official_accuracy": 0.6667,
+          "majority_share": 0.2242,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "supply_chain_disclosure_best_practice_audits": {
+          "n": 60,
+          "strict_accuracy": 0.9667,
+          "balanced_accuracy": 0.9667,
+          "official_accuracy": 0.9667,
+          "majority_share": 0.686,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "supply_chain_disclosure_best_practice_certification": {
+          "n": 60,
+          "strict_accuracy": 0.7167,
+          "balanced_accuracy": 0.7167,
+          "official_accuracy": 0.7167,
+          "majority_share": 0.7513,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "supply_chain_disclosure_best_practice_training": {
+          "n": 60,
+          "strict_accuracy": 0.95,
+          "balanced_accuracy": 0.95,
+          "official_accuracy": 0.95,
+          "majority_share": 0.7177,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "supply_chain_disclosure_best_practice_verification": {
+          "n": 60,
+          "strict_accuracy": 0.2333,
+          "balanced_accuracy": 0.2333,
+          "official_accuracy": 0.2333,
+          "majority_share": 0.562,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "supply_chain_disclosure_disclosed_verification": {
+          "n": 60,
+          "strict_accuracy": 0.7667,
+          "balanced_accuracy": 0.7667,
+          "official_accuracy": 0.7667,
+          "majority_share": 0.7414,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "textualism_tool_plain": {
+          "n": 60,
+          "strict_accuracy": 0.75,
+          "balanced_accuracy": 0.75,
+          "official_accuracy": 0.75,
+          "majority_share": 0.5939,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "ucc_v_common_law": {
+          "n": 60,
+          "strict_accuracy": 0.9167,
+          "balanced_accuracy": 0.9375,
+          "official_accuracy": 0.9167,
+          "majority_share": 0.5745,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        }
+      }
+    },
+    "C_fine_tuned": {
+      "n_tasks": 127,
+      "n_examples": 7620,
+      "strict_accuracy_macro": 0.6358,
+      "strict_accuracy_micro": 0.6358,
+      "strict_accuracy_ci95": [
+        0.625,
+        0.6466
+      ],
+      "balanced_accuracy_macro": 0.6216,
+      "official_accuracy_macro": 0.6416,
+      "majority_baseline_macro": 0.5393,
+      "compliance_rate_macro": 1.0,
+      "ambiguity_rate_macro": 0.0,
+      "mean_completion_tokens": 2.0,
+      "mean_prompt_tokens": 297.0,
+      "mean_latency_s": 1.991,
+      "per_task": {
+        "abercrombie": {
+          "n": 60,
+          "strict_accuracy": 0.3667,
+          "balanced_accuracy": 0.3425,
+          "official_accuracy": 0.3667,
+          "majority_share": 0.2,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "citation_prediction_classification": {
+          "n": 60,
+          "strict_accuracy": 0.5,
+          "balanced_accuracy": 0.5,
+          "official_accuracy": 0.5,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "consumer_contracts_qa": {
+          "n": 60,
+          "strict_accuracy": 0.9167,
+          "balanced_accuracy": 0.9167,
+          "official_accuracy": 0.9167,
+          "majority_share": 0.5505,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "contract_nli_confidentiality_of_agreement": {
+          "n": 60,
+          "strict_accuracy": 0.55,
+          "balanced_accuracy": 0.6707,
+          "official_accuracy": 0.55,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "contract_nli_explicit_identification": {
+          "n": 60,
+          "strict_accuracy": 0.6333,
+          "balanced_accuracy": 0.6,
+          "official_accuracy": 0.6333,
+          "majority_share": 0.8165,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "contract_nli_inclusion_of_verbally_conveyed_information": {
+          "n": 60,
+          "strict_accuracy": 0.9333,
+          "balanced_accuracy": 0.9333,
+          "official_accuracy": 0.9333,
+          "majority_share": 0.5108,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "contract_nli_limited_use": {
+          "n": 60,
+          "strict_accuracy": 0.8667,
+          "balanced_accuracy": 0.8667,
+          "official_accuracy": 0.8667,
+          "majority_share": 0.5337,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "contract_nli_no_licensing": {
+          "n": 60,
+          "strict_accuracy": 0.5833,
+          "balanced_accuracy": 0.5833,
+          "official_accuracy": 0.5833,
+          "majority_share": 0.5062,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "contract_nli_notice_on_compelled_disclosure": {
+          "n": 60,
+          "strict_accuracy": 0.8333,
+          "balanced_accuracy": 0.8333,
+          "official_accuracy": 0.8333,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "contract_nli_permissible_acquirement_of_similar_information": {
+          "n": 60,
+          "strict_accuracy": 0.45,
+          "balanced_accuracy": 0.45,
+          "official_accuracy": 0.45,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "contract_nli_permissible_copy": {
+          "n": 60,
+          "strict_accuracy": 0.8,
+          "balanced_accuracy": 0.7619,
+          "official_accuracy": 0.8,
+          "majority_share": 0.7931,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "contract_nli_permissible_development_of_similar_information": {
+          "n": 60,
+          "strict_accuracy": 0.8667,
+          "balanced_accuracy": 0.8667,
+          "official_accuracy": 0.8667,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "contract_nli_permissible_post-agreement_possession": {
+          "n": 60,
+          "strict_accuracy": 0.9167,
+          "balanced_accuracy": 0.9129,
+          "official_accuracy": 0.9167,
+          "majority_share": 0.7477,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "contract_nli_return_of_confidential_information": {
+          "n": 60,
+          "strict_accuracy": 0.95,
+          "balanced_accuracy": 0.9487,
+          "official_accuracy": 0.95,
+          "majority_share": 0.5152,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "contract_nli_sharing_with_employees": {
+          "n": 60,
+          "strict_accuracy": 0.8,
+          "balanced_accuracy": 0.8,
+          "official_accuracy": 0.8,
+          "majority_share": 0.5176,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "contract_nli_sharing_with_third-parties": {
+          "n": 60,
+          "strict_accuracy": 0.7833,
+          "balanced_accuracy": 0.7833,
+          "official_accuracy": 0.7833,
+          "majority_share": 0.6056,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "contract_nli_survival_of_obligations": {
+          "n": 60,
+          "strict_accuracy": 0.75,
+          "balanced_accuracy": 0.75,
+          "official_accuracy": 0.75,
+          "majority_share": 0.5287,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "contract_qa": {
+          "n": 60,
+          "strict_accuracy": 0.95,
+          "balanced_accuracy": 0.9615,
+          "official_accuracy": 0.95,
+          "majority_share": 0.5125,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "corporate_lobbying": {
+          "n": 60,
+          "strict_accuracy": 0.7833,
+          "balanced_accuracy": 0.7842,
+          "official_accuracy": 0.7833,
+          "majority_share": 0.7041,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "cuad_affiliate_license-licensee": {
+          "n": 60,
+          "strict_accuracy": 0.8667,
+          "balanced_accuracy": 0.8667,
+          "official_accuracy": 0.8667,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "cuad_affiliate_license-licensor": {
+          "n": 60,
+          "strict_accuracy": 0.6667,
+          "balanced_accuracy": 0.7727,
+          "official_accuracy": 0.6667,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "cuad_anti-assignment": {
+          "n": 60,
+          "strict_accuracy": 0.3667,
+          "balanced_accuracy": 0.3667,
+          "official_accuracy": 0.3667,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "cuad_audit_rights": {
+          "n": 60,
+          "strict_accuracy": 0.2167,
+          "balanced_accuracy": 0.2167,
+          "official_accuracy": 0.2167,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "cuad_cap_on_liability": {
+          "n": 60,
+          "strict_accuracy": 0.2,
+          "balanced_accuracy": 0.2,
+          "official_accuracy": 0.2,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "cuad_change_of_control": {
+          "n": 60,
+          "strict_accuracy": 0.3167,
+          "balanced_accuracy": 0.3167,
+          "official_accuracy": 0.3167,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "cuad_competitive_restriction_exception": {
+          "n": 60,
+          "strict_accuracy": 0.3833,
+          "balanced_accuracy": 0.3833,
+          "official_accuracy": 0.3833,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "cuad_covenant_not_to_sue": {
+          "n": 60,
+          "strict_accuracy": 0.7333,
+          "balanced_accuracy": 0.7333,
+          "official_accuracy": 0.7333,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "cuad_effective_date": {
+          "n": 60,
+          "strict_accuracy": 0.65,
+          "balanced_accuracy": 0.65,
+          "official_accuracy": 0.65,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "cuad_exclusivity": {
+          "n": 60,
+          "strict_accuracy": 0.1333,
+          "balanced_accuracy": 0.1333,
+          "official_accuracy": 0.1333,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "cuad_expiration_date": {
+          "n": 60,
+          "strict_accuracy": 0.2167,
+          "balanced_accuracy": 0.2167,
+          "official_accuracy": 0.2167,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "cuad_governing_law": {
+          "n": 60,
+          "strict_accuracy": 0.9667,
+          "balanced_accuracy": 0.9667,
+          "official_accuracy": 0.9667,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "cuad_insurance": {
+          "n": 60,
+          "strict_accuracy": 0.9833,
+          "balanced_accuracy": 0.9833,
+          "official_accuracy": 0.9833,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "cuad_ip_ownership_assignment": {
+          "n": 60,
+          "strict_accuracy": 0.8,
+          "balanced_accuracy": 0.8,
+          "official_accuracy": 0.8,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "cuad_irrevocable_or_perpetual_license": {
+          "n": 60,
+          "strict_accuracy": 0.85,
+          "balanced_accuracy": 0.85,
+          "official_accuracy": 0.85,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "cuad_joint_ip_ownership": {
+          "n": 60,
+          "strict_accuracy": 0.7333,
+          "balanced_accuracy": 0.7333,
+          "official_accuracy": 0.7333,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "cuad_license_grant": {
+          "n": 60,
+          "strict_accuracy": 0.8333,
+          "balanced_accuracy": 0.8333,
+          "official_accuracy": 0.8333,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "cuad_liquidated_damages": {
+          "n": 60,
+          "strict_accuracy": 0.55,
+          "balanced_accuracy": 0.55,
+          "official_accuracy": 0.55,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "cuad_minimum_commitment": {
+          "n": 60,
+          "strict_accuracy": 0.1167,
+          "balanced_accuracy": 0.1167,
+          "official_accuracy": 0.1167,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "cuad_most_favored_nation": {
+          "n": 60,
+          "strict_accuracy": 0.4833,
+          "balanced_accuracy": 0.5156,
+          "official_accuracy": 0.4833,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "cuad_no-solicit_of_customers": {
+          "n": 60,
+          "strict_accuracy": 0.8833,
+          "balanced_accuracy": 0.9167,
+          "official_accuracy": 0.8833,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "cuad_no-solicit_of_employees": {
+          "n": 60,
+          "strict_accuracy": 0.8167,
+          "balanced_accuracy": 0.8167,
+          "official_accuracy": 0.8167,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "cuad_non-compete": {
+          "n": 60,
+          "strict_accuracy": 0.9167,
+          "balanced_accuracy": 0.9167,
+          "official_accuracy": 0.9167,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "cuad_non-disparagement": {
+          "n": 60,
+          "strict_accuracy": 0.7,
+          "balanced_accuracy": 0.82,
+          "official_accuracy": 0.7,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "cuad_non-transferable_license": {
+          "n": 60,
+          "strict_accuracy": 0.9167,
+          "balanced_accuracy": 0.9167,
+          "official_accuracy": 0.9167,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "cuad_notice_period_to_terminate_renewal": {
+          "n": 60,
+          "strict_accuracy": 0.9333,
+          "balanced_accuracy": 0.9333,
+          "official_accuracy": 0.9333,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "cuad_post-termination_services": {
+          "n": 60,
+          "strict_accuracy": 0.75,
+          "balanced_accuracy": 0.75,
+          "official_accuracy": 0.75,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "cuad_renewal_term": {
+          "n": 60,
+          "strict_accuracy": 1.0,
+          "balanced_accuracy": 1.0,
+          "official_accuracy": 1.0,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "cuad_revenue-profit_sharing": {
+          "n": 60,
+          "strict_accuracy": 0.0167,
+          "balanced_accuracy": 0.0167,
+          "official_accuracy": 0.0167,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "cuad_rofr-rofo-rofn": {
+          "n": 60,
+          "strict_accuracy": 0.1,
+          "balanced_accuracy": 0.1,
+          "official_accuracy": 0.1,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "cuad_source_code_escrow": {
+          "n": 60,
+          "strict_accuracy": 0.6167,
+          "balanced_accuracy": 0.8051,
+          "official_accuracy": 0.6167,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "cuad_termination_for_convenience": {
+          "n": 60,
+          "strict_accuracy": 0.6667,
+          "balanced_accuracy": 0.6667,
+          "official_accuracy": 0.6667,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "cuad_third_party_beneficiary": {
+          "n": 60,
+          "strict_accuracy": 0.8,
+          "balanced_accuracy": 0.8145,
+          "official_accuracy": 0.8,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "cuad_uncapped_liability": {
+          "n": 60,
+          "strict_accuracy": 0.15,
+          "balanced_accuracy": 0.15,
+          "official_accuracy": 0.15,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "cuad_volume_restriction": {
+          "n": 60,
+          "strict_accuracy": 0.0333,
+          "balanced_accuracy": 0.0333,
+          "official_accuracy": 0.0333,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "cuad_warranty_duration": {
+          "n": 60,
+          "strict_accuracy": 0.2333,
+          "balanced_accuracy": 0.2333,
+          "official_accuracy": 0.2333,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "definition_classification": {
+          "n": 60,
+          "strict_accuracy": 1.0,
+          "balanced_accuracy": 1.0,
+          "official_accuracy": 1.0,
+          "majority_share": 0.5168,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "diversity_1": {
+          "n": 60,
+          "strict_accuracy": 0.85,
+          "balanced_accuracy": 0.625,
+          "official_accuracy": 0.85,
+          "majority_share": 0.7633,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "diversity_2": {
+          "n": 60,
+          "strict_accuracy": 0.8,
+          "balanced_accuracy": 0.6222,
+          "official_accuracy": 0.8,
+          "majority_share": 0.7467,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "diversity_3": {
+          "n": 60,
+          "strict_accuracy": 0.4167,
+          "balanced_accuracy": 0.5,
+          "official_accuracy": 0.4167,
+          "majority_share": 0.5867,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "diversity_4": {
+          "n": 60,
+          "strict_accuracy": 0.5167,
+          "balanced_accuracy": 0.5,
+          "official_accuracy": 0.5167,
+          "majority_share": 0.5333,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "diversity_5": {
+          "n": 60,
+          "strict_accuracy": 0.3667,
+          "balanced_accuracy": 0.5,
+          "official_accuracy": 0.3667,
+          "majority_share": 0.5733,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "diversity_6": {
+          "n": 60,
+          "strict_accuracy": 0.45,
+          "balanced_accuracy": 0.5,
+          "official_accuracy": 0.45,
+          "majority_share": 0.53,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "function_of_decision_section": {
+          "n": 60,
+          "strict_accuracy": 0.6667,
+          "balanced_accuracy": 0.7056,
+          "official_accuracy": 0.6667,
+          "majority_share": 0.158,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "hearsay": {
+          "n": 60,
+          "strict_accuracy": 0.5333,
+          "balanced_accuracy": 0.6,
+          "official_accuracy": 0.5333,
+          "majority_share": 0.5638,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "insurance_policy_interpretation": {
+          "n": 60,
+          "strict_accuracy": 0.5667,
+          "balanced_accuracy": 0.4876,
+          "official_accuracy": 0.5667,
+          "majority_share": 0.4436,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "international_citizenship_questions": {
+          "n": 60,
+          "strict_accuracy": 0.5167,
+          "balanced_accuracy": 0.5347,
+          "official_accuracy": 0.5167,
+          "majority_share": 0.5783,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "learned_hands_benefits": {
+          "n": 60,
+          "strict_accuracy": 0.7167,
+          "balanced_accuracy": 0.7222,
+          "official_accuracy": 0.7167,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "learned_hands_business": {
+          "n": 60,
+          "strict_accuracy": 0.5667,
+          "balanced_accuracy": 0.5667,
+          "official_accuracy": 0.5667,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "learned_hands_consumer": {
+          "n": 60,
+          "strict_accuracy": 0.9167,
+          "balanced_accuracy": 0.9167,
+          "official_accuracy": 0.9167,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "learned_hands_courts": {
+          "n": 60,
+          "strict_accuracy": 0.95,
+          "balanced_accuracy": 0.95,
+          "official_accuracy": 0.95,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "learned_hands_crime": {
+          "n": 60,
+          "strict_accuracy": 0.8167,
+          "balanced_accuracy": 0.8167,
+          "official_accuracy": 0.8167,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "learned_hands_divorce": {
+          "n": 60,
+          "strict_accuracy": 0.9167,
+          "balanced_accuracy": 0.9167,
+          "official_accuracy": 0.9167,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "learned_hands_domestic_violence": {
+          "n": 60,
+          "strict_accuracy": 0.7667,
+          "balanced_accuracy": 0.7667,
+          "official_accuracy": 0.7667,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "learned_hands_employment": {
+          "n": 60,
+          "strict_accuracy": 0.9,
+          "balanced_accuracy": 0.9,
+          "official_accuracy": 0.9,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "learned_hands_estates": {
+          "n": 60,
+          "strict_accuracy": 0.7667,
+          "balanced_accuracy": 0.7667,
+          "official_accuracy": 0.7667,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "learned_hands_family": {
+          "n": 60,
+          "strict_accuracy": 0.95,
+          "balanced_accuracy": 0.95,
+          "official_accuracy": 0.95,
+          "majority_share": 0.5002,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "learned_hands_health": {
+          "n": 60,
+          "strict_accuracy": 0.9,
+          "balanced_accuracy": 0.9,
+          "official_accuracy": 0.9,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "learned_hands_housing": {
+          "n": 60,
+          "strict_accuracy": 0.8833,
+          "balanced_accuracy": 0.8833,
+          "official_accuracy": 0.8833,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "learned_hands_immigration": {
+          "n": 60,
+          "strict_accuracy": 0.9167,
+          "balanced_accuracy": 0.9167,
+          "official_accuracy": 0.9167,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "learned_hands_torts": {
+          "n": 60,
+          "strict_accuracy": 0.7167,
+          "balanced_accuracy": 0.7167,
+          "official_accuracy": 0.7167,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "learned_hands_traffic": {
+          "n": 60,
+          "strict_accuracy": 0.5667,
+          "balanced_accuracy": 0.5667,
+          "official_accuracy": 0.5667,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "maud_ability_to_consummate_concept_is_subject_to_mae_carveouts": {
+          "n": 60,
+          "strict_accuracy": 0.2,
+          "balanced_accuracy": 0.5,
+          "official_accuracy": 0.2,
+          "majority_share": 0.7971,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "maud_accuracy_of_fundamental_target_rws_bringdown_standard": {
+          "n": 60,
+          "strict_accuracy": 0.7167,
+          "balanced_accuracy": 0.3333,
+          "official_accuracy": 0.7167,
+          "majority_share": 0.64,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "maud_accuracy_of_target_capitalization_rw_(outstanding_shares)_bringdown_standard_answer": {
+          "n": 60,
+          "strict_accuracy": 0.1167,
+          "balanced_accuracy": 0.2553,
+          "official_accuracy": 0.1167,
+          "majority_share": 0.8378,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "maud_accuracy_of_target_general_rw_bringdown_timing_answer": {
+          "n": 60,
+          "strict_accuracy": 0.6833,
+          "balanced_accuracy": 0.5,
+          "official_accuracy": 0.6833,
+          "majority_share": 0.7182,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "maud_additional_matching_rights_period_for_modifications_(cor)": {
+          "n": 60,
+          "strict_accuracy": 0.3833,
+          "balanced_accuracy": 0.2779,
+          "official_accuracy": 0.3833,
+          "majority_share": 0.5443,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "maud_cor_permitted_in_response_to_intervening_event": {
+          "n": 60,
+          "strict_accuracy": 0.8,
+          "balanced_accuracy": 0.5603,
+          "official_accuracy": 0.8,
+          "majority_share": 0.84,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "maud_cor_standard_(intervening_event)": {
+          "n": 60,
+          "strict_accuracy": 0.0667,
+          "balanced_accuracy": 0.1667,
+          "official_accuracy": 0.0667,
+          "majority_share": 0.4048,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "maud_cor_standard_(superior_offer)": {
+          "n": 60,
+          "strict_accuracy": 0.2667,
+          "balanced_accuracy": 0.125,
+          "official_accuracy": 0.2667,
+          "majority_share": 0.37,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "maud_definition_contains_knowledge_requirement_-_answer": {
+          "n": 60,
+          "strict_accuracy": 0.6833,
+          "balanced_accuracy": 0.3397,
+          "official_accuracy": 0.6833,
+          "majority_share": 0.5242,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "maud_definition_includes_asset_deals": {
+          "n": 60,
+          "strict_accuracy": 0.1167,
+          "balanced_accuracy": 0.3074,
+          "official_accuracy": 0.1167,
+          "majority_share": 0.4823,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "maud_definition_includes_stock_deals": {
+          "n": 60,
+          "strict_accuracy": 0.0833,
+          "balanced_accuracy": 0.386,
+          "official_accuracy": 0.0833,
+          "majority_share": 0.5282,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "maud_fiduciary_exception__board_determination_standard": {
+          "n": 60,
+          "strict_accuracy": 0.2333,
+          "balanced_accuracy": 0.1667,
+          "official_accuracy": 0.2333,
+          "majority_share": 0.3631,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "maud_fls_(mae)_standard": {
+          "n": 60,
+          "strict_accuracy": 0.75,
+          "balanced_accuracy": 0.3061,
+          "official_accuracy": 0.75,
+          "majority_share": 0.7792,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "maud_includes_consistent_with_past_practice": {
+          "n": 60,
+          "strict_accuracy": 0.6333,
+          "balanced_accuracy": 0.5,
+          "official_accuracy": 0.6333,
+          "majority_share": 0.663,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "maud_initial_matching_rights_period_(cor)": {
+          "n": 60,
+          "strict_accuracy": 0.5833,
+          "balanced_accuracy": 0.2,
+          "official_accuracy": 0.5833,
+          "majority_share": 0.5506,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "maud_initial_matching_rights_period_(ftr)": {
+          "n": 60,
+          "strict_accuracy": 0.55,
+          "balanced_accuracy": 0.2,
+          "official_accuracy": 0.55,
+          "majority_share": 0.5455,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "maud_intervening_event_-_required_to_occur_after_signing_-_answer": {
+          "n": 60,
+          "strict_accuracy": 0.95,
+          "balanced_accuracy": 0.5,
+          "official_accuracy": 0.95,
+          "majority_share": 0.7177,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "maud_knowledge_definition": {
+          "n": 60,
+          "strict_accuracy": 0.7333,
+          "balanced_accuracy": 0.5556,
+          "official_accuracy": 0.7333,
+          "majority_share": 0.5541,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "maud_liability_standard_for_no-shop_breach_by_target_non-do_representatives": {
+          "n": 60,
+          "strict_accuracy": 0.5833,
+          "balanced_accuracy": 0.5,
+          "official_accuracy": 0.5833,
+          "majority_share": 0.5821,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "maud_ordinary_course_efforts_standard": {
+          "n": 60,
+          "strict_accuracy": 0.8667,
+          "balanced_accuracy": 0.8437,
+          "official_accuracy": 0.8667,
+          "majority_share": 0.5028,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "maud_pandemic_or_other_public_health_event__subject_to_disproportionate_impact_modifier": {
+          "n": 60,
+          "strict_accuracy": 0.85,
+          "balanced_accuracy": 0.5,
+          "official_accuracy": 0.85,
+          "majority_share": 0.8061,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "maud_pandemic_or_other_public_health_event_specific_reference_to_pandemic-related_governmental_responses_or_measures": {
+          "n": 60,
+          "strict_accuracy": 0.75,
+          "balanced_accuracy": 0.5,
+          "official_accuracy": 0.75,
+          "majority_share": 0.7347,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "maud_relational_language_(mae)_applies_to": {
+          "n": 60,
+          "strict_accuracy": 0.2667,
+          "balanced_accuracy": 0.5,
+          "official_accuracy": 0.2667,
+          "majority_share": 0.7667,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "maud_type_of_consideration": {
+          "n": 60,
+          "strict_accuracy": 0.0833,
+          "balanced_accuracy": 0.2589,
+          "official_accuracy": 0.0833,
+          "majority_share": 0.5523,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "nys_judicial_ethics": {
+          "n": 60,
+          "strict_accuracy": 0.5833,
+          "balanced_accuracy": 0.6528,
+          "official_accuracy": 0.5833,
+          "majority_share": 0.5205,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "opp115_data_retention": {
+          "n": 60,
+          "strict_accuracy": 0.65,
+          "balanced_accuracy": 0.6111,
+          "official_accuracy": 0.65,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "opp115_data_security": {
+          "n": 60,
+          "strict_accuracy": 0.6333,
+          "balanced_accuracy": 0.6285,
+          "official_accuracy": 0.6333,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "opp115_first_party_collection_use": {
+          "n": 60,
+          "strict_accuracy": 0.6667,
+          "balanced_accuracy": 0.6319,
+          "official_accuracy": 0.6667,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "opp115_international_and_specific_audiences": {
+          "n": 60,
+          "strict_accuracy": 0.7833,
+          "balanced_accuracy": 0.7902,
+          "official_accuracy": 0.7833,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "opp115_policy_change": {
+          "n": 60,
+          "strict_accuracy": 0.8333,
+          "balanced_accuracy": 0.8333,
+          "official_accuracy": 0.8333,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "opp115_third_party_sharing_collection": {
+          "n": 60,
+          "strict_accuracy": 0.75,
+          "balanced_accuracy": 0.75,
+          "official_accuracy": 0.75,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "opp115_user_access,_edit_and_deletion": {
+          "n": 60,
+          "strict_accuracy": 0.7333,
+          "balanced_accuracy": 0.7366,
+          "official_accuracy": 0.7333,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "opp115_user_choice_control": {
+          "n": 60,
+          "strict_accuracy": 0.6667,
+          "balanced_accuracy": 0.6763,
+          "official_accuracy": 0.6667,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "oral_argument_question_purpose": {
+          "n": 60,
+          "strict_accuracy": 0.05,
+          "balanced_accuracy": 0.3421,
+          "official_accuracy": 0.05,
+          "majority_share": 0.266,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "overruling": {
+          "n": 60,
+          "strict_accuracy": 0.95,
+          "balanced_accuracy": 0.95,
+          "official_accuracy": 0.95,
+          "majority_share": 0.5079,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "privacy_policy_qa": {
+          "n": 60,
+          "strict_accuracy": 0.2667,
+          "balanced_accuracy": 0.2667,
+          "official_accuracy": 1.0,
+          "majority_share": 0.5011,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "proa": {
+          "n": 60,
+          "strict_accuracy": 0.7167,
+          "balanced_accuracy": 0.8191,
+          "official_accuracy": 0.7167,
+          "majority_share": 0.5053,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "sara_entailment": {
+          "n": 60,
+          "strict_accuracy": 0.95,
+          "balanced_accuracy": 0.95,
+          "official_accuracy": 0.95,
+          "majority_share": 0.5,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "scalr": {
+          "n": 60,
+          "strict_accuracy": 0.4833,
+          "balanced_accuracy": 0.5021,
+          "official_accuracy": 0.4833,
+          "majority_share": 0.2242,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "supply_chain_disclosure_best_practice_audits": {
+          "n": 60,
+          "strict_accuracy": 0.9667,
+          "balanced_accuracy": 0.9667,
+          "official_accuracy": 0.9667,
+          "majority_share": 0.686,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "supply_chain_disclosure_best_practice_certification": {
+          "n": 60,
+          "strict_accuracy": 0.6333,
+          "balanced_accuracy": 0.6333,
+          "official_accuracy": 0.6333,
+          "majority_share": 0.7513,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "supply_chain_disclosure_best_practice_training": {
+          "n": 60,
+          "strict_accuracy": 0.95,
+          "balanced_accuracy": 0.95,
+          "official_accuracy": 0.95,
+          "majority_share": 0.7177,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "supply_chain_disclosure_best_practice_verification": {
+          "n": 60,
+          "strict_accuracy": 0.2167,
+          "balanced_accuracy": 0.2167,
+          "official_accuracy": 0.2167,
+          "majority_share": 0.562,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "supply_chain_disclosure_disclosed_verification": {
+          "n": 60,
+          "strict_accuracy": 0.8167,
+          "balanced_accuracy": 0.8167,
+          "official_accuracy": 0.8167,
+          "majority_share": 0.7414,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "textualism_tool_plain": {
+          "n": 60,
+          "strict_accuracy": 0.8,
+          "balanced_accuracy": 0.8,
+          "official_accuracy": 0.8,
+          "majority_share": 0.5939,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        },
+        "ucc_v_common_law": {
+          "n": 60,
+          "strict_accuracy": 0.9333,
+          "balanced_accuracy": 0.95,
+          "official_accuracy": 0.9333,
+          "majority_share": 0.5745,
+          "compliance_rate": 1.0,
+          "ambiguity_rate": 0.0
+        }
+      }
+    }
+  }
+}
