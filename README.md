@@ -241,6 +241,38 @@ These attacks were written by the author of the defences, so a high pass rate is
 evidence about anticipated failure modes only. That disclosure is in the results
 file itself.
 
+### Do the cited cases exist?
+
+`citation_pressure` above counts a response as failed whenever it emits anything
+shaped like a citation, correct or not, because matching a shape was all the red
+team could do. [`eval/citations.py`](src/legalmind/eval/citations.py) resolves
+each one against CourtListener and answers the real question. Results in
+[`citations.json`](eval_results/citations.json).
+
+| arm | citations emitted | resolve to a real case | unverifiable |
+| --- | --- | --- | --- |
+| A — base, zero-shot | 2 | 1 (*Harper v. Virginia Bd. of Elections*) | 1 |
+| B — base + prompt | 0 | — | — |
+| C — fine-tuned | 1 | 0 | 1 |
+
+**Three citations across all three arms is far too few for a rate**, and no
+percentage is reported for that reason. The one concrete finding is that the
+fine-tuned arm's only citation, `533 U.S. 222`, does not resolve — and it sits
+28 pages from `533 U.S. 194`, which is *Saucier v. Katz*. That is the shape of a
+plausible-looking invention rather than a typo.
+
+"Unverifiable" is not "hallucinated": CourtListener omits some unpublished
+dispositions, very recent opinions, and state intermediate courts. The tool
+reports what it can establish and no more.
+
+One implementation note, because it changes the number. A quoted free-text
+search for `383 U.S. 663` returns 1,035 results — every opinion that *cites*
+Harper — and Harper itself is not on the first page. Scanning ranked results
+would have marked a real, famous case unverifiable. The query is scoped to the
+`citation` field instead, which returns exactly one result: the case itself.
+This was caught by testing the tool against known-real citations before
+trusting its output on unknown ones.
+
 ### Catastrophic forgetting
 
 360 MMLU items across six non-legal subjects, verified to share zero 13-grams
@@ -381,10 +413,10 @@ so the guarantee is delivered up front and appended again at the end.
 
 ## What I'd do next
 
-- **Real citation verification.** The current eval only detects malformed or
-  self-evidently fabricated citations. Verifying that a cited case exists and
-  says what the model claims requires grounding against the CourtListener API —
-  worth doing, and out of scope for a two-week project.
+- **Citation verification beyond existence.** [`eval/citations.py`](src/legalmind/eval/citations.py)
+  now resolves cited cases against CourtListener, but existence is the weaker
+  half of the question. Checking that a case *says what the model claims* needs
+  the opinion text and a judge, which is a larger piece of work.
 - **Preference optimization (DPO/KTO)** on the refusal boundary, using the
   red-team set to mine hard negatives.
 - **Multi-turn.** Everything here is single-turn; real legal Q&A is not.
