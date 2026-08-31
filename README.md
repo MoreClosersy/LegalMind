@@ -3,9 +3,15 @@
 > Domain-adapted legal LLM: QLoRA fine-tuning of Qwen3-8B, with a deterministic
 > UPL compliance layer at serving time rather than a probabilistic one in the weights.
 
-> **Status: in progress.** Sections marked `<!-- PENDING -->` are placeholders.
-> No number appears in this README until a committed file under `eval_results/`
-> backs it and a command in this README reproduces it.
+> Every number below is backed by a committed file under [`eval_results/`](eval_results/)
+> and reproduces with a command in this README. Where a result is suggestive but
+> not significant, it says so.
+
+**Headline:** on 127 frozen LegalBench tasks, the fine-tune scores **66.3%**
+[65.3, 67.4] against **59.7%** for the base model and **53.8%** for the base
+model with a carefully written prompt — which is the majority-class baseline.
+The prompted arm being *worse than no prompt at all* is the finding this
+project's three-arm design exists to catch.
 
 ## What it does
 
@@ -29,7 +35,34 @@ is not learned; see *Design decisions* below.
 
 ## Architecture
 
-<!-- PENDING: docs/architecture.png -->
+```mermaid
+flowchart LR
+    subgraph offline["Offline — data and training"]
+        POL["pile-of-law<br/>CFR · CourtListener · Fed. Register"]
+        SYN["synthesize.py<br/>Batch API, Sonnet 5"]
+        FIL["filter.py<br/>quality + dedupe"]
+        DEC["decontaminate.py<br/>13-gram vs LegalBench"]
+        SFT["train/sft.py<br/>QLoRA, completion-only loss"]
+        POL --> SYN --> FIL --> DEC --> SFT
+    end
+
+    subgraph online["Online — serving"]
+        GW["serve/gateway.py<br/>FastAPI · SSE · metrics"]
+        DIS["serve/disclaimer.py<br/>deterministic UPL enforcement"]
+        VLLM["vLLM<br/>Qwen3-8B + LoRA hot-swap"]
+        GW --> VLLM --> GW
+        GW --> DIS
+    end
+
+    SFT -.->|"LoRA adapter"| VLLM
+    LB["LegalBench<br/>127 frozen tasks"] -.->|"eval only, never trained on"| EVAL["eval/<br/>3 arms · red team · forgetting"]
+    VLLM --> EVAL
+    DEC -.->|"overlap check"| LB
+```
+
+The dotted line from LegalBench is the one that matters: it enters the system
+only at evaluation time, and `decontaminate.py` proves it by checking the
+training set against every one of its 162 tasks.
 
 | Layer | Component | Responsibility |
 | --- | --- | --- |
@@ -71,8 +104,15 @@ from ~8k after a teacher-model A/B measured retention at 100%, which removed the
 yield headroom the larger number was padding for.
 
 **5. g5.xlarge over g4dn.xlarge.** Both draw on the same 4-vCPU G-instance quota.
-The A10G (Ampere) supports bf16 and FlashAttention-2 and runs vLLM properly; the
-T4 (Turing) does none of these.
+The A10G (Ampere) supports bf16 and fused attention kernels and runs vLLM
+properly; the T4 (Turing) does none of these. `preflight` checks compute
+capability ≥ 8.0 before spending GPU time, because a T4 fails deep inside the
+first forward pass with an unhelpful message.
+
+Attention is `sdpa`, not `flash_attention_2`: the latter needs the separate
+`flash-attn` package, which has no prebuilt wheel for this project's pinned
+torch and takes 20–40 minutes to compile — a bad trade against billed GPU time
+for a kernel PyTorch already dispatches to on Ampere under bf16.
 
 ## Training data
 
@@ -86,6 +126,8 @@ filtered and decontaminated. Every number below comes from a committed report.
 | Kept after quality filter | 6,019 (**97.8%**) | [`filter_report_full.json`](eval_results/filter_report_full.json) |
 | Dropped as contaminated | 10 (**0.17%**) | [`decontamination.json`](eval_results/decontamination.json) |
 | Train / validation | 5,509 / 500 | |
+| + refusal calibration | 133 (80 refuse / 53 answer) | 21 topics, held out by topic |
+| **Final training set** | **5,642** | |
 
 The filter's largest rejection category is `response_not_self_contained` (96 of
 134). That gate exists because a probe measured 31.6% of responses referring back
@@ -117,11 +159,130 @@ spaces (3), or non-US jurisdiction (2).
 
 ## Results
 
-<!-- PENDING: three-arm comparison table. Populated from eval_results/*.json. -->
+All numbers below come from [`eval_results/`](eval_results/) and reproduce with
+`./scripts/run_on_gpu.sh evaluate`. 7,620 examples per arm across the 127 frozen
+LegalBench tasks; greedy decoding; all three arms served from one vLLM process
+in a single session.
+
+### LegalBench, three arms
+
+| | strict accuracy | 95% CI | vs. majority |
+| --- | --- | --- | --- |
+| A — base, zero-shot | 59.7% | [58.6, 60.8] | +5.8 |
+| B — base + system prompt + few-shot | 53.8% | [52.7, 54.9] | **−0.1** |
+| **C — fine-tuned (LoRA)** | **66.3%** | **[65.3, 67.4]** | **+12.4** |
+| majority-class baseline | 53.9% | | |
+
+No two intervals overlap. Format compliance is ≥99.9% on every arm, so these
+are answers being scored, not parse failures.
+
+**The result worth reporting is arm B.** A carefully written system prompt with
+two few-shot exemplars does not merely underperform the fine-tune — it lands on
+the majority-class baseline, *below* the un-prompted base model. A two-arm
+comparison would have reported "fine-tuning beats base by 6.6 points" and missed
+that prompt engineering is actively counterproductive on this task shape. That
+is the entire reason arm B exists, and it is the one number here that changed
+what I believe.
+
+The likely mechanism: the prompt instructs the model to explain doctrine in two
+to five paragraphs, which is the right behaviour for the product and the wrong
+behaviour for a benchmark asking for a single label. Arm B pays 867 prompt
+tokens per request against arm A's 297 to make itself worse at this task.
+
+### Did the refusal data do anything?
+
+The training mixture initially contained **zero** refusal examples —
+`refusal_set.py` had been written but never run — so the project's central claim
+(rules handle the disclaimer, the fine-tune handles refusal calibration) had no
+evidence behind it. Adding 133 refusal-calibration examples (2.4% of the
+mixture) and retraining gives a controlled before/after, archived in
+[`eval_results/v1_no_refusal_data/`](eval_results/v1_no_refusal_data/):
+
+| red team, defended | v1 (no refusal data) | v2 (133 examples) |
+| --- | --- | --- |
+| `advice_extraction` — C fine-tuned | 0/6 | 1/6 |
+| `advice_extraction` — A base | 0/6 | 0/6 |
+| `advice_extraction` — B prompted | 4/6 | 4/6 |
+| LegalBench strict — C fine-tuned | 63.6% | 66.3% |
+
+Arms A and B reproduce to within 0.1 points across two independent runs on two
+separately provisioned servers. That is what licenses reading C's 2.7-point
+LegalBench gain as real rather than as run-to-run noise.
+
+**Refusal calibration itself remains unproven.** 0/6 → 1/6 moves in the right
+direction while both base arms hold exactly still, which is suggestive, but at
+n=6 the interval is far too wide to call it evidence. The honest summary is that
+2.4% behavioural data produced an observable but not significant effect, and
+that the red-team suite needs to be an order of magnitude larger before this
+question can be answered. Arm B — pure prompting — is still the best refuser
+here at 4/6.
+
+### Red team
+
+18 attacks, grouped by which layer is supposed to stop them. Full results and
+the responses that failed are in [`redteam.json`](eval_results/redteam.json).
+
+| category | defended by | A | B | C |
+| --- | --- | --- | --- | --- |
+| `disclaimer_evasion` | serving layer | 6/6 | 6/6 | 6/6 |
+| `advice_extraction` | model | 0/6 | 4/6 | 1/6 |
+| `citation_pressure` | model | 1/3 | 2/3 | 2/3 |
+| `prompt_injection` | model | 0/3 | 0/3 | 2/3 |
+
+`disclaimer_evasion` is 6/6 by construction, not by luck — it is enforced in
+code, and the suite exists to catch a regression that makes it conditional
+again, which has happened once. The number worth reading in that row is
+`layer_contribution`: **6 of 6** of those responses would have reached the user
+with no disclaimer had the gateway not run. The model is not producing this text
+on its own, which is exactly what `filter.py` stripping disclaimers out of the
+training data was for.
+
+These attacks were written by the author of the defences, so a high pass rate is
+evidence about anticipated failure modes only. That disclosure is in the results
+file itself.
+
+### Catastrophic forgetting
+
+360 MMLU items across six non-legal subjects, verified to share zero 13-grams
+with the training set before the run ([`precheck`](eval_results/forgetting_contamination_precheck.json)).
+
+| | accuracy | 95% CI |
+| --- | --- | --- |
+| A — base, zero-shot | 44.2% | [39.1, 49.3] |
+| B — base + prompt | 63.3% | [58.2, 68.1] |
+| C — fine-tuned | 53.6% | [48.4, 58.6] |
+
+The A→C delta is +9.4 points with overlapping intervals, so the harness reports
+**no demonstrated change in either direction** — which is the correct reading at
+n=360, not a claim that the fine-tune improved general capability. Legal
+fine-tuning did not measurably damage non-legal reasoning, and that is all this
+supports.
 
 ## Performance
 
-<!-- PENDING: measured p50/p95/TTFT/tokens-per-second under load. See docs/latency.md. -->
+Measured through the gateway with [`scripts/bench_latency.py`](scripts/bench_latency.py),
+48 requests per cell, arms interleaved within each concurrency level so machine
+drift cannot align with arm identity. Raw numbers in [`latency.json`](eval_results/latency.json).
+
+| concurrency | arm | TTFT p50 | TTFT p95 | total p50 | total p95 | output tok/s |
+| --- | --- | --- | --- | --- | --- | --- |
+| 1 | base | 53ms | 53ms | 18.4s | 18.5s | 27.8 |
+| 1 | fine-tuned | 56ms | 58ms | **12.2s** | 20.6s | 24.9 |
+| 4 | base | 79ms | 119ms | 19.7s | 19.8s | 26.0 |
+| 4 | fine-tuned | 86ms | 137ms | **13.4s** | 21.1s | 24.2 |
+| 16 | base | 141ms | 228ms | 21.3s | 21.3s | 24.1 |
+| 16 | fine-tuned | 94ms | 211ms | **13.6s** | 22.7s | 22.7 |
+
+Read the token counts before the latency: the base model emits 513 completion
+tokens per response — it is hitting the 512-token cap and being truncated — while
+the fine-tuned model emits 350 and stops. The fine-tune is ~35% faster end to end
+not because it generates faster (it is marginally slower per token) but because
+it has learned when an answer is finished. Its p95 is worse than its p50 by 8
+seconds for the same reason a mean would mislead here: response length is
+bimodal, and a small number of long answers set the tail.
+
+TTFT is flat at ~55ms single-stream and degrades gracefully to ~140ms at 16-way
+concurrency, which is the number that matters for the streaming UX.
 
 ## Quick start
 
