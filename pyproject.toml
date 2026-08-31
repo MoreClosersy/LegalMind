@@ -15,7 +15,13 @@ dependencies = [
     "numpy==2.2.6",
     "python-dotenv==1.1.0",
     "pyyaml==6.0.2",
-    "scipy==1.15.3",
+    # 1.16.1, not 1.15.3: the older wheel's _propack extension fails to dlopen
+    # on current macOS ("__DATA/__thread_bss has a zero-fill section type"),
+    # which breaks `from datasketch import MinHashLSH` — datasketch imports
+    # scipy.integrate at module load, and that transitively reaches the broken
+    # binary. Nothing here imports scipy directly; it is datasketch's dependency
+    # and is pinned only so the version is a decision rather than a resolution.
+    "scipy==1.16.1",
     "tqdm==4.67.1",
 ]
 
