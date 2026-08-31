@@ -1,0 +1,100 @@
+{
+  "gateway": "http://localhost:8080",
+  "requests_per_cell": 48,
+  "max_tokens": 512,
+  "prompts": [
+    "What are the elements of adverse possession?",
+    "My landlord kept my deposit. Should I sue?",
+    "What is the difference between a motion to dismiss and a motion for summary judgment?",
+    "Explain the parol evidence rule.",
+    "I was fired after reporting a safety violation. Do I have a case?",
+    "What standard of review applies to an agency's interpretation of its own regulation?"
+  ],
+  "note": "p50/p95 are nearest-rank, not interpolated. The mean is reported only to show how far it sits from p95. Arms are interleaved within each concurrency level so machine drift cannot align with arm identity.",
+  "results": [
+    {
+      "arm": "base",
+      "adapter": null,
+      "concurrency": 1,
+      "n": 48,
+      "failed": 0,
+      "ttft_p50_ms": 52.5,
+      "ttft_p95_ms": 53.3,
+      "latency_p50_ms": 18437.8,
+      "latency_p95_ms": 18462.1,
+      "latency_mean_ms": 18438.0,
+      "mean_completion_tokens": 513.0,
+      "output_tokens_per_s": 27.8
+    },
+    {
+      "arm": "fine_tuned",
+      "adapter": "legalmind",
+      "concurrency": 1,
+      "n": 48,
+      "failed": 0,
+      "ttft_p50_ms": 56.1,
+      "ttft_p95_ms": 57.2,
+      "latency_p50_ms": 9320.6,
+      "latency_p95_ms": 20605.4,
+      "latency_mean_ms": 13013.8,
+      "mean_completion_tokens": 323.9,
+      "output_tokens_per_s": 24.9
+    },
+    {
+      "arm": "base",
+      "adapter": null,
+      "concurrency": 4,
+      "n": 48,
+      "failed": 0,
+      "ttft_p50_ms": 78.7,
+      "ttft_p95_ms": 119.1,
+      "latency_p50_ms": 19734.7,
+      "latency_p95_ms": 19772.8,
+      "latency_mean_ms": 19730.7,
+      "mean_completion_tokens": 513.0,
+      "output_tokens_per_s": 26.0
+    },
+    {
+      "arm": "fine_tuned",
+      "adapter": "legalmind",
+      "concurrency": 4,
+      "n": 48,
+      "failed": 0,
+      "ttft_p50_ms": 86.1,
+      "ttft_p95_ms": 136.8,
+      "latency_p50_ms": 9726.1,
+      "latency_p95_ms": 21138.8,
+      "latency_mean_ms": 13483.3,
+      "mean_completion_tokens": 326.6,
+      "output_tokens_per_s": 24.2
+    },
+    {
+      "arm": "base",
+      "adapter": null,
+      "concurrency": 16,
+      "n": 48,
+      "failed": 0,
+      "ttft_p50_ms": 153.7,
+      "ttft_p95_ms": 225.7,
+      "latency_p50_ms": 21256.4,
+      "latency_p95_ms": 21307.6,
+      "latency_mean_ms": 21190.1,
+      "mean_completion_tokens": 511.3,
+      "output_tokens_per_s": 24.1
+    },
+    {
+      "arm": "fine_tuned",
+      "adapter": "legalmind",
+      "concurrency": 16,
+      "n": 48,
+      "failed": 0,
+      "ttft_p50_ms": 94.0,
+      "ttft_p95_ms": 212.0,
+      "latency_p50_ms": 10461.0,
+      "latency_p95_ms": 22705.0,
+      "latency_mean_ms": 14368.8,
+      "mean_completion_tokens": 325.6,
+      "output_tokens_per_s": 22.7
+    }
+  ]
+}

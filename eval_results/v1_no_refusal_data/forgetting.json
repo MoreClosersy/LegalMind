@@ -1,0 +1,162 @@
+{
+  "subjects": [
+    "high_school_mathematics",
+    "college_computer_science",
+    "formal_logic",
+    "high_school_biology",
+    "moral_scenarios",
+    "world_religions"
+  ],
+  "items_per_subject": 60,
+  "n_items": 360,
+  "contamination_check": {
+    "train_pairs_indexed": 5509,
+    "train_ngrams": 1313342,
+    "items_checked": 360,
+    "items_overlapping": 0,
+    "examples": []
+  },
+  "arms": {
+    "A_base_zero_shot": {
+      "accuracy": 0.44166666666666665,
+      "ci95": [
+        0.3912525696376544,
+        0.4933125817908792
+      ],
+      "correct": 159,
+      "total": 360,
+      "format_compliance": 0.6611111111111111,
+      "by_subject": {
+        "college_computer_science": {
+          "correct": 21,
+          "total": 60,
+          "accuracy": 0.35
+        },
+        "formal_logic": {
+          "correct": 22,
+          "total": 60,
+          "accuracy": 0.36666666666666664
+        },
+        "high_school_biology": {
+          "correct": 48,
+          "total": 60,
+          "accuracy": 0.8
+        },
+        "high_school_mathematics": {
+          "correct": 0,
+          "total": 60,
+          "accuracy": 0.0
+        },
+        "moral_scenarios": {
+          "correct": 20,
+          "total": 60,
+          "accuracy": 0.3333333333333333
+        },
+        "world_religions": {
+          "correct": 48,
+          "total": 60,
+          "accuracy": 0.8
+        }
+      }
+    },
+    "B_base_prompted": {
+      "accuracy": 0.6305555555555555,
+      "ci95": [
+        0.579563139292167,
+        0.6787910456058766
+      ],
+      "correct": 227,
+      "total": 360,
+      "format_compliance": 1.0,
+      "by_subject": {
+        "college_computer_science": {
+          "correct": 33,
+          "total": 60,
+          "accuracy": 0.55
+        },
+        "formal_logic": {
+          "correct": 40,
+          "total": 60,
+          "accuracy": 0.6666666666666666
+        },
+        "high_school_biology": {
+          "correct": 52,
+          "total": 60,
+          "accuracy": 0.8666666666666667
+        },
+        "high_school_mathematics": {
+          "correct": 30,
+          "total": 60,
+          "accuracy": 0.5
+        },
+        "moral_scenarios": {
+          "correct": 20,
+          "total": 60,
+          "accuracy": 0.3333333333333333
+        },
+        "world_religions": {
+          "correct": 52,
+          "total": 60,
+          "accuracy": 0.8666666666666667
+        }
+      }
+    },
+    "C_fine_tuned": {
+      "accuracy": 0.5333333333333333,
+      "ci95": [
+        0.48171733873830913,
+        0.5842454318739574
+      ],
+      "correct": 192,
+      "total": 360,
+      "format_compliance": 0.7527777777777778,
+      "by_subject": {
+        "college_computer_science": {
+          "correct": 30,
+          "total": 60,
+          "accuracy": 0.5
+        },
+        "formal_logic": {
+          "correct": 35,
+          "total": 60,
+          "accuracy": 0.5833333333333334
+        },
+        "high_school_biology": {
+          "correct": 51,
+          "total": 60,
+          "accuracy": 0.85
+        },
+        "high_school_mathematics": {
+          "correct": 5,
+          "total": 60,
+          "accuracy": 0.08333333333333333
+        },
+        "moral_scenarios": {
+          "correct": 23,
+          "total": 60,
+          "accuracy": 0.38333333333333336
+        },
+        "world_religions": {
+          "correct": 48,
+          "total": 60,
+          "accuracy": 0.8
+        }
+      }
+    }
+  },
+  "forgetting": {
+    "base_accuracy": 0.44166666666666665,
+    "fine_tuned_accuracy": 0.5333333333333333,
+    "delta": 0.0917,
+    "intervals_separated": false,
+    "verdict": "no demonstrated change \u2014 the intervals overlap, so this delta is not evidence of forgetting in either direction"
+  },
+  "harness_control": {
+    "base_accuracy": 0.44166666666666665,
+    "fine_tuned_accuracy": 0.6305555555555555,
+    "delta": 0.1889,
+    "intervals_separated": true,
+    "verdict": "measurable change in general capability",
+    "means": "arms A and B share weights, so a separated interval here means the harness itself is noisy and the A-to-C delta above cannot be attributed to the fine-tune"
+  }
+}
