@@ -18,6 +18,10 @@ data/raw/
 data/.last_batch_id
 data/.last_refusal_batch_id
 
+# Backup copies left by in-place data edits (e.g. train.jsonl.bak) — never
+# meant to be committed. data/*.jsonl does not match a .jsonl.bak suffix.
+*.bak
+
 # Model artifacts — the adapter lives on the HF Hub, not here
 outputs/
 checkpoints/
@@ -32,5 +36,10 @@ wandb/
 # NOTE: eval_results/ is deliberately NOT ignored. Every number in the README
 # must be traceable to a committed raw result file.
 
-# Personal study notes: local only, deliberately untracked.
-docs/LEARNING_NOTES.md
+# Interview prep and personal study notes: local only, deliberately untracked.
+# Everything under docs/ is working material — question banks, technical
+# summaries, study notes. It is written for myself, not for readers of the
+# repo, and is kept out in full rather than file by file so a new file added
+# there cannot leak by omission. The traceable evidence for the README's
+# numbers lives in eval_results/, not here.
+docs/
